@@ -1,0 +1,9 @@
+.field-card {
+    min-width: 190px;
+    max-width: 300px;
+    margin: 20px;
+}
+
+.container {
+    margin-top: 20px;
+}
