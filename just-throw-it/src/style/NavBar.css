@@ -1,0 +1,15 @@
+.navigation-bar {
+    background-color: #C1DCE2;
+    border-bottom: 2px solid #BDD6E0;
+}
+
+.brand-name{
+    color: #2B3C55 !important;
+    font-weight: bold;
+    margin-left: 5%;
+}
+
+.navigation-bar-link {
+    color: #5F83B4 !important;
+    font-weight: bold;
+}
