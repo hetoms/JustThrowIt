@@ -26,7 +26,7 @@ class NavigationBar extends React.Component {
                     <Collapse isOpen={!this.state.collapsed} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink className="navigation-bar-link" href="/components/">Components</NavLink>
+                                <NavLink className="navigation-bar-link" href="/about">About the team</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink className="navigation-bar-link" href="https://github.com/hetoms/JustThrowIt">Github</NavLink>

@@ -9,7 +9,7 @@ class FieldPicker extends React.Component {
 
 	renderAllFields() {
 		return this.props.fields.map(field => {
-			return (<div className="col-sm col-md-4">
+			return (<div key={field.FieldID} className="col-sm col-md-4">
 				<Card key={field.FieldID} className="field-card">
 					<CardImg top width="10%"
 							 src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
