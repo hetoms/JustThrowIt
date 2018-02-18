@@ -21,12 +21,12 @@ const mapDispatchToProps = dispatch => {
 
 class SetName extends React.Component {
     setNameAndRedirect = (event) => {
-        console.log(event);
+        event.preventDefault();
     };
 
     render() {
         return (
-            <Form inline className='set-name'>
+            <Form inline className='set-name' onSubmit={this.setNameAndRedirect}>
                 <Label for="playerName" className="mr-sm-2">Player Name: </Label>
                 <Input name="playerName" id="playerName" placeholder="Your name" required
                        onChange={event => this.props.actions.setName(event.target.value)}/>
