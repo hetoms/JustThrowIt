@@ -31,7 +31,7 @@ class FieldPicker extends React.Component {
 			<div className="container">
 				<h2>Please pick a field</h2>
 				<hr/>
-				<div className="row justify-content-center">
+				<div className="row">
 					<CardDeck>
 						{this.renderAllFields()}
 					</CardDeck>

@@ -1,9 +1,22 @@
 .field-card {
     min-width: 190px !important;
-    max-width: 300px;
-    margin: 20px;
+    max-width: 225px !important;
+}
+
+.row {
+    width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.card-deck {
+    width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .container {
+    width: 80% !important;
     margin-top: 20px;
+    padding: 0 !important;
 }
