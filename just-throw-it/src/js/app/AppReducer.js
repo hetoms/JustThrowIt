@@ -1,12 +1,25 @@
-import {fields} from '../api/MockData'
+import {fields} from '../api/MockData';
+import {
+    SET_NAME
+} from "./Actions";
 
 const initialState = {
-  fields: fields,
-  playerData: []
+    fields: fields,
+    mainPlayer: "UnknownPlayer",
+    playerData: []
 };
 
 const AppReducer = (state = initialState, action) => {
-  return state;
+    switch (action.type) {
+        case SET_NAME:
+            return {
+                ...state,
+                mainPlayer: action.name
+            }
+        default:
+            return state;
+
+    }
 };
 
 export default AppReducer;
