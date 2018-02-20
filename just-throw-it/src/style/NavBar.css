@@ -2,7 +2,7 @@
     /*background-color: #C1DCE2;*/
     background: url("https://static1.squarespace.com/static/58b5a6addb29d6036965863c/58b6ee33cd0f68809ff0d894/58c12dc4ebbd1a9d3cd5cfcb/1501236373114/Course_Portfolio_Banner-optimized.jpg") center;
     background-size: cover;
-    min-height: 260px;
+    min-height: 10em;
     border-bottom: 2px solid #BDD6E0;
     align-items: flex-start !important;
     position: relative;
