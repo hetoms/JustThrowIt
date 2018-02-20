@@ -8,7 +8,7 @@ const Router = () => (
         <Switch>
             <Route exact path='/' component={SetName}/>
             <Route exact path='/pickField' component={PickFieldContainer}/>
-        </Switch>
+		</Switch>
     </main>
 );
 

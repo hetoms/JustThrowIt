@@ -1,15 +1,32 @@
 .navigation-bar {
-    background-color: #C1DCE2;
+    /*background-color: #C1DCE2;*/
+    background: url("https://static1.squarespace.com/static/58b5a6addb29d6036965863c/58b6ee33cd0f68809ff0d894/58c12dc4ebbd1a9d3cd5cfcb/1501236373114/Course_Portfolio_Banner-optimized.jpg") center;
+    background-size: cover;
+    min-height: 260px;
     border-bottom: 2px solid #BDD6E0;
 }
 
+.navbar-toggler {
+    background: rgba(255, 255, 255, 0.6) !important;
+}
+
 .brand-name{
-    color: #2B3C55 !important;
+    color: white !important;
     font-weight: bold;
+    font-size: 5vw !important;
     margin-left: 5%;
 }
 
 .navigation-bar-link {
-    color: #5F83B4 !important;
+    color: white !important;
     font-weight: bold;
+    font-size: 1.5vw !important;
+    margin: 40px;
 }
+
+/*.navigation-box {*/
+    /*background: rgba(214, 199, 133, 0.4);*/
+    /*border: 2px;*/
+    /*border-radius: 20px;*/
+    /*padding: 10px;*/
+/*}*/

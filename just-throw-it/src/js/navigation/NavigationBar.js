@@ -21,11 +21,11 @@ class NavigationBar extends React.Component {
     render() {
         return (
             <div>
-                <Navbar className="navigation-bar" light expand="md">
+                <Navbar className="navigation-bar" light>
                     <Link to='/' className="mr-auto brand-name navbar-brand">JustThrowIt</Link>
                     <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                     <Collapse isOpen={!this.state.collapsed} navbar>
-                        <Nav className="ml-auto" navbar>
+                        <Nav className="ml-auto navigation-box" navbar>
                             <NavItem>
                                 <Link to='/about' className="navigation-bar-link nav-link">About the team</Link>
                             </NavItem>
