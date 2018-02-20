@@ -23,7 +23,7 @@ class NavigationBar extends React.Component {
             <div>
                 <Navbar className="navigation-bar" light>
                     <Link to='/' className="mr-auto brand-name navbar-brand">JustThrowIt</Link>
-                    <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+                    <NavbarToggler onClick={this.toggleNavbar} className="mr-2 navigation-toggler" />
                     <Collapse isOpen={!this.state.collapsed} navbar>
                         <Nav className="ml-auto navigation-box" navbar>
                             <NavItem>

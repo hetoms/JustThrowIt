@@ -1,8 +1,8 @@
+
 .navigation-bar {
-    /*background-color: #C1DCE2;*/
     background: url("https://static1.squarespace.com/static/58b5a6addb29d6036965863c/58b6ee33cd0f68809ff0d894/58c12dc4ebbd1a9d3cd5cfcb/1501236373114/Course_Portfolio_Banner-optimized.jpg") center;
     background-size: cover;
-    min-height: 260px;
+    min-height: 10em;
     border-bottom: 2px solid #BDD6E0;
     align-items: flex-start !important;
     position: relative;
@@ -13,26 +13,38 @@
     margin-left: auto;
 }
 
-.brand-name{
+.brand-name {
     color: white !important;
     font-weight: bold;
-    font-size: 5vw !important;
+    font-size: 3em !important;
     margin-left: 5%;
-    margin-top:auto;
-    margin-bottom:auto;
+    margin-top: auto;
+    margin-bottom: auto;
     position: absolute;
 }
 
 .navigation-bar-link {
     color: white !important;
     font-weight: bold;
-    font-size: 1.5vw !important;
+    font-size: 1.25em !important;
     margin: 40px;
 }
 
-/*.navigation-box {*/
-    /*background: rgba(214, 199, 133, 0.4);*/
-    /*border: 2px;*/
-    /*border-radius: 20px;*/
-    /*padding: 10px;*/
-/*}*/
+@media (max-width: 700px) {
+    .navigation-bar {
+        min-height: 6em !important;
+    }
+
+    .brand-name {
+        font-size: 1.5em !important;
+    }
+
+    .navigation-bar-link {
+        font-size: 1em !important;
+    }
+
+    .navigation-toggler {
+        font-size: 0.8em !important;
+    }
+
+}
