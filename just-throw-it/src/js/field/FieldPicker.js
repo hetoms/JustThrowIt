@@ -9,7 +9,7 @@ class FieldPicker extends React.Component {
 
 	renderAllFields() {
 		return this.props.fields.map(field => {
-			return (<div key={field.FieldID} className="col-sm col-md-4">
+			return (
 				<Card key={field.FieldID} className="field-card">
 					<CardImg top width="10%"
 							 src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
@@ -22,7 +22,7 @@ class FieldPicker extends React.Component {
 						<Button>Pick field</Button>
 					</CardBody>
 				</Card>
-			</div>)
+			)
 		})
 	}
 
@@ -31,11 +31,9 @@ class FieldPicker extends React.Component {
 			<div className="container">
 				<h2>Please pick a field</h2>
 				<hr/>
-				<div className="row">
-					<CardDeck>
-						{this.renderAllFields()}
-					</CardDeck>
-				</div>
+				<CardDeck className='card-deck'>
+					{this.renderAllFields()}
+				</CardDeck>
 			</div>
 		)
 	}
