@@ -5,6 +5,7 @@
     min-height: 260px;
     border-bottom: 2px solid #BDD6E0;
     align-items: flex-start !important;
+    position: relative;
 }
 
 .navbar-toggler {
@@ -18,6 +19,7 @@
     margin-left: 5%;
     margin-top:auto;
     margin-bottom:auto;
+    position: absolute;
 }
 
 .navigation-bar-link {
