@@ -16,7 +16,9 @@ export const fields = [
                 "TrackNumber": 3,
                 "TrackPar": 7
             }
-        ]
+        ],
+      lat: -34.397,
+      lng: 150.644
     },
     {
         "FieldID": 2,

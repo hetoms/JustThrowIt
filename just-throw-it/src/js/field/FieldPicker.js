@@ -5,6 +5,7 @@ import {
 	CardTitle, CardSubtitle, Button, CardDeck
 } from 'reactstrap';
 import {Link} from "react-router-dom";
+import MyMapComponent from "../map/GoogleMap";
 
 class FieldPicker extends React.Component {
 
@@ -40,6 +41,7 @@ class FieldPicker extends React.Component {
 				<CardDeck className='card-deck'>
 					{this.renderAllFields()}
 				</CardDeck>
+        <MyMapComponent isMarkerShown={true} lat={-34.397} lng={150.644} />
 			</div>
 		)
 	}
