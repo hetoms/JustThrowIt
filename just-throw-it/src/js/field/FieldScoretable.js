@@ -29,6 +29,7 @@ class FieldScoretable extends React.Component {
 				<hr/>
 				<div>
 					{this.setTracks()}
+					{this.props.field.FieldName}
 				</div>
 			</div>
 		)

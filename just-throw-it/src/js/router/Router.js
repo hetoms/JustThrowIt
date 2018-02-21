@@ -2,7 +2,7 @@ import React from 'react'
 import {Switch, Route} from 'react-router-dom'
 import PickFieldContainer from "../field/PickFieldContainer";
 import SetName from "../setname/SetName";
-import FieldScoretable from "../field/FieldScoretable";
+import FieldScoretable from "../field/FieldScoretableContainer";
 
 
 const Router = () => (

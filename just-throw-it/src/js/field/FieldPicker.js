@@ -8,6 +8,10 @@ import {Link} from "react-router-dom";
 
 class FieldPicker extends React.Component {
 
+	pickField(id) {
+		this.props.actions.pickField(id)
+	}
+
 	renderAllFields() {
 		return this.props.fields.map(field => {
 			return (
@@ -21,7 +25,7 @@ class FieldPicker extends React.Component {
 						<CardSubtitle>Number of fields {field.NumberOfTracks}</CardSubtitle>
 						<CardText>Some quick example text to build on the card title and make up the bulk of the card's
 							content.</CardText>
-						<Link to='/fieldScoretable' numberOfTracks={field.NumberOfTracks}><Button>OK</Button></Link>
+						<Link to='/fieldScoretable' numberOfTracks={field.NumberOfTracks}><Button onClick={() =>this.pickField(field.FieldID)}>OK</Button></Link>
 					</CardBody>
 				</Card>
 			)
