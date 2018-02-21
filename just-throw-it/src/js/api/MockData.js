@@ -1,204 +1,206 @@
 export const fields = [
     {
-        "FieldID": 1,
-        "FieldName": "TTU",
-        "NumberOfTracks": 3,
-        "Tracks": [
+        "fieldID": 1,
+        "fieldName": "TTU",
+        "numberOfTracks": 3,
+        "tracks": [
             {
-                "TrackNumber": 1,
-                "TrackPar": 4
+                "trackNumber": 1,
+                "trackPar": 4
             },
             {
-                "TrackNumber": 2,
-                "TrackPar": 5
+                "trackNumber": 2,
+                "trackPar": 5
             },
             {
-                "TrackNumber": 3,
-                "TrackPar": 7
+                "trackNumber": 3,
+                "trackPar": 7
+            }
+        ],
+      lat: -34.397,
+      lng: 150.644
+    },
+    {
+        "fieldID": 2,
+        "fieldName": "Random",
+        "numberOfTracks": 4,
+        "tracks": [
+            {
+                "trackNumber": 1,
+                "trackPar": 2
+            },
+            {
+                "trackNumber": 2,
+                "trackPar": 3
+            },
+            {
+                "trackNumber": 3,
+                "trackPar": 5
+            },
+            {
+                "trackNumber": 4,
+                "trackPar": 7
             }
         ]
     },
     {
-        "FieldID": 2,
-        "FieldName": "Random",
-        "NumberOfTracks": 4,
-        "Tracks": [
+        "fieldID": 3,
+        "fieldName": "Random",
+        "numberOfTracks": 4,
+        "tracks": [
             {
-                "TrackNumber": 1,
-                "TrackPar": 2
+                "trackNumber": 1,
+                "trackPar": 2
             },
             {
-                "TrackNumber": 2,
-                "TrackPar": 3
+                "trackNumber": 2,
+                "trackPar": 3
             },
             {
-                "TrackNumber": 3,
-                "TrackPar": 5
+                "trackNumber": 3,
+                "trackPar": 5
             },
             {
-                "TrackNumber": 4,
-                "TrackPar": 7
+                "trackNumber": 4,
+                "trackPar": 7
             }
         ]
     },
     {
-        "FieldID": 3,
-        "FieldName": "Random",
-        "NumberOfTracks": 4,
-        "Tracks": [
+        "fieldID": 4,
+        "fieldName": "Random",
+        "numberOfTracks": 4,
+        "tracks": [
             {
-                "TrackNumber": 1,
-                "TrackPar": 2
+                "trackNumber": 1,
+                "trackPar": 2
             },
             {
-                "TrackNumber": 2,
-                "TrackPar": 3
+                "trackNumber": 2,
+                "trackPar": 3
             },
             {
-                "TrackNumber": 3,
-                "TrackPar": 5
+                "trackNumber": 3,
+                "trackPar": 5
             },
             {
-                "TrackNumber": 4,
-                "TrackPar": 7
+                "trackNumber": 4,
+                "trackPar": 7
             }
         ]
     },
     {
-        "FieldID": 4,
-        "FieldName": "Random",
-        "NumberOfTracks": 4,
-        "Tracks": [
+        "fieldID": 5,
+        "fieldName": "Random",
+        "numberOfTracks": 4,
+        "tracks": [
             {
-                "TrackNumber": 1,
-                "TrackPar": 2
+                "trackNumber": 1,
+                "trackPar": 2
             },
             {
-                "TrackNumber": 2,
-                "TrackPar": 3
+                "trackNumber": 2,
+                "trackPar": 3
             },
             {
-                "TrackNumber": 3,
-                "TrackPar": 5
+                "trackNumber": 3,
+                "trackPar": 5
             },
             {
-                "TrackNumber": 4,
-                "TrackPar": 7
-            }
-        ]
-    },
-    {
-        "FieldID": 5,
-        "FieldName": "Random",
-        "NumberOfTracks": 4,
-        "Tracks": [
-            {
-                "TrackNumber": 1,
-                "TrackPar": 2
-            },
-            {
-                "TrackNumber": 2,
-                "TrackPar": 3
-            },
-            {
-                "TrackNumber": 3,
-                "TrackPar": 5
-            },
-            {
-                "TrackNumber": 4,
-                "TrackPar": 7
+                "trackNumber": 4,
+                "trackPar": 7
             }
         ]
     },
 	{
-		"FieldID": 6,
-		"FieldName": "Random",
-		"NumberOfTracks": 4,
-		"Tracks": [
+		"fieldID": 6,
+		"fieldName": "Random",
+		"numberOfTracks": 4,
+		"tracks": [
 			{
-				"TrackNumber": 1,
-				"TrackPar": 2
+				"trackNumber": 1,
+				"trackPar": 2
 			},
 			{
-				"TrackNumber": 2,
-				"TrackPar": 3
+				"trackNumber": 2,
+				"trackPar": 3
 			},
 			{
-				"TrackNumber": 3,
-				"TrackPar": 5
+				"trackNumber": 3,
+				"trackPar": 5
 			},
 			{
-				"TrackNumber": 4,
-				"TrackPar": 7
+				"trackNumber": 4,
+				"trackPar": 7
 			}
 		]
 	},
 	{
-		"FieldID": 7,
-		"FieldName": "Random",
-		"NumberOfTracks": 4,
-		"Tracks": [
+		"fieldID": 7,
+		"fieldName": "Random",
+		"numberOfTracks": 4,
+		"tracks": [
 			{
-				"TrackNumber": 1,
-				"TrackPar": 2
+				"trackNumber": 1,
+				"trackPar": 2
 			},
 			{
-				"TrackNumber": 2,
-				"TrackPar": 3
+				"trackNumber": 2,
+				"trackPar": 3
 			},
 			{
-				"TrackNumber": 3,
-				"TrackPar": 5
+				"trackNumber": 3,
+				"trackPar": 5
 			},
 			{
-				"TrackNumber": 4,
-				"TrackPar": 7
+				"trackNumber": 4,
+				"trackPar": 7
 			}
 		]
 	},
 	{
-		"FieldID": 8,
-		"FieldName": "Random",
-		"NumberOfTracks": 4,
-		"Tracks": [
+		"fieldID": 8,
+		"fieldName": "Random",
+		"numberOfTracks": 4,
+		"tracks": [
 			{
-				"TrackNumber": 1,
-				"TrackPar": 2
+				"trackNumber": 1,
+				"trackPar": 2
 			},
 			{
-				"TrackNumber": 2,
-				"TrackPar": 3
+				"trackNumber": 2,
+				"trackPar": 3
 			},
 			{
-				"TrackNumber": 3,
-				"TrackPar": 5
+				"trackNumber": 3,
+				"trackPar": 5
 			},
 			{
-				"TrackNumber": 4,
-				"TrackPar": 7
+				"trackNumber": 4,
+				"trackPar": 7
 			}
 		]
 	},
 	{
-		"FieldID": 9,
-		"FieldName": "Random",
-		"NumberOfTracks": 4,
-		"Tracks": [
+		"fieldID": 9,
+		"fieldName": "Random",
+		"numberOfTracks": 4,
+		"tracks": [
 			{
-				"TrackNumber": 1,
-				"TrackPar": 2
+				"trackNumber": 1,
+				"trackPar": 2
 			},
 			{
-				"TrackNumber": 2,
-				"TrackPar": 3
+				"trackNumber": 2,
+				"trackPar": 3
 			},
 			{
-				"TrackNumber": 3,
-				"TrackPar": 5
+				"trackNumber": 3,
+				"trackPar": 5
 			},
 			{
-				"TrackNumber": 4,
-				"TrackPar": 7
+				"trackNumber": 4,
+				"trackPar": 7
 			}
 		]
 	}

@@ -5,7 +5,7 @@ import FieldScoretable from "./FieldScoretable";
 
 const mapStateToProps = state => {
   return {
-    field: state.fields.filter(field => field.FieldID === state.selectedField)[0],
+    field: state.fields.filter(field => field.fieldID === state.selectedField)[0],
     selectedField: state.selectedField
   }
 };
