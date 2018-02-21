@@ -4,15 +4,20 @@ import {
 	Card, CardImg, CardText, CardBody,
 	CardTitle, CardSubtitle, Button, CardDeck
 } from 'reactstrap';
+import {Link} from "react-router-dom";
 
 class FieldPicker extends React.Component {
+
+	pickField(id) {
+		this.props.actions.pickField(id)
+	}
 
 	renderAllFields() {
 		return this.props.fields.map(field => {
 			return (
 				<Card key={field.FieldID} className="field-card">
 					<CardImg top width="10%"
-							 /*Placeholder*/
+						/*Placeholder*/
 							 src="http://discgolfanswerman.com/wp-content/uploads/2017/12/Cool.jpg"
 							 alt="Card image cap"/>
 					<CardBody>
@@ -20,7 +25,8 @@ class FieldPicker extends React.Component {
 						<CardSubtitle>Number of fields {field.NumberOfTracks}</CardSubtitle>
 						<CardText>Some quick example text to build on the card title and make up the bulk of the card's
 							content.</CardText>
-						<Button>Pick field</Button>
+						<Link to='/fieldScoretable'><Button
+							onClick={() => this.pickField(field.FieldID)}>OK</Button></Link>
 					</CardBody>
 				</Card>
 			)
