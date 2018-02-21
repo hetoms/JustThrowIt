@@ -8,7 +8,7 @@ const initialState = {
     fields: fields,
     mainPlayer: "UnknownPlayer",
     playerData: [],
-    selectedField: undefined
+    selectedField: 1
 };
 
 const AppReducer = (state = initialState, action) => {
