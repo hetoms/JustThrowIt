@@ -17,11 +17,11 @@ export default class Track extends React.Component {
 	render() {
 		return (
 			<div>
-				<Button block color="primary" style={{marginBottom: 1.5 + "em"}} onClick={this.toggle}>Track: {this.props.track.TrackNumber}</Button>
+				<Button block color="primary" style={{marginBottom: 1.5 + "em"}} onClick={this.toggle}>Track: {this.props.track.trackNumber}</Button>
 				<Collapse isOpen={this.state.collapse}>
 					<Card>
 						<CardBody>
-							Par: {this.props.track.TrackPar} <br/>
+							Par: {this.props.track.trackPar} <br/>
 							Anim pariatur cliche reprehenderit,
 							enim eiusmod high life accusamus terry richardson ad squid. Nihil
 							anim keffiyeh helvetica, craft beer labore wes anderson cred

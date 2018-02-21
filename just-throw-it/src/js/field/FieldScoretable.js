@@ -12,17 +12,18 @@ class FieldScoretable extends React.Component {
 
 
 	setTracks() {
-		return this.props.field.Tracks.map(track => {
+		return this.props.field.tracks.map(track => {
 			return <Track track={track}/>
 		});
 	}
 
 	render() {
+		console.log(this.props);
 		return (
 			<div className="container">
 				<div>
 					<Link to='/pickField'><Button>Back</Button></Link>
-					<h2>{this.props.field.FieldName} DiscGolf field</h2>
+					<h2>{this.props.field.fieldName} DiscGolf field</h2>
 				</div>
 
 				<hr/>
