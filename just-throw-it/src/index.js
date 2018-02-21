@@ -15,15 +15,11 @@ import getFields from "./js/api/GetFields";
 
 const preSavedState = loadState();
 const store = createStore(AppReducer, preSavedState, composeWithDevTools());
-getFields(store.dispatch)
+getFields(store.dispatch);
 
 store.subscribe(() => {
     console.log(store.getState());
-    saveState({
-      mainPlayer: store.getState().mainPlayer,
-      playerData: store.getState().playerData,
-      selectedField: store.getState().selectedField
-    })
+    saveState(store.getState())
 });
 
 ReactDOM.render((
