@@ -44,7 +44,8 @@ class FieldPicker extends React.Component {
 				<CardDeck className='card-deck'>
 					{this.renderAllFields()}
 				</CardDeck>
-        <MyMapComponent isMarkerShown={true} lat={-34.397} lng={150.644} />
+
+				{ /* <MyMapComponent isMarkerShown={true} lat={-34.397} lng={150.644} /> */}
 			</div>
 		)
 	}
