@@ -21,7 +21,7 @@ class FieldPicker extends React.Component {
 			return (
 				<Card key={field.fieldID} className="field-card">
 					<CardImg top width="10%"
-							 /*Placeholder*/
+						/*Placeholder*/
 							 src="http://discgolfanswerman.com/wp-content/uploads/2017/12/Cool.jpg"
 							 alt="Card image cap"/>
 					<CardBody>

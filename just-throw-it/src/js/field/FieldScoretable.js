@@ -1,8 +1,8 @@
 import React from "react";
-import {Collapse, Button, CardBody, Card} from 'reactstrap';
-import {Link, Redirect} from 'react-router-dom';
+import {Button} from 'reactstrap';
+import {Link} from 'react-router-dom';
 import Track from "./Track";
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 class FieldScoretable extends React.Component {
 	constructor(props) {
@@ -12,20 +12,17 @@ class FieldScoretable extends React.Component {
 
 
 	setTracks() {
-		let id = 1;
-		let tracks = [];
-		for (let trackId = 1; trackId <= this.props.numberOfTracks; trackId++) {
-			tracks.push(<Track trackId={id++}/>);
-		}
-		return tracks;
+		return this.props.field.Tracks.map(track => {
+			return <Track track={track}/>
+		});
 	}
 
 	render() {
 		return (
 			<div className="container">
-				<div style={{display: "flex", justifyContent: "flex-start"}}>
+				<div>
 					<Link to='/pickField'><Button>Back</Button></Link>
-					<h2 style={{marginLeft: 15 + "em"}}>Scoretable</h2>
+					<h2>{this.props.field.FieldName} DiscGolf field</h2>
 				</div>
 
 				<hr/>
