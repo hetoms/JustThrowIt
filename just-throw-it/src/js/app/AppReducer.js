@@ -1,7 +1,8 @@
 import {fields} from '../api/MockData';
 import {
   SET_NAME,
-  PICK_FIELD
+  PICK_FIELD,
+  SET_FIELDS
 } from "./Actions";
 
 const initialState = {
@@ -23,6 +24,11 @@ const AppReducer = (state = initialState, action) => {
             ...state,
             selectedField: action.field
           };
+      case SET_FIELDS:
+        return {
+          ...state,
+          fields: action.fields
+        };
         default:
             return state;
 
