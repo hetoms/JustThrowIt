@@ -10,10 +10,9 @@ class FieldScoretable extends React.Component {
 	}
 
 	setTracks() {
-		let id = 1;
 		let tracks = [];
-		for (let trackId = 1; trackId <= this.props.numberOfTracks; trackId++) {
-			tracks.push(<Track trackId={id++}/>);
+		for (let trackId = 1; trackId <= this.props.field.NumberOfTracks; trackId++) {
+			tracks.push(<Track trackId={trackId}/>);
 		}
 		return tracks;
 	}
