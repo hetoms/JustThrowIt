@@ -26,15 +26,21 @@ class SetName extends React.Component {
 	
 	render() {
 		return (
-			<Form inline className='set-name' onSubmit={this.setNameAndRedirect}>
-				<Label for="playerName" className="mr-sm-2">Player Name: </Label>
-				<Input name="playerName"
-							 id="playerName"
-               value={this.props.mainPlayer}
-               placeholder="Your name" required
-               onChange={event => this.props.actions.setName(event.target.value)}/>
-				<Link to='/pickField'><Button>OK</Button></Link>
-			</Form>
+			<div className="form-box container">
+				<Form inline className='set-name' onSubmit={this.setNameAndRedirect}>
+					<Label for="playerName" className="mr-sm-2 player-name-label">Player Name: </Label>
+					<Input name="playerName"
+						   id="playerName"
+						   value={this.props.mainPlayer}
+						   placeholder="Your name" required
+						   onChange={event => this.props.actions.setName(event.target.value)}/>
+				</Form>
+				<div  className="confirm-btn">
+					<Link to='/pickField'><Button>OK</Button></Link>
+				</div>
+
+			</div>
+
 		)
 	}
 }

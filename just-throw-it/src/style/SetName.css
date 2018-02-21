@@ -3,3 +3,11 @@
     justify-content: center;
     padding-top: 0.5%;
 }
+
+.form-box {
+    display: block;
+}
+
+.confirm-btn {
+    margin: 3em !important;
+}
