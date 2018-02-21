@@ -93,5 +93,15 @@ public class DatabaseLoader implements CommandLineRunner {
             fields7.addTrack(new Track(i, 3));
         }
         this.fieldRepository.save(fields7);
+
+        Fields fields8 = new Fields("Edise", 9, 59.3653781, 27.376896);
+        for (int i = 1; i <= 9; i++) {
+            if (i == 8) {
+                fields8.addTrack(new Track(i, 4));
+            } else {
+                fields8.addTrack(new Track(i, 3));
+            }
+        }
+        this.fieldRepository.save(fields8);
     }
 }
