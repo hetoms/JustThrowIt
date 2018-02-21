@@ -21,6 +21,7 @@ public class DatabaseLoader implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
+        fieldRepository.deleteAll();
         Fields fields1 = new Fields("Aegviidu", 9, 59.2885344, 25.6033856);
         for (int i = 1; i <= 9; i++) {
             fields1.addTrack(new Track(i, 3));
