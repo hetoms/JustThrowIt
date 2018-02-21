@@ -1,30 +1,36 @@
 import React from "react";
-import * as Actions from "../app/Actions";
-import {connect} from 'react-redux';
-import {Button, Form, Label, Input} from 'reactstrap';
-import {bindActionCreators} from "redux";
+import {Collapse, Button, CardBody, Card} from 'reactstrap';
 import {Link} from 'react-router-dom';
-
-const mapStateToProps = state => {
-	return {
-	}
-};
-
-const mapDispatchToProps = dispatch => {
-	return {
-		actions: bindActionCreators(Actions, dispatch),
-	}
-
-};
+import Track from "./Track";
 
 class FieldScoretable extends React.Component {
+	constructor(props) {
+		super(props);
+		this.setTracks = this.setTracks.bind(this);
+	}
+
+	setTracks() {
+		let id = 1;
+		let tracks = [];
+		for (let trackId = 1; trackId <= this.props.numberOfTracks; trackId++) {
+			tracks.push(<Track trackId={id++}/>);
+		}
+		return tracks;
+	}
+
 	render() {
 		return (
 			<div className="container">
-				<Link to='/pickField'><Button>Back</Button></Link>
-				<h2>Scoretable</h2>
-			</div>
+				<div style={{display: "flex", justifyContent: "flex-start"}}>
+					<Link to='/pickField'><Button>Back</Button></Link>
+					<h2 style={{marginLeft: 15 + "em"}}>Scoretable</h2>
+				</div>
 
+				<hr/>
+				<div>
+					{this.setTracks()}
+				</div>
+			</div>
 		)
 	}
 }
