@@ -6,6 +6,9 @@ import {
 } from 'reactstrap';
 import {Link} from "react-router-dom";
 import MyMapComponent from "../map/GoogleMap";
+import getFields from "../api/GetFields";
+
+console.log(getFields());
 
 class FieldPicker extends React.Component {
 
@@ -16,17 +19,17 @@ class FieldPicker extends React.Component {
 	renderAllFields() {
 		return this.props.fields.map(field => {
 			return (
-				<Card key={field.FieldID} className="field-card">
+				<Card key={field.fieldID} className="field-card">
 					<CardImg top width="10%"
 							 /*Placeholder*/
 							 src="http://discgolfanswerman.com/wp-content/uploads/2017/12/Cool.jpg"
 							 alt="Card image cap"/>
 					<CardBody>
-						<CardTitle>{field.FieldName}</CardTitle>
-						<CardSubtitle>Number of fields {field.NumberOfTracks}</CardSubtitle>
+						<CardTitle>{field.fieldName}</CardTitle>
+						<CardSubtitle>Number of fields {field.numberOfTracks}</CardSubtitle>
 						<CardText>Some quick example text to build on the card title and make up the bulk of the card's
 							content.</CardText>
-						<Link to='/fieldScoretable' numberOfTracks={field.NumberOfTracks}><Button onClick={() =>this.pickField(field.FieldID)}>OK</Button></Link>
+						<Link to='/fieldScoretable' numberOfTracks={field.numberOfTracks}><Button onClick={() =>this.pickField(field.fieldID)}>OK</Button></Link>
 					</CardBody>
 				</Card>
 			)
