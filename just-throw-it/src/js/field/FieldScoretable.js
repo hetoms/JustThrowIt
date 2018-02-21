@@ -10,11 +10,9 @@ class FieldScoretable extends React.Component {
 	}
 
 	setTracks() {
-		let tracks = [];
-		for (let trackId = 1; trackId <= this.props.field.NumberOfTracks; trackId++) {
-			tracks.push(<Track trackId={trackId}/>);
-		}
-		return tracks;
+		return this.props.field.Tracks.map(track => {
+			return <Track trackId={track.TrackNumber}/>
+		})
 	}
 
 	render() {
@@ -23,6 +21,7 @@ class FieldScoretable extends React.Component {
 				<div style={{display: "flex", justifyContent: "flex-start"}}>
 					<Link to='/pickField'><Button>Back</Button></Link>
 					<h2 style={{marginLeft: 15 + "em"}}>Scoretable</h2>
+					{this.props.field.FieldName}
 				</div>
 
 				<hr/>
