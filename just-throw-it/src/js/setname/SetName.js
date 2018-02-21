@@ -8,7 +8,7 @@ import "../../style/SetName.css";
 
 const mapStateToProps = state => {
 	return {
-		fields: state.fields,
+		mainPlayer: state.mainPlayer
 	}
 };
 
@@ -23,13 +23,16 @@ class SetName extends React.Component {
 	setNameAndRedirect = (event) => {
 		event.preventDefault();
 	};
-
+	
 	render() {
 		return (
 			<Form inline className='set-name' onSubmit={this.setNameAndRedirect}>
 				<Label for="playerName" className="mr-sm-2">Player Name: </Label>
-				<Input name="playerName" id="playerName" placeholder="Your name" required
-					   onChange={event => this.props.actions.setName(event.target.value)}/>
+				<Input name="playerName"
+							 id="playerName"
+               value={this.props.mainPlayer}
+               placeholder="Your name" required
+               onChange={event => this.props.actions.setName(event.target.value)}/>
 				<Link to='/pickField'><Button>OK</Button></Link>
 			</Form>
 		)
