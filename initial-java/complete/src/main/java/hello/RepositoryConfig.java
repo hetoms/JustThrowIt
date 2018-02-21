@@ -10,5 +10,6 @@ public class RepositoryConfig extends RepositoryRestConfigurerAdapter {
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
         config.exposeIdsFor(Person.class);
+        config.exposeIdsFor(Fields.class);
     }
 }
