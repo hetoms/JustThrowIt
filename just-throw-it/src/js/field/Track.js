@@ -6,8 +6,8 @@ export default class Track extends React.Component {
 		super(props);
 		this.toggle = this.toggle.bind(this);
 		this.state = {
-			trackName: "Track " + this.props.trackId,
-			collapse: false};
+			collapse: false
+		};
 	}
 
 	toggle() {
@@ -17,10 +17,12 @@ export default class Track extends React.Component {
 	render() {
 		return (
 			<div>
-				<Button block color="primary" onClick={this.toggle} style={{marginBottom: '1rem'}}>{this.state.trackName}</Button>
+				<Button block color="primary" onClick={this.toggle}
+						style={{marginBottom: '1rem'}}>Track: {this.props.track.TrackNumber}</Button>
 				<Collapse isOpen={this.state.collapse}>
 					<Card>
 						<CardBody>
+							Par: {this.props.track.TrackPar} <br/>
 							Anim pariatur cliche reprehenderit,
 							enim eiusmod high life accusamus terry richardson ad squid. Nihil
 							anim keffiyeh helvetica, craft beer labore wes anderson cred
