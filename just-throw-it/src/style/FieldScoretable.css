@@ -1,0 +1,15 @@
+.tracks-container {
+    position: relative;
+    align-items: flex-start;
+}
+
+.tracks-nav {
+    width: 20%;
+}
+
+.track-info {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 80%;
+}
