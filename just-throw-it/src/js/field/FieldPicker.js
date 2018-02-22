@@ -5,7 +5,6 @@ import {
 	CardTitle, CardSubtitle, Button, CardDeck
 } from 'reactstrap';
 import {Link} from "react-router-dom";
-import MyMapComponent from "../map/GoogleMap";
 import getFields from "../api/GetFields";
 
 console.log(getFields());
@@ -26,10 +25,11 @@ class FieldPicker extends React.Component {
 							 alt="Card image cap"/>
 					<CardBody>
 						<CardTitle>{field.fieldName}</CardTitle>
-						<CardSubtitle>Number of fields {field.numberOfTracks}</CardSubtitle>
+						<CardSubtitle>Number of tracks {field.numberOfTracks}</CardSubtitle>
+						<CardSubtitle>Track par {field.pars}</CardSubtitle>
 						<CardText>Some quick example text to build on the card title and make up the bulk of the card's
 							content.</CardText>
-						<Link to='/fieldScoretable' numberOfTracks={field.numberOfTracks}><Button onClick={() =>this.pickField(field.fieldID)}>OK</Button></Link>
+						<Link to='/fieldScoretable' numberOfTracks={field.numberOfTracks}><Button onClick={() =>this.pickField(field.fieldID)}>Select</Button></Link>
 					</CardBody>
 				</Card>
 			)
