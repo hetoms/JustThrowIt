@@ -19,6 +19,7 @@ public class Fields {
     private double latitude;
     private double longitude;
     private int pars;
+    private String text = "";
 
     public Fields() {}
 
@@ -84,5 +85,13 @@ public class Fields {
 
     public void setPars(int pars) {
         this.pars = pars;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }
