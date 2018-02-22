@@ -9,16 +9,25 @@ public class Fields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private long fieldID;
 
     private String fieldName;
+
     private int numberOfTracks ;
+
     @OneToMany(cascade = {CascadeType.ALL})
+
     @ElementCollection(targetClass=Track.class)
+
     private List<Track> tracks = new ArrayList<>();
+
     private double latitude;
+
     private double longitude;
+
     private int pars;
+
     private String text = "";
 
     public Fields() {}
