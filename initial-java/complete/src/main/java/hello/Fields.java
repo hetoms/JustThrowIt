@@ -18,14 +18,16 @@ public class Fields {
     private List<Track> tracks = new ArrayList<>();
     private double latitude;
     private double longitude;
+    private int pars;
 
     public Fields() {}
 
-    public Fields(String fieldName, int numberOfTracks, double latitude, double longitude) {
+    public Fields(String fieldName, int numberOfTracks, double latitude, double longitude, int pars) {
         this.fieldName = fieldName;
         this.numberOfTracks = numberOfTracks;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.pars = pars;
     }
 
     public String getFieldName() {
@@ -74,5 +76,13 @@ public class Fields {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public int getPars() {
+        return pars;
+    }
+
+    public void setPars(int pars) {
+        this.pars = pars;
     }
 }
