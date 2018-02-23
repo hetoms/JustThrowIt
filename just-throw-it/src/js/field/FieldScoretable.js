@@ -44,13 +44,13 @@ class FieldScoretable extends React.Component {
 				<div>
 					<Link to='/pickField'><Button>Back</Button></Link>
 					<h2>{this.props.field.fieldName} DiscGolf field</h2>
+					{console.log("props", this.props)}
 				</div>
 				<hr/>
 				<StickyContainer style={{overflowY: 'auto'}}>
 					<div className="tracks-container">
 						<div className="tracks-nav">
 							<Nav vertical>
-								{this.setTracks()}
 								{this.setTracks()}
 							</Nav>
 						</div>

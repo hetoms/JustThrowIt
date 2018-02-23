@@ -7,14 +7,10 @@ export default class Track extends React.Component {
 			<div>
 				<Card>
 					<CardHeader>
-						Track: {this.props.track.trackNumber}
+						Track {this.props.track.trackNumber} (par: {this.props.track.trackPar})
 					</CardHeader>
 					<CardBody>
-						Par: {this.props.track.trackPar} <br/>
-						Anim pariatur cliche reprehenderit,
-						enim eiusmod high life accusamus terry richardson ad squid. Nihil
-						anim keffiyeh helvetica, craft beer labore wes anderson cred
-						nesciunt sapiente ea proident.
+						<label> Player Name</label>
 					</CardBody>
 				</Card>
 			</div>
