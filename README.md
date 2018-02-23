@@ -1,2 +1,2 @@
 # JustThrowIt
-tarkvaratehnika
+Tarkvaratehnika
