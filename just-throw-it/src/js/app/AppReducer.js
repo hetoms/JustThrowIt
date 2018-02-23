@@ -1,4 +1,5 @@
 import {fields} from '../api/MockData';
+
 import {
   SET_NAME,
   PICK_FIELD,

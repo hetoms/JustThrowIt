@@ -2,8 +2,8 @@ import React from "react";
 import {Button, Nav, NavLink, NavItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import Track from "./Track";
+import Overview from "./Overview";
 import "../../style/FieldScoretable.css";
-import {StickyContainer, Sticky} from 'react-sticky';
 import PropTypes from 'prop-types';
 
 class FieldScoretable extends React.Component {
@@ -13,67 +13,63 @@ class FieldScoretable extends React.Component {
 		this.showTrack = this.showTrack.bind(this);
 
 		this.state = {
-			displayedTrack: this.props.field.tracks[0]
+			displayedTrack: this.props.field.tracks[0],
+			showOverview: false
 		}
 	}
 
-	showTrack(track, e) {
-		e.preventDefault();
+	showTrack(track) {
 		this.setState({
-			displayedTrack: track
+			displayedTrack: track,
+			showOverview: false
+		})
+	}
+
+	showOverview() {
+		this.setState({
+			showOverview: true
 		})
 	}
 
 	setTracks() {
-		// return this.props.field.tracks.map(track => {
-		// 	return <Track track={track}/>
-		// });
-
 		return this.props.field.tracks.map(track => {
 			return (
-				<NavItem>
-					<NavLink className="track"  href="#" onClick={(e) => this.showTrack(track, e)}>Track: {track.trackNumber}</NavLink>
+				<NavItem className="track">
+					<NavLink href="#" onClick={() => this.showTrack(track)}>Track: {track.trackNumber}</NavLink>
 				</NavItem>
 			)
 		})
 	}
 
 	render() {
+		let content = null;
+
+		if (this.state.showOverview) {
+			content = <Overview/>;
+		} else {
+			content = <Track player={this.props.mainPlayer} track={this.state.displayedTrack}/>;
+		}
+
 		return (
 			<div className="container">
 				<div>
 					<Link to='/pickField'><Button>Back</Button></Link>
 					<h2>{this.props.field.fieldName} DiscGolf field</h2>
-					{console.log("props", this.props)}
 				</div>
 				<hr/>
-				<StickyContainer style={{overflowY: 'auto'}}>
-					<div className="tracks-container">
-						<div className="tracks-nav">
-							<Nav vertical>
-								{this.setTracks()}
-							</Nav>
-						</div>
-						<div className='info-container'>
-							<Sticky>{
-								({
-									 style
-								 }) => {
-									return (
-										<div className="track-info" style={style}>
-											<Track track={this.state.displayedTrack}/>
-										</div>
-									)
-								}
-							}</Sticky>
-						</div>
-
-
-						{/*<div className="track-info">*/}
-						{/*<Track track={this.state.displayedTrack}/>*/}
-						{/*</div>*/}
+				<div className="tracks-container">
+					<div className="tracks-nav">
+						<Nav vertical>
+							<NavItem className="track">
+								<NavLink href="#" onClick={() => this.showOverview()}>Overview</NavLink>
+							</NavItem>
+							{this.setTracks()}
+						</Nav>
 					</div>
-				</StickyContainer>
+					<div className="track-info">
+						{ content }
+					</div>
+				</div>
 			</div>
 		)
 	}
