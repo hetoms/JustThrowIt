@@ -2,10 +2,6 @@ import React from "react";
 import {CardBody, Card, CardHeader} from 'reactstrap';
 
 export default class Track extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return (
 			<div>

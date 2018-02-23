@@ -1,15 +1,24 @@
-.tracks-container {
-    position: relative;
-    align-items: flex-start;
-}
-
 .tracks-nav {
-    width: 20%;
+    margin-right: 20px;
 }
 
 .track-info {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 80%;
+    margin-top: 15px;
+    width: 55vw !important;
+    float: left !important;
+}
+
+.tracks-container {
+    left: 0 !important;
+    display:flex;
+    justify-content: flex-start;
+}
+
+.track {
+    border-bottom: 1px solid lightgray;
+}
+
+.container {
+    width: 90vw !important;
+    padding: 10px !important;
 }
