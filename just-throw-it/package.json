@@ -12,7 +12,6 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
-    "react-sticky": "^6.0.1",
     "reactstrap": "^5.0.0-beta",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2"
