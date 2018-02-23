@@ -4,7 +4,7 @@ import {CardBody, Card, CardHeader} from 'reactstrap';
 export default class Track extends React.Component {
 	render() {
 		return (
-			<div>
+			<div style={{position: "-webkit-sticky", position: "sticky", top: "0", zIndex: "100"}}>
 				<Card>
 					<CardHeader>
 						Track: {this.props.track.trackNumber}

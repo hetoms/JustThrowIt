@@ -3,7 +3,6 @@ import {Button, Nav, NavLink, NavItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import Track from "./Track";
 import "../../style/FieldScoretable.css";
-import {StickyContainer, Sticky} from 'react-sticky';
 import PropTypes from 'prop-types';
 
 class FieldScoretable extends React.Component {
@@ -32,7 +31,7 @@ class FieldScoretable extends React.Component {
 		return this.props.field.tracks.map(track => {
 			return (
 				<NavItem>
-					<NavLink className="track"  href="#" onClick={(e) => this.showTrack(track, e)}>Track: {track.trackNumber}</NavLink>
+					<NavLink href="#" onClick={(e) => this.showTrack(track, e)}>Track: { track.trackNumber }</NavLink>
 				</NavItem>
 			)
 		})
@@ -46,34 +45,17 @@ class FieldScoretable extends React.Component {
 					<h2>{this.props.field.fieldName} DiscGolf field</h2>
 				</div>
 				<hr/>
-				<StickyContainer style={{overflowY: 'auto'}}>
-					<div className="tracks-container">
-						<div className="tracks-nav">
-							<Nav vertical>
-								{this.setTracks()}
-								{this.setTracks()}
-							</Nav>
-						</div>
-						<div className='info-container'>
-							<Sticky>{
-								({
-									 style
-								 }) => {
-									return (
-										<div className="track-info" style={style}>
-											<Track track={this.state.displayedTrack}/>
-										</div>
-									)
-								}
-							}</Sticky>
-						</div>
-
-
-						{/*<div className="track-info">*/}
-						{/*<Track track={this.state.displayedTrack}/>*/}
-						{/*</div>*/}
+				<div className="tracks-container">
+					<div className="tracks-nav">
+						<Nav vertical>
+							{this.setTracks()}
+              {this.setTracks()}
+						</Nav>
 					</div>
-				</StickyContainer>
+					<div className="track-info">
+						<Track track={this.state.displayedTrack}/>
+					</div>
+				</div>
 			</div>
 		)
 	}
