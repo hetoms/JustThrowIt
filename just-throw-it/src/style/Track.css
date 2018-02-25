@@ -1,0 +1,34 @@
+.decrease-btn {
+    margin-left: 2em;
+    margin-right: 2em;
+    width: 35px;
+}
+
+.increase-btn {
+    width: 35px;
+}
+
+.player-points {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.player-name {
+    margin-right: 2em;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.throws {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.track-box {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}

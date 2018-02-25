@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Nav, NavLink, NavItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import Track from "./Track";
+import Overview from "./Overview";
 import "../../style/FieldScoretable.css";
 import PropTypes from 'prop-types';
 
@@ -12,32 +13,43 @@ class FieldScoretable extends React.Component {
 		this.showTrack = this.showTrack.bind(this);
 
 		this.state = {
-			displayedTrack: this.props.field.tracks[0]
+			displayedTrack: this.props.field.tracks[0],
+			showOverview: false
 		}
 	}
 
-	showTrack(track, e) {
-		e.preventDefault();
+	showTrack(track) {
 		this.setState({
-			displayedTrack: track
+			displayedTrack: track,
+			showOverview: false
+		})
+	}
+
+	showOverview() {
+		this.setState({
+			showOverview: true
 		})
 	}
 
 	setTracks() {
-		// return this.props.field.tracks.map(track => {
-		// 	return <Track track={track}/>
-		// });
-
 		return this.props.field.tracks.map(track => {
 			return (
-				<NavItem>
-					<NavLink href="#" onClick={(e) => this.showTrack(track, e)}>Track: { track.trackNumber }</NavLink>
+				<NavItem className="track">
+					<NavLink href="#" onClick={() => this.showTrack(track)}>Track: {track.trackNumber}</NavLink>
 				</NavItem>
 			)
 		})
 	}
 
 	render() {
+		let content = null;
+
+		if (this.state.showOverview) {
+			content = <Overview/>;
+		} else {
+			content = <Track player={this.props.mainPlayer} track={this.state.displayedTrack}/>;
+		}
+
 		return (
 			<div className="container">
 				<div>
@@ -48,12 +60,14 @@ class FieldScoretable extends React.Component {
 				<div className="tracks-container">
 					<div className="tracks-nav">
 						<Nav vertical>
+							<NavItem className="track">
+								<NavLink href="#" onClick={() => this.showOverview()}>Overview</NavLink>
+							</NavItem>
 							{this.setTracks()}
-              {this.setTracks()}
 						</Nav>
 					</div>
 					<div className="track-info">
-						<Track track={this.state.displayedTrack}/>
+						{ content }
 					</div>
 				</div>
 			</div>
