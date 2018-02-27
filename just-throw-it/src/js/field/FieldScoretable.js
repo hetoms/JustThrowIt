@@ -7,72 +7,81 @@ import "../../style/FieldScoretable.css";
 import PropTypes from 'prop-types';
 
 class FieldScoretable extends React.Component {
-	constructor(props) {
-		super(props);
-		this.setTracks = this.setTracks.bind(this);
-		this.showTrack = this.showTrack.bind(this);
+  constructor(props) {
+    super(props);
+    this.setTracks = this.setTracks.bind(this);
+    this.showTrack = this.showTrack.bind(this);
 
-		this.state = {
-			displayedTrack: this.props.field.tracks[0],
-			showOverview: false
-		}
-	}
+    this.state = {
+      displayedTrack: this.props.field.tracks[0],
+      showOverview: false
+    }
+  }
 
-	showTrack(track) {
-		this.setState({
-			displayedTrack: track,
-			showOverview: false
-		})
-	}
+  showTrack(track) {
+    this.setState({
+      displayedTrack: track,
+      showOverview: false
+    })
+  }
 
-	showOverview() {
-		this.setState({
-			showOverview: true
-		})
-	}
+  showOverview() {
+    this.setState({
+      showOverview: true
+    })
+  }
 
-	setTracks() {
-		return this.props.field.tracks.map(track => {
-			return (
-				<NavItem className="track">
-					<NavLink href="#" onClick={() => this.showTrack(track)}>Track: {track.trackNumber}</NavLink>
-				</NavItem>
-			)
-		})
-	}
+  setTracks() {
+    return this.props.field.tracks.map(track => {
+      return (
+        <NavItem className="track" key={track.trackNumber}>
+          <NavLink href="#" onClick={() => this.showTrack(track)}>Track: {track.trackNumber}</NavLink>
+        </NavItem>
+      )
+    })
+  }
 
-	render() {
-		let content = null;
+  render() {
+    let content = null;
+    if (this.state.showOverview) {
+      content =
+        <Overview
+          playerData={this.props.playerData}
+          mainPlayer={this.props.mainPlayer}
+          field={this.props.field}
+        />;
+    } else {
+      content = <Track
+        player={this.props.mainPlayer}
+        track={this.state.displayedTrack}
+        onChange={this.props.actions.saveThrowDumb}
+        throws={this.props.playerData[this.state.displayedTrack.trackNumber - 1]}
+      />;
+    }
 
-		if (this.state.showOverview) {
-			content = <Overview/>;
-		} else {
-			content = <Track player={this.props.mainPlayer} track={this.state.displayedTrack}/>;
-		}
-
-		return (
-			<div className="container">
-				<div>
-					<Link to='/pickField'><Button>Back</Button></Link>
-					<h2>{this.props.field.fieldName} DiscGolf field</h2>
-				</div>
-				<hr/>
-				<div className="tracks-container">
-					<div className="tracks-nav">
-						<Nav vertical>
-							<NavItem className="track">
-								<NavLink href="#" onClick={() => this.showOverview()}>Overview</NavLink>
-							</NavItem>
-							{this.setTracks()}
-						</Nav>
-					</div>
-					<div className="track-info">
-						{ content }
-					</div>
-				</div>
-			</div>
-		)
-	}
+    return (
+      <div className="container">
+        <div>
+          <Link to='/pickField'><Button>Back</Button></Link>
+          <h2>{this.props.field.fieldName} DiscGolf field</h2>
+        </div>
+        <hr/>
+        <div className="tracks-container">
+          <div className="tracks-nav">
+            <Nav vertical>
+              <NavItem className="track">
+                <NavLink href="#" onClick={() => this.showOverview()}>Overview</NavLink>
+              </NavItem>
+              {this.setTracks()}
+            </Nav>
+          </div>
+          <div className="track-info">
+            {content}
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default FieldScoretable;

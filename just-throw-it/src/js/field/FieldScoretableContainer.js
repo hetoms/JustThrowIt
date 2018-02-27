@@ -7,7 +7,8 @@ const mapStateToProps = state => {
 	return {
 		field: state.fields.filter(field => field.fieldID === state.selectedField)[0],
 		selectedField: state.selectedField,
-		mainPlayer: state.mainPlayer
+		mainPlayer: state.mainPlayer,
+		playerData: state.playerData
 	}
 };
 

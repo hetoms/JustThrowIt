@@ -29,7 +29,7 @@ class FieldPicker extends React.Component {
 						<CardSubtitle>Track par {field.pars}</CardSubtitle>
 						<CardText>Some quick example text to build on the card title and make up the bulk of the card's
 							content.</CardText>
-						<Link to='/fieldScoretable' numberOfTracks={field.numberOfTracks}><Button onClick={() =>this.pickField(field.fieldID)}>Select</Button></Link>
+						<Link to='/fieldScoretable' numberOfTracks={field.numberOfTracks}><Button onClick={() =>this.pickField(field)}>Select</Button></Link>
 					</CardBody>
 				</Card>
 			)
