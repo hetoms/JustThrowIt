@@ -14,14 +14,14 @@ export default class Track extends React.Component {
 		this.increaseThrows = this.increaseThrows.bind(this);
 
 	}
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.track !== this.props.track ) {
-      this.setState({
-        throws: nextProps.throws,
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.track !== this.props.track ) {
+			this.setState({
+				throws: nextProps.throws,
 				trackNumber: nextProps.track.trackNumber
-      });
-    }
-  }
+			});
+		}
+	}
 
 	increaseThrows() {
 		this.setState({

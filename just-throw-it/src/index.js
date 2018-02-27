@@ -20,15 +20,15 @@ getFields(store.dispatch);
 // store.dispatch(clearPlayerData());
 
 store.subscribe(() => {
-    console.log(store.getState());
-    saveState(store.getState())
+	console.log(store.getState());
+	saveState(store.getState())
 });
 
 ReactDOM.render((
-    <Provider store={store}>
-        <BrowserRouter>
-            <App/>
-        </BrowserRouter>
-    </Provider>
+	<Provider store={store}>
+		<BrowserRouter>
+			<App/>
+		</BrowserRouter>
+	</Provider>
 ), document.getElementById('root'));
 registerServiceWorker();
