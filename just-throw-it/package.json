@@ -6,6 +6,7 @@
     "bootstrap": "^4.0.0",
     "jquery": "^3.3.1",
     "prop-types": "latest",
+    "ramda": "^0.25.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-google-maps": "^9.4.5",

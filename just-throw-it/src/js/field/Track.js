@@ -6,25 +6,34 @@ export default class Track extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			throws: 0
+			throws: this.props.throws,
+			trackNumber: this.props.track.trackNumber
 		};
 
 		this.decreaseThrows = this.decreaseThrows.bind(this);
 		this.increaseThrows = this.increaseThrows.bind(this);
 
 	}
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.track !== this.props.track ) {
+      this.setState({
+        throws: nextProps.throws,
+				trackNumber: nextProps.track.trackNumber
+      });
+    }
+  }
 
 	increaseThrows() {
 		this.setState({
-			throws: this.state.throws + 1
-		})
+			throws: this.state.throws+ 1
+		}, () => this.props.onChange(this.state.trackNumber, this.state.throws));
 	}
 
 	decreaseThrows() {
 		if (this.state.throws > 0) {
 			this.setState({
 				throws: this.state.throws - 1
-			})
+			}, () => this.props.onChange(this.state.trackNumber, this.state.throws));
 		}
 	}
 
