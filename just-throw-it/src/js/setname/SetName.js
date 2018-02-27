@@ -31,6 +31,7 @@ class SetName extends React.Component {
 					<Label for="playerName" className="mr-sm-2 player-name-label">Player Name: </Label>
 					<Input name="playerName"
 						   id="playerName"
+                 maxLength="10"
 						   value={this.props.mainPlayer}
 						   placeholder="Your name" required
 						   onChange={event => this.props.actions.setName(event.target.value)}/>

@@ -25,7 +25,6 @@ export default class Track extends React.Component {
 								<td>{this.props.mainPlayer}</td>
 								<td>{this.props.playerData.reduce((a, b) => a + b, 0)}</td>
 								<td>{this.props.field.pars}</td>
-
 							</tr>
 							</tbody>
 						</Table>
