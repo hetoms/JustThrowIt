@@ -1,6 +1,6 @@
 .decrease-btn {
-    margin-left: 2em;
-    margin-right: 2em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
     width: 35px;
 }
 
@@ -8,22 +8,26 @@
     width: 35px;
 }
 
+.buttons {
+    margin: 10px auto auto;
+}
+
 .player-points {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin-top: 20px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .player-name {
-    margin-right: 2em;
-    margin-bottom: auto;
-    margin-top: auto;
+    flex-shrink: 50;
+    margin: auto;
+    word-break: break-all;
 }
 
 .throws {
-    margin-top: auto;
-    margin-bottom: auto;
+    margin: auto;
 }
 
 .track-box {

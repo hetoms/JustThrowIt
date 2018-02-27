@@ -10,7 +10,7 @@
 
 .tracks-container {
     left: 0 !important;
-    display:flex;
+    display: flex;
     justify-content: flex-start;
 }
 
@@ -21,4 +21,5 @@
 .container {
     width: 90vw !important;
     padding: 10px !important;
+    justify-content: center;
 }

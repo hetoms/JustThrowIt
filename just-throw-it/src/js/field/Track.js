@@ -48,7 +48,7 @@ export default class Track extends React.Component {
 						<div className="player-points">
 							<h5 className="player-name"> {this.props.player}</h5>
 							<p className="throws"> Throws: {this.state.throws}</p>
-							<div>
+							<div className="buttons">
 								<Button color="danger" className="decrease-btn" onClick={() => this.decreaseThrows()}>-</Button>
 								<Button color="success" className="increase-btn" onClick={() => this.increaseThrows()}>+</Button>
 							</div>

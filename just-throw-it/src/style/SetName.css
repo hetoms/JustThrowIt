@@ -1,5 +1,5 @@
 .set-name {
-    display: flex;
+    display: flex !important;
     justify-content: center;
     padding-top: 0.5%;
 }
@@ -9,5 +9,10 @@
 }
 
 .confirm-btn {
-    margin: 3em !important;
+    margin: 1.5em !important;
+}
+
+#playerName {
+    max-width: 200px !important;
+    margin-left: 20px !important;
 }
