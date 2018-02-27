@@ -16,7 +16,6 @@ export default class Track extends React.Component {
 					</CardBody>
 				</Card>
 			</div>
-
 		)
 	}
 }

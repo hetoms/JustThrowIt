@@ -1,6 +1,6 @@
 import {setFields} from "../app/Actions";
 
-const apiURL = 'http://sbjustthrowit-env.eu-central-1.elasticbeanstalk.com/fields';
+const apiURL = 'http://justthrowit-env.eu-central-1.elasticbeanstalk.com/fields';
 
 const getFields = async (action) => {
   return await fetch(apiURL, {cache: 'no-store'})
@@ -13,5 +13,3 @@ const getFields = async (action) => {
     });
 };
 export default getFields;
-
-
