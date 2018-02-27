@@ -6,6 +6,7 @@ import {
 } from 'reactstrap';
 import {Link} from "react-router-dom";
 import getFields from "../api/GetFields";
+import fieldLogo from "../../resources/images/field.jpg";
 
 console.log(getFields());
 
@@ -21,7 +22,7 @@ class FieldPicker extends React.Component {
 				<Card key={field.fieldID} className="field-card">
 					<CardImg top width="10%"
 						/*Placeholder*/
-							 src="http://discgolfanswerman.com/wp-content/uploads/2017/12/Cool.jpg"
+							 src={fieldLogo}
 							 alt="Card image cap"/>
 					<CardBody>
 						<CardTitle>{field.fieldName}</CardTitle>
