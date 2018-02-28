@@ -61,9 +61,10 @@ class FieldScoretable extends React.Component {
 
 		return (
 			<div className="container">
-				<div>
-					<Link to='/pickField'><Button>Back</Button></Link>
+				<div className="header-box">
+					<Link className="back-btn" to='/pickField'><Button>Back</Button></Link>
 					<h2>{this.props.field.fieldName} DiscGolf field</h2>
+					<div/>
 				</div>
 				<hr/>
 				<div className="tracks-container">

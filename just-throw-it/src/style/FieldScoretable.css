@@ -8,6 +8,12 @@
     float: left !important;
 }
 
+.header-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .tracks-container {
     left: 0 !important;
     display: flex;
@@ -22,4 +28,9 @@
     width: 90vw !important;
     padding: 10px !important;
     justify-content: center;
+}
+
+.back-btn {
+    margin-top:auto;
+    margin-bottom: auto;
 }
