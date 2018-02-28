@@ -6,11 +6,27 @@ import {
 } from 'reactstrap';
 import {Link} from "react-router-dom";
 import getFields from "../api/GetFields";
-import fieldLogo from "../../resources/images/field.jpg";
+import {APIKey} from "../api/APIKey";
+import MapModal from "../map/MapModal";
 
 console.log(getFields());
 
 class FieldPicker extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalOpen: false,
+      fieldInModal: {fieldName: 'Something went wrong'}
+    };
+    this.toggleModal = this.toggleModal.bind(this)
+  }
+
+  toggleModal(field) {
+    this.setState({
+      fieldInModal: field,
+      modalOpen: !this.state.modalOpen
+    })
+  }
 
 	pickField(id) {
 		this.props.actions.pickField(id)
@@ -20,10 +36,13 @@ class FieldPicker extends React.Component {
 		return this.props.fields.map(field => {
 			return (
 				<Card key={field.fieldID} className="field-card">
+          <div onClick={() => this.toggleModal(field)}>
 					<CardImg top width="10%"
 						/*Placeholder*/
-							 src={fieldLogo}
+                   src={"https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=600x300&markers="
+                   + field.latitude + "," + field.longitude + "&key=" + APIKey}
 							 alt="Card image cap"/>
+          </div>
 					<CardBody>
 						<CardTitle>{field.fieldName}</CardTitle>
 						<CardSubtitle>Number of tracks {field.numberOfTracks}</CardSubtitle>
@@ -46,7 +65,7 @@ class FieldPicker extends React.Component {
 					{this.renderAllFields()}
 				</CardDeck>
 
-				{ /* <MyMapComponent isMarkerShown={true} lat={-34.397} lng={150.644} /> */}
+        <MapModal modalOpen={this.state.modalOpen} toggle={this.toggleModal} field={this.state.fieldInModal} />
 			</div>
 		)
 	}
