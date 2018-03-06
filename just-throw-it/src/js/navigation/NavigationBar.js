@@ -30,7 +30,7 @@ class NavigationBar extends React.Component {
                                 <Link to='/about' className="navigation-bar-link nav-link">About the team</Link>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="navigation-bar-link" href="https://github.com/hetoms/JustThrowIt">Github</NavLink>
+                                <NavLink className="navigation-bar-link" target="_blank" href="https://github.com/hetoms/JustThrowIt">Github</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>
