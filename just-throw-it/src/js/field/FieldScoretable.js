@@ -36,7 +36,7 @@ class FieldScoretable extends React.Component {
 		return this.props.field.tracks.map(track => {
 			return (
 				<NavItem className="track" key={track.trackNumber}>
-					<NavLink className="track-link" href="#" onClick={() => this.showTrack(track)} active={ this.state.displayedTrack === track }>Track: {track.trackNumber}</NavLink>
+					<NavLink href="#" onClick={() => this.showTrack(track)} active={ this.state.displayedTrack === track }>Track: {track.trackNumber}</NavLink>
 				</NavItem>
 			)
 		})
@@ -72,7 +72,7 @@ class FieldScoretable extends React.Component {
 					<div className="tracks-nav">
 						<Nav pills vertical>
 							<NavItem className="track">
-								<NavLink className="track-link" href="#" onClick={() => this.showOverview()} active={ this.state.showOverview }>Overview</NavLink>
+								<NavLink href="#" onClick={() => this.showOverview()} active={ this.state.showOverview }>Overview</NavLink>
 							</NavItem>
 							{this.setTracks()}
 						</Nav>
