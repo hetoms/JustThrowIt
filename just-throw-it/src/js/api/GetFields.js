@@ -13,5 +13,3 @@ const getFields = async (action) => {
 		});
 };
 export default getFields;
-
-

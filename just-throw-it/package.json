@@ -15,7 +15,8 @@
     "react-scripts": "1.1.1",
     "reactstrap": "^5.0.0-beta",
     "redux": "^3.7.2",
-    "redux-devtools-extension": "^2.13.2"
+    "redux-devtools-extension": "^2.13.2",
+    "src": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",

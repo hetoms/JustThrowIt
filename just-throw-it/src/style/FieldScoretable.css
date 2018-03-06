@@ -22,6 +22,22 @@
 
 .track {
     border-bottom: 1px solid lightgray;
+    background-color: #E8F1F7;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5em;
+}
+
+.track-link {
+    color: black !important;
+}
+
+.track:hover {
+    background-color: #CDE9EE;
+}
+
+.nav-link.active {
+    border-bottom: 2px solid gray;
+    background-color: #98BCDD !important;
 }
 
 .container {
