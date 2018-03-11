@@ -17,7 +17,6 @@ const mapDispatchToProps = dispatch => {
 	return {
 		actions: bindActionCreators(Actions, dispatch),
 	}
-
 };
 
 class SetName extends React.Component {
@@ -27,29 +26,22 @@ class SetName extends React.Component {
 		this.getPlayerNameInputs = this.getPlayerNameInputs.bind(this);
 		this.addPlayer = this.addPlayer.bind(this);
 		this.resetFields = this.resetFields.bind(this);
-
-		this.state = {
-			playerCount: 1
-		}
 	}
 	setNameAndRedirect = (event) => {
 		event.preventDefault();
 	};
 
 	componentWillMount() {
-		if (this.props.playerData.length === 0) {
+		if (Object.keys(this.props.playerData).length === 0) {
 			this.props.actions.setName('player1', "");
 		}
-	}
+	};
 
 	addPlayer(event) {
 		event.preventDefault();
-		this.props.actions.setName('player' + (this.state.playerCount + 1), "");
-
-		this.setState({
-			playerCount: this.state.playerCount + 1
-		});
-	}
+		let size = Object.keys(this.props.playerData).length;
+		this.props.actions.setName('player' + (size + 1), "");
+	};
 
 	getPlayerNameInputs() {
 		return Object.keys(this.props.playerData).map((player) => {
@@ -62,13 +54,12 @@ class SetName extends React.Component {
 						   placeholder="Your name" required
 						   onChange={event => this.props.actions.setName(event.target.id, event.target.value)}/>)
 		})
-
-	}
+	};
 
 	resetFields() {
-		this.props.actions.resetData();
+		this.props.actions.clearPlayerData();
 		this.props.actions.setName('player1', "");
-	}
+	};
 
 	render() {
 		return (
@@ -89,7 +80,7 @@ class SetName extends React.Component {
 			</div>
 
 		)
-	}
+	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SetName);

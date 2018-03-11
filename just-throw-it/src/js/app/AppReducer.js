@@ -2,7 +2,6 @@ import {fields} from '../api/MockData';
 
 import {
 	SET_NAME,
-	RESET_DATA,
 	PICK_FIELD,
 	SET_FIELDS,
 	SAVE_THROWS,
@@ -25,19 +24,17 @@ const AppReducer = (state = initialState, action) => {
 				// mainPlayer: action.name
 				playerData: {...state.playerData, [action.id]: [action.name, []]}
 			};
-		case RESET_DATA:
-			return {
-				fields: fields,
-				mainPlayer: "UnknownPlayer",
-				playerData: {},
-				selectedField: 1
-			};
-
 		case PICK_FIELD:
+			let newPlayerData = state.playerData;
+
+			Object.keys(newPlayerData).map((player) => {
+				newPlayerData[player] = [newPlayerData[player][0], new Array(action.field.numberOfTracks).fill(0)]
+			});
+
 			return {
 				...state,
 				selectedField: action.field.fieldID,
-				playerData: new Array(action.field.numberOfTracks).fill(0)
+				playerData: newPlayerData
 			};
 		case SET_FIELDS:
 			return {
@@ -51,31 +48,31 @@ const AppReducer = (state = initialState, action) => {
 			};
 		case SAVE_THROWS:
 			let found = false;
-			let newPlayerData = [];
+			let newPlayerDataAr = [];
 			state.playerData.map(track => {
 				if(track.trackNumber === action.trackNumber) {
 					found = true;
-					newPlayerData.push({
+					newPlayerDataAr.push({
 						trackNumber: action.trackNumber,
 						throws: action.throws
 					})
 				} else {
-					newPlayerData.push(track)
+					newPlayerDataAr.push(track)
 				}
 			});
 			if (!found) {
-				newPlayerData.push({
+				newPlayerDataAr.push({
 					trackNumber: action.trackNumber,
 					throws: action.throws
 				})
 			}
 			return{
 				...state,
-				playerData: newPlayerData
+				playerData: newPlayerDataAr
 			};
 		case SAVE_THROW_DUMB:
-			let newPlayerDataDumb = state.playerData.slice();
-			newPlayerDataDumb[action.index - 1] = action.throws;
+			let newPlayerDataDumb = state.playerData;
+			newPlayerDataDumb[action.player][1][action.index - 1] = action.throws;
 			return{
 				...state,
 				playerData: newPlayerDataDumb

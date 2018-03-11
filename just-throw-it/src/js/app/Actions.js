@@ -1,5 +1,4 @@
 export const SET_NAME = 'SET_NAME';
-export const RESET_DATA = 'RESET_DATA';
 export const PICK_FIELD = 'PICK_FIELD';
 export const SET_FIELDS = 'SET_FIELDS';
 export const SAVE_THROWS = 'SAVE_THROWS';
@@ -10,10 +9,6 @@ export const setName = (id, name) => ({
 	type: SET_NAME,
 	id: id,
 	name: name
-});
-
-export const resetData = () => ({
-	type: RESET_DATA
 });
 
 export const pickField = (field) => ({
@@ -36,8 +31,9 @@ export const clearPlayerData = () => ({
 	type: CLEAR_PLAYER_DATA
 });
 
-export const saveThrowDumb = (index, throws) => ({
+export const saveThrowDumb = (player, index, throws) => ({
 	type: SAVE_THROW_DUMB,
+	player,
 	index,
 	throws
 });

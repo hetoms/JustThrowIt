@@ -53,10 +53,7 @@ class FieldScoretable extends React.Component {
 				/>;
 		} else {
 			content = <Track
-				player={this.props.mainPlayer}
 				track={this.state.displayedTrack}
-				onChange={this.props.actions.saveThrowDumb}
-				throws={this.props.playerData[this.state.displayedTrack.trackNumber - 1]}
 			/>;
 		}
 
