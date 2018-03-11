@@ -1,13 +1,19 @@
 export const SET_NAME = 'SET_NAME';
+export const RESET_DATA = 'RESET_DATA';
 export const PICK_FIELD = 'PICK_FIELD';
 export const SET_FIELDS = 'SET_FIELDS';
 export const SAVE_THROWS = 'SAVE_THROWS';
 export const CLEAR_PLAYER_DATA = 'CLEAR_PLAYER_DATA';
 export const SAVE_THROW_DUMB = 'SAVE_THROW_DUMB';
 
-export const setName = (name) => ({
+export const setName = (id, name) => ({
 	type: SET_NAME,
+	id: id,
 	name: name
+});
+
+export const resetData = () => ({
+	type: RESET_DATA
 });
 
 export const pickField = (field) => ({

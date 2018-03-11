@@ -2,6 +2,7 @@ import {fields} from '../api/MockData';
 
 import {
 	SET_NAME,
+	RESET_DATA,
 	PICK_FIELD,
 	SET_FIELDS,
 	SAVE_THROWS,
@@ -12,7 +13,7 @@ import {
 const initialState = {
 	fields: fields,
 	mainPlayer: "UnknownPlayer",
-	playerData: [],
+	playerData: {},
 	selectedField: 1
 };
 
@@ -21,8 +22,17 @@ const AppReducer = (state = initialState, action) => {
 		case SET_NAME:
 			return {
 				...state,
-				mainPlayer: action.name
+				// mainPlayer: action.name
+				playerData: {...state.playerData, [action.id]: [action.name, []]}
 			};
+		case RESET_DATA:
+			return {
+				fields: fields,
+				mainPlayer: "UnknownPlayer",
+				playerData: {},
+				selectedField: 1
+			};
+
 		case PICK_FIELD:
 			return {
 				...state,
@@ -37,7 +47,7 @@ const AppReducer = (state = initialState, action) => {
 		case CLEAR_PLAYER_DATA:
 			return {
 				...state,
-				playerData: []
+				playerData: {}
 			};
 		case SAVE_THROWS:
 			let found = false;

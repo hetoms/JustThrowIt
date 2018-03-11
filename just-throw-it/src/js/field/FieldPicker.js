@@ -40,7 +40,6 @@ class FieldPicker extends React.Component {
 					<CardImg
 						className="img-maps"
 						top width="10%"
-						/*Placeholder*/
                    		src={"https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=600x300&markers="
                    		+ field.latitude + "," + field.longitude + "&key=" + APIKey}
 						alt="Card image cap"/>
