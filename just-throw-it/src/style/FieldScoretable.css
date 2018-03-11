@@ -8,17 +8,45 @@
     float: left !important;
 }
 
+.header-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .tracks-container {
     left: 0 !important;
-    display:flex;
+    display: flex;
     justify-content: flex-start;
 }
 
 .track {
     border-bottom: 1px solid lightgray;
+    background-color: #E8F1F7;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5em;
+}
+
+.tracks-nav .nav-link {
+    color: black !important;
+}
+
+.track:hover {
+    background-color: #CDE9EE;
+}
+
+.nav-link.active {
+    border-bottom: 2px solid gray;
+    background-color: #98BCDD !important;
 }
 
 .container {
     width: 90vw !important;
     padding: 10px !important;
+    justify-content: center;
+}
+
+.back-btn {
+    margin-top:auto;
+    margin-bottom: auto;
 }

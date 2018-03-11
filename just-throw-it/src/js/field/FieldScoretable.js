@@ -27,6 +27,7 @@ class FieldScoretable extends React.Component {
 
 	showOverview() {
 		this.setState({
+			displayedTrack: null,
 			showOverview: true
 		})
 	}
@@ -34,8 +35,8 @@ class FieldScoretable extends React.Component {
 	setTracks() {
 		return this.props.field.tracks.map(track => {
 			return (
-				<NavItem className="track">
-					<NavLink href="#" onClick={() => this.showTrack(track)}>Track: {track.trackNumber}</NavLink>
+				<NavItem className="track" key={track.trackNumber}>
+					<NavLink href="#" onClick={() => this.showTrack(track)} active={ this.state.displayedTrack === track }>Track: {track.trackNumber}</NavLink>
 				</NavItem>
 			)
 		})
@@ -43,31 +44,38 @@ class FieldScoretable extends React.Component {
 
 	render() {
 		let content = null;
-
 		if (this.state.showOverview) {
-			content = <Overview/>;
+			content =
+				<Overview
+					playerData={this.props.playerData}
+					mainPlayer={this.props.mainPlayer}
+					field={this.props.field}
+				/>;
 		} else {
-			content = <Track player={this.props.mainPlayer} track={this.state.displayedTrack}/>;
+			content = <Track
+				track={this.state.displayedTrack}
+			/>;
 		}
 
 		return (
 			<div className="container">
-				<div>
-					<Link to='/pickField'><Button>Back</Button></Link>
+				<div className="header-box">
+					<Link className="back-btn" to='/pickField'><Button>Back</Button></Link>
 					<h2>{this.props.field.fieldName} DiscGolf field</h2>
+					<div/>
 				</div>
 				<hr/>
 				<div className="tracks-container">
 					<div className="tracks-nav">
-						<Nav vertical>
+						<Nav pills vertical>
 							<NavItem className="track">
-								<NavLink href="#" onClick={() => this.showOverview()}>Overview</NavLink>
+								<NavLink href="#" onClick={() => this.showOverview()} active={ this.state.showOverview }>Overview</NavLink>
 							</NavItem>
 							{this.setTracks()}
 						</Nav>
 					</div>
 					<div className="track-info">
-						{ content }
+						{content}
 					</div>
 				</div>
 			</div>

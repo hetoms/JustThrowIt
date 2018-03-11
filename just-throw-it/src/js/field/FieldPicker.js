@@ -6,10 +6,27 @@ import {
 } from 'reactstrap';
 import {Link} from "react-router-dom";
 import getFields from "../api/GetFields";
+import {APIKey} from "../api/APIKey";
+import MapModal from "../map/MapModal";
 
 console.log(getFields());
 
 class FieldPicker extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalOpen: false,
+      fieldInModal: {fieldName: 'Something went wrong'}
+    };
+    this.toggleModal = this.toggleModal.bind(this)
+  }
+
+  toggleModal(field) {
+    this.setState({
+      fieldInModal: field,
+      modalOpen: !this.state.modalOpen
+    })
+  }
 
 	pickField(id) {
 		this.props.actions.pickField(id)
@@ -19,17 +36,21 @@ class FieldPicker extends React.Component {
 		return this.props.fields.map(field => {
 			return (
 				<Card key={field.fieldID} className="field-card">
-					<CardImg top width="10%"
-						/*Placeholder*/
-							 src="http://discgolfanswerman.com/wp-content/uploads/2017/12/Cool.jpg"
-							 alt="Card image cap"/>
+          <div onClick={() => this.toggleModal(field)}>
+					<CardImg
+						className="img-maps"
+						top width="10%"
+                   		src={"https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=600x300&markers="
+                   		+ field.latitude + "," + field.longitude + "&key=" + APIKey}
+						alt="Card image cap"/>
+          </div>
 					<CardBody>
 						<CardTitle>{field.fieldName}</CardTitle>
 						<CardSubtitle>Number of tracks {field.numberOfTracks}</CardSubtitle>
 						<CardSubtitle>Track par {field.pars}</CardSubtitle>
 						<CardText>Some quick example text to build on the card title and make up the bulk of the card's
 							content.</CardText>
-						<Link to='/fieldScoretable' numberOfTracks={field.numberOfTracks}><Button onClick={() =>this.pickField(field.fieldID)}>Select</Button></Link>
+						<Link to='/fieldScoretable' numberOfTracks={field.numberOfTracks}><Button onClick={() =>this.pickField(field)}>Select</Button></Link>
 					</CardBody>
 				</Card>
 			)
@@ -45,7 +66,7 @@ class FieldPicker extends React.Component {
 					{this.renderAllFields()}
 				</CardDeck>
 
-				{ /* <MyMapComponent isMarkerShown={true} lat={-34.397} lng={150.644} /> */}
+        <MapModal modalOpen={this.state.modalOpen} toggle={this.toggleModal} field={this.state.fieldInModal} />
 			</div>
 		)
 	}

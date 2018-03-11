@@ -12,21 +12,23 @@ import AppReducer from "./js/app/AppReducer";
 import {saveState} from "./js/localstorage/SaveToLocalStorage";
 import {loadState} from "./js/localstorage/LoadFromLocalStorage";
 import getFields from "./js/api/GetFields";
+import {clearPlayerdata} from "./js/app/Actions";
 
 const preSavedState = loadState();
 const store = createStore(AppReducer, preSavedState, composeWithDevTools());
 getFields(store.dispatch);
+// store.dispatch(clearPlayerData());
 
 store.subscribe(() => {
-    console.log(store.getState());
-    saveState(store.getState())
+	console.log(store.getState());
+	saveState(store.getState())
 });
 
 ReactDOM.render((
-    <Provider store={store}>
-        <BrowserRouter>
-            <App/>
-        </BrowserRouter>
-    </Provider>
+	<Provider store={store}>
+		<BrowserRouter>
+			<App/>
+		</BrowserRouter>
+	</Provider>
 ), document.getElementById('root'));
 registerServiceWorker();

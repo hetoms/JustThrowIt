@@ -8,7 +8,8 @@ import "../../style/SetName.css";
 
 const mapStateToProps = state => {
 	return {
-		mainPlayer: state.mainPlayer
+		mainPlayer: state.mainPlayer,
+		playerData: state.playerData
 	}
 };
 
@@ -16,34 +17,70 @@ const mapDispatchToProps = dispatch => {
 	return {
 		actions: bindActionCreators(Actions, dispatch),
 	}
-
 };
 
 class SetName extends React.Component {
+	constructor() {
+		super();
+
+		this.getPlayerNameInputs = this.getPlayerNameInputs.bind(this);
+		this.addPlayer = this.addPlayer.bind(this);
+		this.resetFields = this.resetFields.bind(this);
+	}
 	setNameAndRedirect = (event) => {
 		event.preventDefault();
 	};
-	
+
+	componentWillMount() {
+		if (Object.keys(this.props.playerData).length === 0) {
+			this.props.actions.setName('player1', "");
+		}
+	};
+
+	addPlayer(event) {
+		event.preventDefault();
+		let size = Object.keys(this.props.playerData).length;
+		this.props.actions.setName('player' + (size + 1), "");
+	};
+
+	getPlayerNameInputs() {
+		return Object.keys(this.props.playerData).map((player) => {
+			return (<Input name="playerName"
+						   id={player}
+						   key={player}
+						   className="playerName"
+						   maxLength="10"
+						   value={this.props.playerData[player][0]}
+						   placeholder="Your name" required
+						   onChange={event => this.props.actions.setName(event.target.id, event.target.value)}/>)
+		})
+	};
+
+	resetFields() {
+		this.props.actions.clearPlayerData();
+		this.props.actions.setName('player1', "");
+	};
+
 	render() {
 		return (
 			<div className="form-box container">
-				<Form inline className='set-name' onSubmit={this.setNameAndRedirect}>
-					<Label for="playerName" className="mr-sm-2 player-name-label">Player Name: </Label>
-					<Input name="playerName"
-						   id="playerName"
-						   value={this.props.mainPlayer}
-						   placeholder="Your name" required
-						   onChange={event => this.props.actions.setName(event.target.value)}/>
+				<Form className='set-name' onSubmit={this.setNameAndRedirect}>
+					<Label for="playerName" className="mr-sm-2 player-name-label">Add players and their names: </Label>
+					{this.getPlayerNameInputs()}
+					<Button onClick={event => this.addPlayer(event)}>+</Button>
 				</Form>
-				<div  className="confirm-btn">
-					<Link to='/pickField'><Button>OK</Button></Link>
+				<div className="buttons">
+					<div className="confirm-btn">
+						<Button onClick={event => this.resetFields()}>Reset</Button>
+					</div>
+					<div className="confirm-btn">
+						<Link to='/pickField'><Button>Continue</Button></Link>
+					</div>
 				</div>
-
 			</div>
 
 		)
-	}
+	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SetName);
-
