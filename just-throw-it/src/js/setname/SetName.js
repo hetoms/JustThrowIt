@@ -78,6 +78,7 @@ class SetName extends React.Component {
 					</div>
 				</div>
 			</div>
+
 		)
 	};
 }
