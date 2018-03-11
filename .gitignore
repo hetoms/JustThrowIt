@@ -4,4 +4,9 @@ just-throw-it/.idea/just-throw-it.iml
 just-throw-it/.idea/misc.xml
 just-throw-it/.idea/modules.xml
 just-throw-it/.idea/vcs.xml
+<<<<<<< HEAD
 just-throw-it/.idea/workspace.xml
+=======
+just-throw-it/.idea/workspace.xml
+just-throw-it/src/js/api/APIKey.js
+>>>>>>> 7d0ec8a50348303584a48d085310bf75d7802a19
