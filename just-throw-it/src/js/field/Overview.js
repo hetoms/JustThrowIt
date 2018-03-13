@@ -27,7 +27,7 @@ export default class Track extends React.Component {
 						Overview
 					</CardHeader>
 					<CardBody>
-						<Table size="sm">
+						<Table responsive>
 							<thead>
 							<tr>
 								<th>Name</th>

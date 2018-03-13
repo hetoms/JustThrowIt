@@ -1,5 +1,5 @@
 import React from "react";
-import {CardBody, Card, CardHeader, Button} from 'reactstrap';
+import {CardBody, Card, CardHeader, Button, Table} from 'reactstrap';
 import "../../style/Track.css";
 import {bindActionCreators} from "redux";
 import * as Actions from "../app/Actions";
@@ -57,18 +57,22 @@ class Track extends React.Component {
 	}
 
 	renderPlayerPoints() {
-		return Object.keys(this.props.playerData).map(player => {
+		return (
+			<Table responsive >
+				{Object.keys(this.props.playerData).map(player => {
 			return (
-				<div className="player-points" key={player}>
-					<h5 className="player-name"> {this.state.playerData[player][0]}</h5>
-					<p className="throws"> Throws: {this.state.playerData[player][1][this.state.trackNumber - 1]}</p>
-					<div className="buttons">
+				<tr key={player}>
+					<th> {this.state.playerData[player][0]}</th>
+					<td> Throws: {this.state.playerData[player][1][this.state.trackNumber - 1]}</td>
+					<td>
 						<Button color="danger" className="decrease-btn" onClick={() => this.decreaseThrows(player)}>-</Button>
 						<Button color="success" className="increase-btn" onClick={() => this.increaseThrows(player)}>+</Button>
-					</div>
-				</div>
+					</td>
+				</tr>
 			)
-		})
+		})}
+			</Table>
+		);
 	}
 
 	render() {
