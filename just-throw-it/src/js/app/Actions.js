@@ -4,6 +4,7 @@ export const SET_FIELDS = 'SET_FIELDS';
 export const SAVE_THROWS = 'SAVE_THROWS';
 export const CLEAR_PLAYER_DATA = 'CLEAR_PLAYER_DATA';
 export const SAVE_THROW_DUMB = 'SAVE_THROW_DUMB';
+export const SAVE_AREA_FILTERS = 'SAVE_AREA_FILTERS';
 
 export const setName = (id, name) => ({
 	type: SET_NAME,
@@ -36,4 +37,9 @@ export const saveThrowDumb = (player, index, throws) => ({
 	player,
 	index,
 	throws
+});
+
+export const saveAreaFilters = (filters) => ({
+	type: SAVE_AREA_FILTERS,
+	filters
 });

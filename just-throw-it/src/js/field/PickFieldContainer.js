@@ -6,6 +6,7 @@ import FieldPicker from "./FieldPicker";
 const mapStateToProps = state => {
     return {
         fields: state.fields,
+        areaFilters: state.areaFilters
     }
 };
 

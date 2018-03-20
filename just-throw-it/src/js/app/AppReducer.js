@@ -1,19 +1,20 @@
 import {fields} from '../api/MockData';
 
 import {
-	SET_NAME,
-	PICK_FIELD,
-	SET_FIELDS,
-	SAVE_THROWS,
-	CLEAR_PLAYER_DATA,
-	SAVE_THROW_DUMB
+  SET_NAME,
+  PICK_FIELD,
+  SET_FIELDS,
+  SAVE_THROWS,
+  CLEAR_PLAYER_DATA,
+  SAVE_THROW_DUMB, SAVE_AREA_FILTERS
 } from "./Actions";
 
 const initialState = {
 	fields: fields,
 	mainPlayer: "UnknownPlayer",
 	playerData: {},
-	selectedField: 1
+	selectedField: 1,
+	areaFilters: []
 };
 
 const AppReducer = (state = initialState, action) => {
@@ -76,6 +77,11 @@ const AppReducer = (state = initialState, action) => {
 			return{
 				...state,
 				playerData: newPlayerDataDumb
+			};
+		case SAVE_AREA_FILTERS:
+			return {
+				...state,
+				areaFilters: action.filters
 			};
 		default:
 			return state;

@@ -1,13 +1,15 @@
 import React from 'react';
 import "../../style/FieldPicker.css";
 import {
-	Card, CardImg, CardText, CardBody,
-	CardTitle, CardSubtitle, Button, CardDeck
+  Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle, Button, CardDeck, ButtonGroup
 } from 'reactstrap';
 import {Link} from "react-router-dom";
 import getFields from "../api/GetFields";
 import {APIKey} from "../api/APIKey";
 import MapModal from "../map/MapModal";
+import loadFilters from "../api/LoadFilters";
+import {contains, remove} from "ramda";
 
 console.log(getFields());
 
@@ -16,9 +18,16 @@ class FieldPicker extends React.Component {
     super(props);
     this.state = {
       modalOpen: false,
-      fieldInModal: {fieldName: 'Something went wrong'}
+      fieldInModal: {fieldName: 'Something went wrong'},
+      appliedFilters: this.props.areaFilters
     };
-    this.toggleModal = this.toggleModal.bind(this)
+    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
+  }
+
+  componentWillMount() {
+    console.log(this.props);
+    loadFilters(this.props.actions.saveAreaFilters);
   }
 
   toggleModal(field) {
@@ -28,48 +37,86 @@ class FieldPicker extends React.Component {
     })
   }
 
-	pickField(id) {
-		this.props.actions.pickField(id)
-	}
+  pickField(id) {
+    this.props.actions.pickField(id)
+  }
 
-	renderAllFields() {
-		return this.props.fields.map(field => {
-			return (
-				<Card key={field.fieldID} className="field-card">
+  renderAllFields() {
+    const fields = this.props.fields;
+    // fields.filter(field => contains(field.county, this.state.appliedFilters));
+    return fields.map(field => {
+      return (
+        <Card key={field.fieldID} className="field-card">
           <div onClick={() => this.toggleModal(field)}>
-					<CardImg
-						className="img-maps"
-						top width="10%"
-                   		src={"https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=600x300&markers="
-                   		+ field.latitude + "," + field.longitude + "&key=" + APIKey}
-						alt="Card image cap"/>
+            <CardImg
+              className="img-maps"
+              top width="10%"
+              src={"https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=600x300&markers="
+              + field.latitude + "," + field.longitude + "&key=" + APIKey}
+              alt="Card image cap"/>
           </div>
-					<CardBody>
-						<CardTitle>{field.fieldName}</CardTitle>
-						<CardSubtitle>Number of tracks {field.numberOfTracks}</CardSubtitle>
-						<CardSubtitle>Track par {field.pars}</CardSubtitle>
-						<CardText>Some quick example text to build on the card title and make up the bulk of the card's
-							content.</CardText>
-						<Link to='/fieldScoretable' numberOfTracks={field.numberOfTracks}><Button onClick={() =>this.pickField(field)}>Select</Button></Link>
-					</CardBody>
-				</Card>
-			)
-		})
-	}
+          <CardBody>
+            <CardTitle>{field.fieldName}</CardTitle>
+            <CardSubtitle>Number of tracks {field.numberOfTracks}</CardSubtitle>
+            <CardSubtitle>Track par {field.pars}</CardSubtitle>
+            <CardText>Some quick example text to build on the card title and make up the bulk of the card's
+              content.</CardText>
+            <Link to='/fieldScoretable' numberOfTracks={field.numberOfTracks}><Button
+              onClick={() => this.pickField(field)}>Select</Button></Link>
+          </CardBody>
+        </Card>
+      )
+    })
+  }
 
-	render() {
-		return (
-			<div className="container">
-				<h2>Please pick a field</h2>
-				<hr/>
-				<CardDeck className='card-deck'>
-					{this.renderAllFields()}
-				</CardDeck>
+  toggleFilter(filter) {
+    let filters = this.state.appliedFilters;
+    console.log('uus filter ', filter, 'vana filter ', filters, ' state ', this.state.appliedFilters);
+    if (contains(filter, filters)) {
+      filters = remove(this.state.appliedFilters.indexOf(filter), 1, filters);
+      this.setState({
+        appliedFilters: filters
+      })
+    } else {
+      filters.push(filter);
+      this.setState({
+        appliedFilters: filters
+      })
+    }
+    console.log(this.state.appliedFilters, 'look here ')
+  }
 
-        <MapModal modalOpen={this.state.modalOpen} toggle={this.toggleModal} field={this.state.fieldInModal} />
-			</div>
-		)
-	}
+  renderFilterButtons() {
+    return (
+      this.props.areaFilters.map(areaFilter => {
+        return (
+          // className={contains(areaFilter, this.state.areaFilters) ? "btn btn-secondary" : "btn btn-danger"}
+        <Button onClick={() => this.toggleFilter(areaFilter)} className={contains(areaFilter, this.state.appliedFilters) ? "btn btn-danger" : "btn btn-secondary"}>
+          {areaFilter}
+        </Button>
+        )
+      })
+    )
+  }
+
+  render() {
+    return (
+      <div className="container">
+        <h2>Please pick a field</h2>
+        <div>
+          <ButtonGroup>
+            {this.renderFilterButtons()}
+          </ButtonGroup>
+        </div>
+        <hr/>
+        <CardDeck className='card-deck'>
+          {this.renderAllFields()}
+        </CardDeck>
+
+        <MapModal modalOpen={this.state.modalOpen} toggle={this.toggleModal} field={this.state.fieldInModal}/>
+      </div>
+    )
+  }
 }
 
 export default FieldPicker;
