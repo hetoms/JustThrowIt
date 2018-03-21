@@ -1,5 +1,5 @@
 const apiURL = 'http://justthrowit-env.eu-central-1.elasticbeanstalk.com/fields';
-const response = ['Harju', 'Pärnu', 'Narva', 'Tartu'];
+const response = ['harju', 'pärnu', 'narva', 'tartu'];
 
 const loadFilters = (callback) => {
   /*
