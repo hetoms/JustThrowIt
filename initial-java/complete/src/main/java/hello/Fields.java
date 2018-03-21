@@ -12,6 +12,8 @@ public class Fields {
 
     private long fieldID;
 
+    private String county;
+
     private String fieldName;
 
     private int numberOfTracks ;
@@ -102,5 +104,13 @@ public class Fields {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
     }
 }
