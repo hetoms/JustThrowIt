@@ -1,7 +1,7 @@
 import React from "react";
 import * as Actions from "../app/Actions";
 import {connect} from 'react-redux';
-import {Button, Form, Label, Input, InputGroupText, InputGroupAddon, InputGroup, Badge} from 'reactstrap';
+import {Button, Form, Label, Input} from 'reactstrap';
 import {bindActionCreators} from "redux";
 import {Link} from 'react-router-dom';
 import "../../style/SetName.css";

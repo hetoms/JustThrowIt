@@ -14,18 +14,18 @@ import {clone, contains, filter, isEmpty, remove} from "ramda";
 console.log(getFields());
 
 class FieldPicker extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalOpen: false,
-      fieldInModal: {fieldName: 'Something went wrong'},
-      appliedFilters: ["all"],
-      textFilter: ""
-    };
-    this.toggleModal = this.toggleModal.bind(this);
-    this.toggleFilter = this.toggleFilter.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			modalOpen: false,
+			fieldInModal: {fieldName: 'Something went wrong'},
+			appliedFilters: ["all"],
+			textFilter: ""
+		};
+		this.toggleModal = this.toggleModal.bind(this);
+		this.toggleFilter = this.toggleFilter.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+	}
 
 	componentWillMount() {
 		console.log(this.props);
@@ -43,20 +43,20 @@ class FieldPicker extends React.Component {
 		this.props.actions.pickField(id)
 	}
 
-  renderAllFields() {
-    let fields = this.props.fields;
-    console.log(this.state.appliedFilters, 'wat');
-    if (this.state.appliedFilters[0] !== "all") {
-      const countyFilter = field => contains(field.county, this.state.appliedFilters);
-      fields = filter(countyFilter, fields);
-    }
+	renderAllFields() {
+		let fields = this.props.fields;
+		console.log(this.state.appliedFilters, 'wat');
+		if (this.state.appliedFilters[0] !== "all") {
+			const countyFilter = field => contains(field.county, this.state.appliedFilters);
+			fields = filter(countyFilter, fields);
+		}
 
 
-    if (this.state.textFilter !== "") {
-      let searchKey = clone(this.state.textFilter).toLowerCase();
-      console.log('yellow ', searchKey, ' aaaa ', fields);
-      fields = fields.filter(field => field.fieldName.toLowerCase().includes(searchKey));
-    }
+		if (this.state.textFilter !== "") {
+			let searchKey = clone(this.state.textFilter).toLowerCase();
+			console.log('yellow ', searchKey, ' aaaa ', fields);
+			fields = fields.filter(field => field.fieldName.toLowerCase().includes(searchKey));
+		}
 
 		return fields.map(field => {
 			return (
@@ -75,42 +75,46 @@ class FieldPicker extends React.Component {
 						<CardSubtitle>Track par {field.pars}</CardSubtitle>
 						<CardText>Some quick example text to build on the card title and make up the bulk of the card's
 							content.</CardText>
-						<Link to='/fieldScoretable' numberOfTracks={field.numberOfTracks}><Button
-							onClick={() => this.pickField(field)}>Select</Button></Link>
+						<div className='select-field-btn'>
+							<Link to='/fieldScoretable' numberOfTracks={field.numberOfTracks}>
+								<Button onClick={() => this.pickField(field)}>Select</Button>
+
+							</Link>
+						</div>
 					</CardBody>
 				</Card>
 			)
 		})
 	}
 
-  toggleFilter(filter) {
-    let filters = this.state.appliedFilters;
-    if (contains(filter, filters)) {
-      filters = remove(this.state.appliedFilters.indexOf(filter), 1, filters);
-      if (isEmpty(filters)) {
-        this.setState({
-          appliedFilters: ["all"]
-        })
-      } else {
-        this.setState({
-          appliedFilters: filters
-        })
-      }
-    } else if (filter === "all") {
-      this.setState({
-        appliedFilters: ["all"]
-      })
-    } else {
-      filters.push(filter);
-      if (contains("all", filters)) {
-        filters = remove(this.state.appliedFilters.indexOf("all"), 1, filters);
-      }
-      this.setState({
-        appliedFilters: filters
-      })
-    }
-    console.log(this.state.appliedFilters, 'look here ')
-  }
+	toggleFilter(filter) {
+		let filters = this.state.appliedFilters;
+		if (contains(filter, filters)) {
+			filters = remove(this.state.appliedFilters.indexOf(filter), 1, filters);
+			if (isEmpty(filters)) {
+				this.setState({
+					appliedFilters: ["all"]
+				})
+			} else {
+				this.setState({
+					appliedFilters: filters
+				})
+			}
+		} else if (filter === "all") {
+			this.setState({
+				appliedFilters: ["all"]
+			})
+		} else {
+			filters.push(filter);
+			if (contains("all", filters)) {
+				filters = remove(this.state.appliedFilters.indexOf("all"), 1, filters);
+			}
+			this.setState({
+				appliedFilters: filters
+			})
+		}
+		console.log(this.state.appliedFilters, 'look here ')
+	}
 
 	renderFilterButtons() {
 		return (
@@ -125,27 +129,35 @@ class FieldPicker extends React.Component {
 		)
 	}
 
-  render() {
-    return (
-      <div className="container">
-        <h2>Please pick a field</h2>
-        <div>
-          <ButtonGroup style={{ alignItems: 'centre', marginBottom: 10, marginTop: 10}}>
-            <Button onClick={() => this.toggleFilter("all")} className={contains("all", this.state.appliedFilters) ? "btn btn-info" : "btn btn-secondary"}>
-              All
-            </Button>
-            {this.renderFilterButtons()}
-          </ButtonGroup>
-          <Input style={{ width: '100%'}} type="text" placeholder="Search" value={this.state.textFilter} onChange={e => this.handleChange('textFilter', e.target.value)}/>
-        </div>
-        <hr/>
-        <CardDeck className='card-deck'>
-          {this.renderAllFields()}
-        </CardDeck>
-        <MapModal modalOpen={this.state.modalOpen} toggle={this.toggleModal} field={this.state.fieldInModal}/>
-      </div>
-    )
-  }
+	handleChange(type, value) {
+		this.setState({
+			[type]: value
+		})
+	}
+
+	render() {
+		return (
+			<div className="container">
+				<h2>Please pick a field</h2>
+				<div>
+					<ButtonGroup style={{alignItems: 'centre', marginBottom: 10, marginTop: 10}}>
+						<Button onClick={() => this.toggleFilter("all")}
+								className={contains("all", this.state.appliedFilters) ? "btn btn-info" : "btn btn-secondary"}>
+							All
+						</Button>
+						{this.renderFilterButtons()}
+					</ButtonGroup>
+					<Input style={{width: '100%'}} type="text" placeholder="Search" value={this.state.textFilter}
+						   onChange={e => this.handleChange('textFilter', e.target.value)}/>
+				</div>
+				<hr/>
+				<CardDeck className='card-deck'>
+					{this.renderAllFields()}
+				</CardDeck>
+				<MapModal modalOpen={this.state.modalOpen} toggle={this.toggleModal} field={this.state.fieldInModal}/>
+			</div>
+		)
+	}
 }
 
 export default FieldPicker;
