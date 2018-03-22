@@ -5,6 +5,7 @@ import {Button, Form, Label, Input} from 'reactstrap';
 import {bindActionCreators} from "redux";
 import {Link} from 'react-router-dom';
 import "../../style/SetName.css";
+import GoX from 'react-icons/lib/go/x';
 
 let count = 1;
 
@@ -63,7 +64,9 @@ class SetName extends React.Component {
 						   value={this.props.playerData[player][0]}
 						   placeholder="Your name" required
 						   onChange={event => this.props.actions.setName(event.target.id, event.target.value)}/>
-					<Button onClick={() => this.handleDeleteRow(player)} color='danger' className="remove-input-btn">X</Button>
+
+					<Button onClick={() => this.handleDeleteRow(player)} color='danger' className="remove-input-btn"><GoX className="remove-icon"/></Button>
+
 				</div>
 			)
 		})
