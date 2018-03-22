@@ -6,6 +6,8 @@ import {bindActionCreators} from "redux";
 import {Link} from 'react-router-dom';
 import "../../style/SetName.css";
 
+let count = 1;
+
 const mapStateToProps = state => {
 	return {
 		mainPlayer: state.mainPlayer,
@@ -40,14 +42,19 @@ class SetName extends React.Component {
 
 	addPlayer(event) {
 		event.preventDefault();
-		let size = Object.keys(this.props.playerData).length;
-		this.props.actions.setName('player' + (size + 1), "");
+		this.props.actions.setName('player' + ++count, "");
 	};
+
+	handleDeleteRow(rowName) {
+    if(Object.keys(this.props.playerData).length > 1) {
+      this.props.actions.deletePlayer(rowName);
+		}
+	}
 
 	getPlayerNameInputs() {
 		return Object.keys(this.props.playerData).map((player) => {
 			return (
-				<div className="player-input">
+				<div className="player-input" key={player}>
 					<Input name="playerName"
 						   id={player}
 						   key={player}
@@ -56,8 +63,7 @@ class SetName extends React.Component {
 						   value={this.props.playerData[player][0]}
 						   placeholder="Your name" required
 						   onChange={event => this.props.actions.setName(event.target.id, event.target.value)}/>
-					<Button onClick={e => {
-					}} color='danger' className="remove-input-btn">X</Button>
+					<Button onClick={() => this.handleDeleteRow(player)} color='danger' className="remove-input-btn">X</Button>
 				</div>
 			)
 		})

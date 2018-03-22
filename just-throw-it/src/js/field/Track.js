@@ -40,7 +40,7 @@ class Track extends React.Component {
 
 	increaseThrows(player) {
 		let throws = this.props.playerData[player][1][this.state.trackNumber - 1] + 1;
-		this.props.actions.saveThrowDumb(player, this.state.trackNumber, throws);
+		this.props.actions.saveThrow(player, this.state.trackNumber, throws);
 		this.setState({
 			playerData: this.props.playerData
 		})
@@ -49,7 +49,7 @@ class Track extends React.Component {
 	decreaseThrows(player) {
 		if (this.props.playerData[player][1][this.state.trackNumber - 1] > 0) {
 			let throws = this.props.playerData[player][1][this.state.trackNumber - 1] - 1;
-			this.props.actions.saveThrowDumb(player, this.state.trackNumber, throws);
+			this.props.actions.saveThrow(player, this.state.trackNumber, throws);
 			this.setState({
 				playerData: this.props.playerData
 			})
