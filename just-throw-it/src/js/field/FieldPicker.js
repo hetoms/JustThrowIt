@@ -1,8 +1,8 @@
 import React from 'react';
 import "../../style/FieldPicker.css";
 import {
-  Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button, CardDeck, ButtonGroup, Input
+	Card, CardImg, CardText, CardBody,
+	CardTitle, CardSubtitle, Button, CardDeck, ButtonGroup, Input
 } from 'reactstrap';
 import {Link} from "react-router-dom";
 import getFields from "../api/GetFields";
@@ -27,21 +27,21 @@ class FieldPicker extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillMount() {
-    console.log(this.props);
-    loadFilters(this.props.actions.saveAreaFilters);
-  }
+	componentWillMount() {
+		console.log(this.props);
+		loadFilters(this.props.actions.saveAreaFilters);
+	}
 
-  toggleModal(field) {
-    this.setState({
-      fieldInModal: field,
-      modalOpen: !this.state.modalOpen
-    })
-  }
+	toggleModal(field) {
+		this.setState({
+			fieldInModal: field,
+			modalOpen: !this.state.modalOpen
+		})
+	}
 
-  pickField(id) {
-    this.props.actions.pickField(id)
-  }
+	pickField(id) {
+		this.props.actions.pickField(id)
+	}
 
   renderAllFields() {
     let fields = this.props.fields;
@@ -58,30 +58,30 @@ class FieldPicker extends React.Component {
       fields = fields.filter(field => field.fieldName.toLowerCase().includes(searchKey));
     }
 
-    return fields.map(field => {
-      return (
-        <Card key={field.fieldID} className="field-card">
-          <div onClick={() => this.toggleModal(field)}>
-            <CardImg
-              className="img-maps"
-              top width="10%"
-              src={"https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=600x300&markers="
-              + field.latitude + "," + field.longitude + "&key=" + APIKey}
-              alt="Card image cap"/>
-          </div>
-          <CardBody>
-            <CardTitle>{field.fieldName}</CardTitle>
-            <CardSubtitle>Number of tracks {field.numberOfTracks}</CardSubtitle>
-            <CardSubtitle>Track par {field.pars}</CardSubtitle>
-            <CardText>Some quick example text to build on the card title and make up the bulk of the card's
-              content.</CardText>
-            <Link to='/fieldScoretable' numberOfTracks={field.numberOfTracks}><Button
-              onClick={() => this.pickField(field)}>Select</Button></Link>
-          </CardBody>
-        </Card>
-      )
-    })
-  }
+		return fields.map(field => {
+			return (
+				<Card key={field.fieldID} className="field-card">
+					<div onClick={() => this.toggleModal(field)}>
+						<CardImg
+							className="img-maps"
+							top width="10%"
+							src={"https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=600x300&markers="
+							+ field.latitude + "," + field.longitude + "&key=" + APIKey}
+							alt="Card image cap"/>
+					</div>
+					<CardBody>
+						<CardTitle>{field.fieldName}</CardTitle>
+						<CardSubtitle>Number of tracks {field.numberOfTracks}</CardSubtitle>
+						<CardSubtitle>Track par {field.pars}</CardSubtitle>
+						<CardText>Some quick example text to build on the card title and make up the bulk of the card's
+							content.</CardText>
+						<Link to='/fieldScoretable' numberOfTracks={field.numberOfTracks}><Button
+							onClick={() => this.pickField(field)}>Select</Button></Link>
+					</CardBody>
+				</Card>
+			)
+		})
+	}
 
   toggleFilter(filter) {
     let filters = this.state.appliedFilters;
@@ -112,22 +112,18 @@ class FieldPicker extends React.Component {
     console.log(this.state.appliedFilters, 'look here ')
   }
 
-  renderFilterButtons() {
-    return (
-      this.props.areaFilters.map(areaFilter => {
-        return (
-        <Button style={{ textTransform: 'capitalize' }} onClick={() => this.toggleFilter(areaFilter)} className={contains(areaFilter, this.state.appliedFilters) ? "btn btn-info" : "btn btn-secondary"}>
-          {areaFilter}
-        </Button>
-        )
-      })
-    )
-  }
-  handleChange(type, value) {
-    this.setState({
-    [type]: value
-    })
-  }
+	renderFilterButtons() {
+		return (
+			this.props.areaFilters.map(areaFilter => {
+				return (
+					<Button style={{textTransform: 'capitalize'}} onClick={() => this.toggleFilter(areaFilter)}
+							className={contains(areaFilter, this.state.appliedFilters) ? "btn btn-info" : "btn btn-secondary"}>
+						{areaFilter}
+					</Button>
+				)
+			})
+		)
+	}
 
   render() {
     return (

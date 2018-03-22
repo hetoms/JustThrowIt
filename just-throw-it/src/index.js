@@ -9,8 +9,8 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import {createStore} from 'redux';
 import Provider from "react-redux/es/components/Provider";
 import AppReducer from "./js/app/AppReducer";
-import {saveState} from "./js/localstorage/SaveToLocalStorage";
-import {loadState} from "./js/localstorage/LoadFromLocalStorage";
+import {saveState} from "./js/sessionstorage/SaveToSessionStorage";
+import {loadState} from "./js/sessionstorage/LoadFromSessionStorage";
 import getFields from "./js/api/GetFields";
 import {clearPlayerdata} from "./js/app/Actions";
 

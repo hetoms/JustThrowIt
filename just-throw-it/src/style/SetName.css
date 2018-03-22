@@ -5,21 +5,32 @@
 
 .form-box {
     display: block;
+    justify-content: center;
 }
 
 .confirm-btn {
     margin: 1.5em !important;
 }
 
+.player-input {
+    margin-bottom: 20px !important;
+    display: flex;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .playerName {
     max-width: 200px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    margin-bottom: 20px !important;
+    padding-right: 20px;
 }
 
 .buttons {
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+.remove-input-btn {
+    margin-left: -35px;
 }

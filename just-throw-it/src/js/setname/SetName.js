@@ -1,7 +1,7 @@
 import React from "react";
 import * as Actions from "../app/Actions";
 import {connect} from 'react-redux';
-import {Button, Form, Label, Input} from 'reactstrap';
+import {Button, Form, Label, Input, InputGroupText, InputGroupAddon, InputGroup, Badge} from 'reactstrap';
 import {bindActionCreators} from "redux";
 import {Link} from 'react-router-dom';
 import "../../style/SetName.css";
@@ -27,6 +27,7 @@ class SetName extends React.Component {
 		this.addPlayer = this.addPlayer.bind(this);
 		this.resetFields = this.resetFields.bind(this);
 	}
+
 	setNameAndRedirect = (event) => {
 		event.preventDefault();
 	};
@@ -45,14 +46,20 @@ class SetName extends React.Component {
 
 	getPlayerNameInputs() {
 		return Object.keys(this.props.playerData).map((player) => {
-			return (<Input name="playerName"
+			return (
+				<div className="player-input">
+					<Input name="playerName"
 						   id={player}
 						   key={player}
 						   className="playerName"
 						   maxLength="10"
 						   value={this.props.playerData[player][0]}
 						   placeholder="Your name" required
-						   onChange={event => this.props.actions.setName(event.target.id, event.target.value)}/>)
+						   onChange={event => this.props.actions.setName(event.target.id, event.target.value)}/>
+					<Button onClick={e => {
+					}} color='danger' className="remove-input-btn">X</Button>
+				</div>
+			)
 		})
 	};
 
@@ -67,7 +74,7 @@ class SetName extends React.Component {
 				<Form className='set-name' onSubmit={this.setNameAndRedirect}>
 					<Label for="playerName" className="mr-sm-2 player-name-label">Add players and their names: </Label>
 					{this.getPlayerNameInputs()}
-					<Button onClick={event => this.addPlayer(event)}>+</Button>
+					<Button color="success" onClick={event => this.addPlayer(event)}>+</Button>
 				</Form>
 				<div className="buttons">
 					<div className="confirm-btn">
@@ -78,7 +85,6 @@ class SetName extends React.Component {
 					</div>
 				</div>
 			</div>
-
 		)
 	};
 }
