@@ -11,12 +11,12 @@ export default class Login extends React.Component {
 					<h1 className="title">Log in</h1>
 					<FormGroup>
 						<Label for="exampleEmail" hidden>Username</Label>
-						<Input type="email" name="email" id="exampleEmail" placeholder="Username" />
+						<Input type="email" name="email" id="exampleEmail" placeholder="Username"/>
 					</FormGroup>
 					{' '}
 					<FormGroup>
 						<Label for="examplePassword" hidden>Password</Label>
-						<Input type="password" name="password" id="examplePassword" placeholder="Password" />
+						<Input type="password" name="password" id="examplePassword" placeholder="Password"/>
 					</FormGroup>
 					{' '}
 					<Row>

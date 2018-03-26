@@ -14,6 +14,7 @@
     background-color: #35281D !important;
     border: 0 !important;
 }
+
 .cancel-btn:hover, .login-btn:hover, .register-btn:hover {
     background-color: #3F2F22 !important;
 }
