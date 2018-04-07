@@ -5,6 +5,8 @@ export const CLEAR_PLAYER_DATA = 'CLEAR_PLAYER_DATA';
 export const SAVE_THROW = 'SAVE_THROW';
 export const SAVE_AREA_FILTERS = 'SAVE_AREA_FILTERS';
 export const DELETE_PLAYER = 'DELETE_PLAYER';
+export const LOG_IN = 'LOG_IN';
+export const LOG_OUT = 'LOG_OUT';
 
 export const setName = (id, name) => ({
   type: SET_NAME,
@@ -41,4 +43,13 @@ export const saveAreaFilters = (filters) => ({
 export const deletePlayer = (player) => ({
   type: DELETE_PLAYER,
   player
+});
+
+export const login = (payload) => ({
+	type: LOG_IN,
+	payload
+});
+
+export const logout = () => ({
+	type: LOG_OUT
 });

@@ -1,38 +1,60 @@
 import React from "react";
 import {Button, Container, Col, Row} from 'reactstrap';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
+import * as Actions from "../app/Actions";
+import {connect} from 'react-redux';
+import {bindActionCreators} from "redux";
 
-export default class HomePage extends React.Component {
+const mapStateToProps = state => {
+	return {
+		userLoggedIn: state.userLoggedIn,
+	}
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		actions: bindActionCreators(Actions, dispatch),
+	}
+};
+
+class HomePage extends React.Component {
+	constructor() {
+		super();
+	}
+
 	render() {
+		if (this.props.userLoggedIn) {
+			<Redirect to="/addPlayers"/>
+		}
+
 		return (
 			<Container>
 				<Row>
 					<Col>
 						<h1>Welcome Page</h1>
+						<br></br>
 					</Col>
 				</Row>
 				<Row>
 					<Col>
 						<Link to='/addplayers'>
-							<Button>
-								<h2>Play</h2>
+							<Button style={{"marginBottom": 20 + "px"}}>
+								<h3>Play</h3>
 								<small>(without logging in)</small>
 							</Button>
 						</Link>
-						<Link to='/login'><Button>
-							<h2>Log In</h2>
-							<small>(To save your game)</small>
-						</Button></Link>
 					</Col>
 				</Row>
 				<Row>
 					<Col>
-						<p>
-							No account yet? <Link to='/register'>Register new account</Link>
-						</p>
+						<h5>Or <b>Sign In</b> to Save Your Games:</h5>
+						<Button>Google</Button>
+						<Button style={{"marginLeft": 20 + "px"}}>Facebook</Button>
 					</Col>
 				</Row>
 			</Container>
 		)
 	};
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

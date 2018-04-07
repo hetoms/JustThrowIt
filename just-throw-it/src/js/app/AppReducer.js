@@ -5,7 +5,8 @@ import {
   PICK_FIELD,
   SET_FIELDS,
   CLEAR_PLAYER_DATA,
-  SAVE_THROW, SAVE_AREA_FILTERS, DELETE_PLAYER
+  SAVE_THROW, SAVE_AREA_FILTERS, DELETE_PLAYER,
+	LOG_IN, LOG_OUT
 } from "./Actions";
 import clone from "ramda/es/clone";
 
@@ -13,7 +14,9 @@ const initialState = {
   fields: fields,
   playerData: {},
   selectedField: 1,
-  areaFilters: []
+  areaFilters: [],
+	userLoggedIn: true,
+	user: {}
 };
 
 const AppReducer = (state = initialState, action) => {
@@ -63,6 +66,18 @@ const AppReducer = (state = initialState, action) => {
         ...state,
         playerData: players
       };
+		case LOG_IN:
+			return {
+				...state,
+				userLoggedIn: true,
+				user: action.payload.user
+			};
+		case LOG_OUT:
+			return {
+				...state,
+				userLoggedIn: false,
+				user: {}
+			}
     default:
       return state;
 
