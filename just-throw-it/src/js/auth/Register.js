@@ -1,7 +1,7 @@
 import React from 'react';
 import {Col, Button, Form, FormGroup, Label, Input, Row} from 'reactstrap';
 import "../../style/Auth.css";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import * as Actions from "../app/Actions";
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
@@ -26,7 +26,8 @@ class Register extends React.Component {
 			username: '',
 			fullname: '',
 			email: '',
-			password: ''
+			password: '',
+			registered: false
 		}
 		this.handleRegister = this.handleRegister.bind(this);
 	}
@@ -55,9 +56,14 @@ class Register extends React.Component {
   			},
   			credentials: "same-origin"
 			})
-			.then((response) => response.json())
-			.then((responseJson) => {
-				console.log(responseJson);
+			.then((response) => {
+				console.log(response);
+
+				// check if registration was valid
+				// if (true) {
+				// 	this.setState({registered: true});
+				// }
+
 			})
 			.catch((error) => {
 				console.error(error);
@@ -65,6 +71,9 @@ class Register extends React.Component {
 	}
 
 	render() {
+		if (this.state.registered) {
+			return <Redirect to="/"/>;
+		}
 		return (
 			<div className="container">
 				<Form className="register-form" onSubmit={this.handleRegister}>

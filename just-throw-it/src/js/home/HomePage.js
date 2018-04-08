@@ -18,13 +18,10 @@ const mapDispatchToProps = dispatch => {
 };
 
 class HomePage extends React.Component {
-	constructor() {
-		super();
-	}
 
 	render() {
 		if (this.props.userLoggedIn) {
-			<Redirect to="/addPlayers"/>
+			return <Redirect to="/addPlayers"/>;
 		}
 
 		return (
@@ -32,24 +29,27 @@ class HomePage extends React.Component {
 				<Row>
 					<Col>
 						<h1>Welcome Page</h1>
-						<br></br>
 					</Col>
 				</Row>
 				<Row>
 					<Col>
 						<Link to='/addplayers'>
-							<Button style={{"marginBottom": 20 + "px"}}>
-								<h3>Play</h3>
+							<Button>
+								<h2>Play</h2>
 								<small>(without logging in)</small>
 							</Button>
 						</Link>
+						<Link to='/login'><Button>
+							<h2>Log In</h2>
+							<small>(To save your game)</small>
+						</Button></Link>
 					</Col>
 				</Row>
 				<Row>
 					<Col>
-						<h5>Or <b>Sign In</b> to Save Your Games:</h5>
-						<Button>Google</Button>
-						<Button style={{"marginLeft": 20 + "px"}}>Facebook</Button>
+						<p>
+							No account yet? <Link to='/register'>Register new account</Link>
+						</p>
 					</Col>
 				</Row>
 			</Container>
