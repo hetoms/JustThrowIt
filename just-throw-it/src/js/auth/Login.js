@@ -22,16 +22,23 @@ export default class Login extends React.Component {
 				cache: 'no-store',
 			})
 			.then((response) => {
-				const authenticated = passwordHash.verify(this.state.password, response);
-				if (authenticated) {
-					console.log("Login was successful!");
-					this.props.actions.login({});
+				response = response.json();
+				console.log(response);
+
+				if (response.loginBoolean) {
+					const authenticated = passwordHash.verify(this.state.password, response.hashedPassword);
+
+					if (authenticated) {
+						console.log("Login was successful!");
+						this.props.actions.login({});
+					} else {
+						console.log("Login was unsuccessful!");
+						console.log(response);
+					}
 				} else {
-					console.log("Login was unsuccessful!");
-					console.log(response);
+					console.log("ERROR: No such account!");
 				}
 			})
-
 			.catch((error) => {
 				console.error(error);
 			});

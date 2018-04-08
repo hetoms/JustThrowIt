@@ -57,13 +57,15 @@ class Register extends React.Component {
   			credentials: "same-origin"
 			})
 			.then((response) => {
+				response = response.json();
 				console.log(response);
 
 				// check if registration was valid
-				// if (true) {
-				// 	this.setState({registered: true});
-				// }
-
+				if (response) {
+					this.setState({registered: true});
+				} else {
+					console.log("ERROR: Registration failed!");
+				}
 			})
 			.catch((error) => {
 				console.error(error);
