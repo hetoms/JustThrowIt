@@ -3,10 +3,18 @@ import "../../style/NavBar.css";
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink } from 'reactstrap';
 import {Link} from "react-router-dom";
 
+import {connect} from "react-redux";
+
+const mapStateToProps = state => {
+	return {
+		userLoggedIn: state.userLoggedIn
+	}
+};
+
 class NavigationBar extends React.Component {
     constructor(props) {
         super(props);
-
+				
         this.toggleNavbar = this.toggleNavbar.bind(this);
         this.state = {
             collapsed: true
@@ -29,6 +37,13 @@ class NavigationBar extends React.Component {
                             <NavItem>
                                 <Link to='/about' className="navigation-bar-link nav-link">About the team</Link>
                             </NavItem>
+
+														{this.props.userLoggedIn ? (
+																	<NavItem>
+																			<Link to='/user' className="navigation-bar-link nav-link">Profile</Link>
+																	</NavItem>
+														      ) : null}
+
                             <NavItem>
                                 <NavLink className="navigation-bar-link" target="_blank" href="https://github.com/hetoms/JustThrowIt">Github</NavLink>
                             </NavItem>
@@ -40,4 +55,4 @@ class NavigationBar extends React.Component {
     }
 }
 
-export default NavigationBar;
+export default connect(mapStateToProps)(NavigationBar);

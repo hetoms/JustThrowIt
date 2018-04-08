@@ -6,17 +6,19 @@ import FieldScoretable from "../field/FieldScoretableContainer";
 import HomePage from "../home/HomePage";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
+import AccountPage from "../home/AccountPage";
 
 const Router = () => (
     <main>
         <Switch>
             <Route exact path='/' component={HomePage}/>
-			<Route exact path='/login' component={Login}/>
-			<Route exact path='/register' component={Register}/>
+						<Route exact path='/login' component={Login}/>
+						<Route exact path='/register' component={Register}/>
             <Route exact path='/addplayers' component={SetPlayerNames}/>
             <Route exact path='/pickField' component={PickFieldContainer}/>
-			<Route exact path='/fieldScoretable' component={FieldScoretable}/>
-		</Switch>
+						<Route exact path='/fieldScoretable' component={FieldScoretable}/>
+						<Route exact path='/user' component={AccountPage}/>
+					</Switch>
     </main>
 );
 

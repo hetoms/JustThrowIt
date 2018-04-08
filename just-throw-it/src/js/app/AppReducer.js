@@ -15,7 +15,7 @@ const initialState = {
   playerData: {},
   selectedField: 1,
   areaFilters: [],
-	userLoggedIn: true,
+	userLoggedIn: false,
 	user: {}
 };
 
