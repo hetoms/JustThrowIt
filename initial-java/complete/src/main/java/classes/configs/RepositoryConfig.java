@@ -1,5 +1,7 @@
-package hello;
+package classes.configs;
 
+import classes.objects.Fields;
+import classes.objects.Person;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;

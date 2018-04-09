@@ -1,4 +1,4 @@
-package hello;
+package classes.objects;
 
 import javax.persistence.*;
 import java.util.ArrayList;
