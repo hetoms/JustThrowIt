@@ -33,7 +33,7 @@ class Register extends React.Component {
 	}
 
 	handleRegister(event) {
-		const registerUrl = 'https://justthrowit-env.eu-central-1.elasticbeanstalk.com/auth/register';
+		const registerUrl = 'https://justthrowit-env.eu-central-1.elasticbeanstalk.com/register';
 		event.preventDefault();
 
 		let hashedPassword = passwordHash.generate(this.state.password);
@@ -53,8 +53,7 @@ class Register extends React.Component {
   			body: JSON.stringify(data),
   			headers: {
     			"Content-Type": "application/json"
-  			},
-  			credentials: "same-origin"
+  			}
 			})
 			.then((response) => {
 				response = response.json();
