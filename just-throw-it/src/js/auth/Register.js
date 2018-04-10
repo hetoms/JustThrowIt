@@ -28,7 +28,7 @@ class Register extends React.Component {
 			email: '',
 			password: '',
 			registered: false
-		}
+		};
 		this.handleRegister = this.handleRegister.bind(this);
 	}
 
@@ -44,7 +44,7 @@ class Register extends React.Component {
 			fullname: this.state.fullname,
 			email: this.state.email,
 			hashedPassword: hashedPassword
-		}
+		};
 		console.log(data);
 
 		fetch(registerUrl, {
@@ -60,10 +60,11 @@ class Register extends React.Component {
 			}).then((data) => {
 
 				// check if registration was valid
-				if (JSON.stringify(data)) {
+			console.log('reeeee', JSON.stringify(data));
+				if (JSON.stringify(data) === 'true') {
 					this.setState({registered: true});
 				} else {
-					console.log("ERROR: Registration failed!");
+					alert("Registration failed!");
 				}
 			})
 			.catch((error) => {

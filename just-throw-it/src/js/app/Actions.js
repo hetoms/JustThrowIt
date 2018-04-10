@@ -46,10 +46,10 @@ export const deletePlayer = (player) => ({
 });
 
 export const login = (payload) => ({
-	type: LOG_IN,
-	payload
+  type: LOG_IN,
+  payload
 });
 
 export const logout = () => ({
-	type: LOG_OUT
+  type: LOG_OUT
 });

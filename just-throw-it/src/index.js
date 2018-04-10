@@ -12,7 +12,7 @@ import AppReducer from "./js/app/AppReducer";
 import {saveState} from "./js/sessionstorage/SaveToSessionStorage";
 import {loadState} from "./js/sessionstorage/LoadFromSessionStorage";
 import getFields from "./js/api/GetFields";
-import {clearPlayerdata} from "./js/app/Actions";
+// import {clearPlayerdata} from "./js/app/Actions";
 
 const preSavedState = loadState();
 const store = createStore(AppReducer, preSavedState, composeWithDevTools());

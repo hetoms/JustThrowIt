@@ -4,16 +4,16 @@ import * as Actions from '../app/Actions';
 import FieldPicker from "./FieldPicker";
 
 const mapStateToProps = state => {
-    return {
-        fields: state.fields,
-        areaFilters: state.areaFilters
-    }
+  return {
+    fields: state.fields,
+    areaFilters: state.areaFilters
+  }
 };
 
 const mapDispatchToProps = dispatch => {
-    return {
-        actions: bindActionCreators(Actions, dispatch),
-    }
+  return {
+    actions: bindActionCreators(Actions, dispatch),
+  }
 
 };
 
