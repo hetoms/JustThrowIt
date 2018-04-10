@@ -32,5 +32,8 @@ dependencies {
     compile group: 'org.jsoup', name: 'jsoup', version: '1.11.2'
     compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.3'
     testCompile group: 'com.h2database', name: 'h2', version: '1.4.197'
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: '4.2.1.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.2.1.RELEASE'
+
 }
 

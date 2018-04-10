@@ -58,4 +58,15 @@ public class Controller {
             return loginResponse;
         }
     }
+
+    @RequestMapping(value = "/userData")
+    @ResponseBody
+    public Object getUserData(@RequestParam("username") String username) {
+        List<Person> findings = personRepository.find(username);
+        if (findings.isEmpty()) {
+            return new LoginResponse(false);
+        } else {
+            return findings.get(0);
+        }
+    }
 }
