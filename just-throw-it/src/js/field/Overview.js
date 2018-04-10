@@ -55,12 +55,13 @@ class Track extends React.Component {
       }
     })
       .then((response) => {
+        console.log('fucking response ', response[0]);
         return response.json();
       }).then((data) => {
 
       // check if registration was valid
       console.log('reeeee', JSON.stringify(data));
-      if (JSON.stringify(data) === 'true') {
+      if (JSON.stringify(data) === 'Passed') {
         console.log('game saved, reeeee')
       } else {
         console.error("saving game failed, reeee");
