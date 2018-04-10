@@ -4,8 +4,6 @@ import {bindActionCreators} from "redux";
 import * as Actions from "../app/Actions";
 import {connect} from "react-redux";
 
-const saveGameUrl = 'http://justthrowit-env.eu-central-1.elasticbeanstalk.com/userHistory';
-
 const mapStateToProps = state => {
   return {
     userLoggedIn: state.userLoggedIn,
@@ -23,7 +21,6 @@ class Track extends React.Component {
   constructor(props) {
     super(props);
     this.renderOverviewTableRows = this.renderOverviewTableRows.bind(this);
-    this.saveGame = this.saveGame.bind(this);
   }
 
   renderOverviewTableRows() {
@@ -38,40 +35,6 @@ class Track extends React.Component {
     })
   }
 
-  saveGame() {
-    const postdata = {};
-    postdata.username = this.props.user;
-    postdata.fieldId = this.props.selectedField;
-    const data = [];
-    const playerdata = this.props.playerData;
-    Object.keys(playerdata).forEach(key => (data.push({playerName: playerdata[key][0], throws: playerdata[key][1].reduce((a, b) => a + b, 0)})));
-    postdata.data = JSON.stringify(data);
-    fetch(saveGameUrl, {
-      cache: 'no-store',
-      method: "POST",
-      body: JSON.stringify(postdata),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then((response) => {
-        return response.json();
-      }).then((data) => {
-
-      // check if registration was valid
-      console.log('reeeee', JSON.stringify(data));
-      if (JSON.stringify(data) === 'true') {
-        console.log('game saved, reeeee')
-      } else {
-        console.error("saving game failed, reeee");
-      }
-    })
-      .catch((error) => {
-        console.error(error);
-      });
-    console.log('post data ', postdata)
-  }
-
   render() {
     return (
       <div className="track-box">
@@ -81,11 +44,7 @@ class Track extends React.Component {
             <span>
               Overview
             </span>
-              {this.props.userLoggedIn ? (
-                <span >
-              <Button onClick={this.saveGame} color="primary" >Finish game</Button>
-            </span>
-              ) : null}
+
             </div>
           </CardHeader>
           <CardBody>
