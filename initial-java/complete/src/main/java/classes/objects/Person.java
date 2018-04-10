@@ -5,9 +5,17 @@ import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.Transient;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Person {
+
+	@OneToMany(cascade = {CascadeType.ALL})
+
+	@ElementCollection(targetClass=SavedGame.class)
+
+	private List<SavedGame> savedGameList = new ArrayList<>();
 
 	@Column(unique = true)
 	private String userName;
@@ -59,5 +67,17 @@ public class Person {
 
 	public String getUsername() {
 		return userName;
+	}
+
+	public List<SavedGame> getSavedGameList() {
+		return this.savedGameList;
+	}
+
+	public void addSavedGame(SavedGame savedGame) {
+		this.savedGameList.add(savedGame);
+	}
+
+	public void setSavedGameList(List<SavedGame> savedGameList) {
+		this.savedGameList = savedGameList;
 	}
 }

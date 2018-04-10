@@ -1,6 +1,6 @@
 package classes.objects;
 
-public class InitialPerson {
+public class PersonGet {
     private String fullname;
 
     private String email;

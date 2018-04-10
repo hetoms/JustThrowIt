@@ -25,8 +25,12 @@ public class DatabaseLoader implements CommandLineRunner {
     @Autowired
     private ResourceLoader resourceLoader;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     @Override
     public void run(String... strings) throws Exception {
+        /**
         this.fieldRepository.deleteAll();
         Resource resource  = resourceLoader.getResource("classpath:static/dataFile.txt");
         try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream(), "UTF-8"))) {
@@ -49,5 +53,6 @@ public class DatabaseLoader implements CommandLineRunner {
                 this.fieldRepository.save(fields);
             }
         }
+         **/
     }
 }
