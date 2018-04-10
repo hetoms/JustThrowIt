@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import {Button, Col, Container, Row} from "reactstrap";
 import getUserdata from "../api/GetUserData";
+import '../../style/AccountPage.css';
 
 const mapStateToProps = state => {
   return {
@@ -38,18 +39,35 @@ class AccountPage extends React.Component {
 
   render() {
     return (
-      <div>
-        <div style={{display: 'flex', margin: 10}}>
-          <Button color="primary" style={{flex: 1, marginRight: 10}} onClick={() => this.setState({userInfoSelected: true})}>User Info</Button>
-          <Button color="primary" style={{flex: 1}} onClick={() => this.setState({userInfoSelected: false})}>Match history</Button>
+      <div className='account-page'>
+        <div className='account-page-buttons'>
+          <Button color="primary" className='profile-button' onClick={() => this.setState({userInfoSelected: true})}>Show Profile</Button>
+          <Button color="primary" className='history-button' onClick={() => this.setState({userInfoSelected: false})}>Show Match History</Button>
         </div>
         {this.state.userInfoSelected ? (
-          <div>
-            {this.props.user}
-            {this.state.id}
-            {this.state.email}
-            {this.state.name}
-          </div>
+					<div className='profile'>
+						<h3>Your Profile</h3>
+						<hr />
+							<Container className="userinfo">
+								<Row className='data-row'>
+									<Col xs="6"><h5>User id:</h5></Col>
+		          		<Col xs="6"><h6>{this.state.id}</h6></Col>
+								</Row>
+								<Row className='data-row'>
+									<Col xs="6"><h5>Username:</h5></Col>
+		          		<Col xs="6"><h6>{this.props.user}</h6></Col>
+								</Row>
+
+								<Row className='data-row'>
+									<Col xs="6"><h5>Email address:</h5></Col>
+		          		<Col xs="6"><h6>{this.state.email}</h6></Col>
+								</Row>
+								<Row className='data-row'>
+									<Col xs="6"><h5>Name:</h5></Col>
+		          		<Col xs="6"><h6>{this.state.name}</h6></Col>
+								</Row>
+							</Container>
+					</div>
         ) : (
           <div>
             Match history
