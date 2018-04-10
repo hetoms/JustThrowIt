@@ -1,5 +1,6 @@
 package classes.objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.Transient;
 
@@ -51,6 +52,7 @@ public class Person {
 		this.email = email;
 	}
 
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}

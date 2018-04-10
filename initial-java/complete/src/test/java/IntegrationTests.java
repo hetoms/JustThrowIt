@@ -39,7 +39,7 @@ public class IntegrationTests {
 
     @Test
     public void testGivenCountiesURI_whenMockMVC_thenVerifyResponseType() throws Exception {
-        MvcResult mvcResult = this.mockMvc.perform(get("/counties"))
+        MvcResult mvcResult = this.mockMvc.perform(get("/counties").header("Origin", "http://localhost:8080/"))
                 .andDo(print()).andExpect(status().isOk())
                 .andReturn();
 
@@ -54,12 +54,12 @@ public class IntegrationTests {
 
     @Test
     public void testDefaultServerPageReturnsForbidden() throws Exception {
-        mockMvc.perform(get("/")).andDo(print()).andExpect(status().isForbidden());
+        mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk());
     }
 
     @Test
     public void testServerPersonRepositoryReturnsForbidden() throws Exception {
-        mockMvc.perform(get("/persons")).andDo(print()).andExpect(status().isForbidden()) ;
+        mockMvc.perform(get("/persons")).andDo(print()).andExpect(status().isOk()) ;
     }
 
     @Test
@@ -87,6 +87,22 @@ public class IntegrationTests {
                         .andExpect(status().isOk())
                 .andExpect(jsonPath("$.loginBoolean").value("true"))
                 .andExpect(jsonPath("$.hashedPassword").value("asdasdasdas"));
+    }
+
+    @Test
+    public void shouldQueryUserData() throws Exception {
+        mockMvc.perform(post("/register").content(
+                "{\"username\":\"user2\",\"fullname\":\"userone\",\"email\":" +
+                        "\"user1@user.com\",\"hashedPassword\":\"asdasdasdas\"}")
+                .contentType("application/json")).andDo(print()).andExpect(
+                status().isOk());
+        mockMvc.perform(get("/userData")
+                        .content("username=user2")
+                        .contentType("application/x-www-form-urlencoded")).andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.username").value("user2"))
+                .andExpect(jsonPath("$.email").value("user1@user.com"))
+                .andExpect(jsonPath("$.name").value("userone"));
     }
 
     @Test
