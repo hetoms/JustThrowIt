@@ -6,6 +6,7 @@ import {Button, Card, CardBody, CardHeader, Col, Container, Nav, NavItem, NavLin
 import getUserdata from "../api/GetUserData";
 import '../../style/AccountPage.css';
 import getUserHistory from "../api/GetUserHistory";
+import {isEmpty} from "ramda";
 
 const mapStateToProps = state => {
   return {
@@ -59,22 +60,30 @@ class AccountPage extends React.Component {
   }
 
   renderHistoryOptions() {
-    return this.state.history.map((game, iterator) => {
-      return (
-        <NavItem className="track" key={game.fieldId.toString() + iterator.toString()}>
-          <NavLink href="#" onClick={() => this.showGame(game)}
-                   active={this.state.gameInView === game}>{game.date + " " + game.fieldId}</NavLink>
-        </NavItem>
-      )
-    })
+    if (!isEmpty(this.state.history)) {
+      return this.state.history.map((game, iterator) => {
+        const trackName = this.props.fields.find(field => field.fieldID.toString() === game.fieldId).fieldName;
+        return (
+          <NavItem className="track" key={game.fieldId.toString() + iterator.toString()}>
+            <NavLink href="#" onClick={() => this.showGame(game)}
+                     active={this.state.gameInView === game}>{game.date + " " + trackName}</NavLink>
+          </NavItem>
+        )
+      })
+    } else {
+      return null;
+    }
+
   }
 
   renderGameOverview() {
+    const trackName = !isEmpty(this.state.history) ?
+      this.props.fields.find(field => field.fieldID.toString() === this.state.gameInView.fieldId).fieldName : "No history to display";   
     return (
       <div className="track-box">
         <Card>
           <CardHeader>
-            Overview
+            {trackName}
           </CardHeader>
           <CardBody>
             <Table responsive>
@@ -86,7 +95,7 @@ class AccountPage extends React.Component {
               </tr>
               </thead>
               <tbody>
-              {this.renderOverviewTableRows()}
+              {!isEmpty(this.state.history) ? this.renderOverviewTableRows() : null}
               </tbody>
             </Table>
           </CardBody>
@@ -96,7 +105,9 @@ class AccountPage extends React.Component {
   }
 
   renderOverviewTableRows() {
-    const par = -1;
+    console.log('field that I am looking for ', this.state.gameInView.fieldId);
+    console.log('all dem fields', this.props.fields);
+    const par = this.props.fields.find(field => field.fieldID.toString() === this.state.gameInView.fieldId).pars;
     return JSON.parse(this.state.gameInView.data).map((player, iterator) => {
       return (
         <tr key={player + iterator.toString()}>
