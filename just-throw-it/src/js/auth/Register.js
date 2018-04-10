@@ -58,13 +58,11 @@ class Register extends React.Component {
 			.then((response) => {
 				return response.json();
 			}).then((data) => {
-
 				// check if registration was valid
-			console.log('reeeee', JSON.stringify(data));
-				if (JSON.stringify(data) === 'true') {
+				if (data.success) {
 					this.setState({registered: true});
 				} else {
-					alert("Registration failed!");
+					alert(data.message);
 				}
 			})
 			.catch((error) => {

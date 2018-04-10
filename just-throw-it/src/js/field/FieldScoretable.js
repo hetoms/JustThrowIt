@@ -82,12 +82,10 @@ class FieldScoretable extends React.Component {
       .then((response) => {
         return response.json();
       }).then((data) => {
-
-      console.log('reeeee', JSON.stringify(data));
-      if (JSON.stringify(data) === 'true') {
-        console.log('game saved, reeeee')
+      if (data.success) {
+        alert('Game saved')
       } else {
-        console.error("saving game failed, reeee");
+        console.error(data.message);
       }
     })
       .catch((error) => {
