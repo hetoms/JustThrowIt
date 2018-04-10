@@ -2,9 +2,24 @@ import React from 'react';
 import {Button, Form, FormGroup, Label, Input, Row, Col} from 'reactstrap';
 import "../../style/Auth.css";
 import {Link, Redirect} from "react-router-dom";
+import * as Actions from "../app/Actions";
+import {connect} from 'react-redux';
+import {bindActionCreators} from "redux";
 import passwordHash from 'password-hash';
 
-export default class Login extends React.Component {
+const mapStateToProps = state => {
+	return {
+		userLoggedIn: state.userLoggedIn,
+	}
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		actions: bindActionCreators(Actions, dispatch),
+	}
+};
+
+class Login extends React.Component {
 	constructor() {
 		super();
 		this.state = {
@@ -15,27 +30,31 @@ export default class Login extends React.Component {
 	}
 
 	handleLogin(event) {
-		const loginUrl = 'https://justthrowit-env.eu-central-1.elasticbeanstalk.com/auth/login';
+		const loginUrl = 'http://justthrowit-env.eu-central-1.elasticbeanstalk.com/auth/login';
 		event.preventDefault();
 
 		fetch(loginUrl + '?username=' + this.state.username, {
 				cache: 'no-store',
+				headers: {
+    			"Content-Type": "application/x-www-form-urlencoded"
+  			}
 			})
 			.then((response) => {
-				response = response.json();
-				console.log(response);
+				return response.json();
+			}).then((data) => {
 
-				if (response.loginBoolean) {
-					const authenticated = passwordHash.verify(this.state.password, response.hashedPassword);
+				if (data.loginBoolean) {
+					const authenticated = passwordHash.verify(this.state.password, data.hashedPassword);
 
 					if (authenticated) {
 						console.log("Login was successful!");
 						this.props.actions.login({});
 					} else {
 						console.log("Login was unsuccessful!");
-						console.log(response);
+						console.log(data);
 					}
 				} else {
+					console.log(data);
 					console.log("ERROR: No such account!");
 				}
 			})
@@ -88,3 +107,5 @@ export default class Login extends React.Component {
 		);
 	}
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

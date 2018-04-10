@@ -33,7 +33,7 @@ class Register extends React.Component {
 	}
 
 	handleRegister(event) {
-		const registerUrl = 'https://justthrowit-env.eu-central-1.elasticbeanstalk.com/register';
+		const registerUrl = 'http://justthrowit-env.eu-central-1.elasticbeanstalk.com/register';
 		event.preventDefault();
 
 		let hashedPassword = passwordHash.generate(this.state.password);
@@ -43,7 +43,7 @@ class Register extends React.Component {
 			username: this.state.username,
 			fullname: this.state.fullname,
 			email: this.state.email,
-			password: hashedPassword
+			hashedPassword: hashedPassword
 		}
 		console.log(data);
 
@@ -56,11 +56,11 @@ class Register extends React.Component {
   			}
 			})
 			.then((response) => {
-				response = response.json();
-				console.log(response);
+				return response.json();
+			}).then((data) => {
 
 				// check if registration was valid
-				if (response) {
+				if (JSON.stringify(data)) {
 					this.setState({registered: true});
 				} else {
 					console.log("ERROR: Registration failed!");
@@ -70,6 +70,9 @@ class Register extends React.Component {
 				console.error(error);
 			});
 	}
+
+
+
 
 	render() {
 		if (this.state.registered) {
