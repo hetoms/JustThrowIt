@@ -1,0 +1,39 @@
+.homepage-header {
+  margin-bottom: 40px;
+}
+
+.homepage-title {
+  color: #292929;
+  font-weight: bold;
+  margin-bottom: 0 !important;
+}
+
+.subheader {
+  color: #787878;
+}
+
+.homepage-button {
+  background-color: #537548 !important;
+  border: 3px solid #537548 !important;
+  margin: 30px 30px 10px 30px;
+}
+
+.homepage-button-header {
+  color: #BFCDAD;
+}
+
+.homepage-register {
+  color: #616161;
+}
+
+.homepage-button:hover {
+  background-color: white !important;
+}
+
+.homepage-button:hover h2 {
+  color: #314418;
+}
+
+.homepage-button:hover .homepage-button-header {
+  color: #577529;
+}
