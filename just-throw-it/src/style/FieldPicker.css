@@ -32,3 +32,28 @@
     width: 100%;
     margin-bottom: 10px;
 }
+
+.filter-buttongroup {
+    align-items: center;
+    margin: 10px 0 10px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-group > .btn {
+    width: 100px !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+
+.picker-header {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-group .btn + .btn {
+    margin-left: 0 !important;
+}
