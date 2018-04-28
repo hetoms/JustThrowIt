@@ -43,22 +43,21 @@ class NavigationBar extends React.Component {
                     <NavbarToggler onClick={this.toggle} className='navigation-toggler'/>
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto navigation-box" navbar>
-                            <NavItem>
-                                <Link to='/about' className="navigation-bar-link nav-link">About the team</Link>
-                            </NavItem>
-
                             {this.props.userLoggedIn ? (
-                                <NavItem>
+                                <NavItem onClick={this.toggle}>
                                     <Link to='/user' className="navigation-bar-link nav-link">Profile</Link>
                                 </NavItem>
                             ) : null}
 
-                            <NavItem>
+                            <NavItem onClick={this.toggle}>
                                 <NavLink className="navigation-bar-link" target="_blank"
                                          href="https://github.com/hetoms/JustThrowIt">Github</NavLink>
                             </NavItem>
+                            <NavItem onClick={this.toggle}>
+                                <Link to='/about' className="navigation-bar-link nav-link">About the team</Link>
+                            </NavItem>
                             {this.props.userLoggedIn ? (
-                                <NavItem>
+                                <NavItem onClick={this.toggle}>
                                     <Link onClick={this.props.actions.logout} to='/'
                                           className="navigation-bar-link nav-link">
                                         Log out
