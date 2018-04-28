@@ -82,7 +82,7 @@ class SetName extends React.Component {
     return (
       <div className="form-box container">
         <Form className='set-name' onSubmit={this.setNameAndRedirect}>
-          <Label for="playerName" className="mr-sm-2 player-name-label">Add players and their names: </Label>
+          <Label for="playerName" className="mr-sm-2 player-name-label">Add players: </Label>
           {this.getPlayerNameInputs()}
           <Button color="success" onClick={event => this.addPlayer(event)}>+</Button>
         </Form>

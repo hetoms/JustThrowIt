@@ -1,7 +1,6 @@
 .userinfo {
   max-width: 500px !important;
   text-align: left;
-  min-width: 390px;
 }
 
 .profile {
@@ -25,6 +24,3 @@
   margin-right: 10px;
 }
 
-body {
-  min-width: 410px;
-}

@@ -1,3 +1,7 @@
+.homepage-container {
+  margin-top: 60px;
+}
+
 .homepage-header {
   margin-bottom: 40px;
 }
@@ -5,6 +9,7 @@
 .homepage-title {
   color: #292929;
   font-weight: bold;
+  font-size: 3.5em;
   margin-bottom: 0 !important;
 }
 
@@ -24,6 +29,15 @@
 
 .homepage-register {
   color: #616161;
+  font-size: 14px;
+}
+
+.homepage-register a:link {
+  color: #284371;
+}
+
+.homepage-register a:visited {
+  color: #60A3C7;
 }
 
 .homepage-button:hover {
@@ -36,4 +50,10 @@
 
 .homepage-button:hover .homepage-button-header {
   color: #577529;
+}
+
+@media screen and (max-width: 700px) {
+  .homepage-title {
+    font-size: 2.3em;
+  }
 }
