@@ -1,6 +1,7 @@
 
 .navigation-bar {
-    background: url(../resources/images/header.jpg) center;
+    /*background: url(../resources/images/header.jpg) center;*/
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), url(../resources/images/header.jpg) center;
     background-size: cover;
     border-bottom: 2px solid #BDD6E0;
     align-items: flex-start !important;
@@ -19,7 +20,7 @@
 }
 
 .brand-name {
-    color: white !important;
+    color: #F5F2E0 !important;
     font-weight: bold;
     font-size: 2.5em !important;
     margin-left: 5%;
@@ -31,16 +32,23 @@
 .navigation-bar-link {
     color: #636363 !important;
     font-weight: bold;
-    font-size: 1em !important;
     margin: 20px;
+    padding: 8px 8px 3px 8px !important;
+}
+
+.navigation-bar-link:hover {
+    border-bottom: 1px solid white;
+}
+
+.nav-item {
+    margin-left:auto;
+    margin-right:auto;
 }
 
 @media screen and (min-width: 768px) {
     .navigation-bar-link {
-        color: white !important;
-        font-weight: bold;
-        font-size: 1em !important;
-        margin: 20px;
+        color: #F7F6E8 !important;
+        font-size: 1.15em !important;
     }
 }
 
@@ -72,5 +80,9 @@
         width: 60vw !important;
         background-color: #F4F4E7 !important;
         border-left: 2px darkgray solid;
+    }
+
+    .navigation-bar-link:hover {
+        border-bottom: 1px solid #19241B;
     }
 }
