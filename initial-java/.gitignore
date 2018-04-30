@@ -1,32 +1,14 @@
-# Operating System Files
 
-*.DS_Store
-Thumbs.db
-*.sw?
-.#*
-*#
-*~
-*.sublime-*
-
-# Build Artifacts
-
-.gradle/
-build/
-target/
-bin/
-dependency-reduced-pom.xml
-
-# Eclipse Project Files
-
-.classpath
-.project
-.settings/
-
-# IntelliJ IDEA Files
-
-*.iml
-*.ipr
-*.iws
-*.idea
-
-README.html
+just-throw-it/.idea/jsLibraryMappings.xml
+just-throw-it/.idea/just-throw-it.iml
+just-throw-it/.idea/misc.xml
+just-throw-it/.idea/modules.xml
+just-throw-it/.idea/vcs.xml
+.idea
+target
+<<<<<<< HEAD
+just-throw-it/.idea/workspace.xml
+=======
+just-throw-it/.idea/workspace.xml
+just-throw-it/src/js/api/APIKey.js
+>>>>>>> 7d0ec8a50348303584a48d085310bf75d7802a19
