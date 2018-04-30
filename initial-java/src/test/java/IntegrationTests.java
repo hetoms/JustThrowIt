@@ -1,4 +1,3 @@
-package test.java;
 
 import classes.Application;
 import org.junit.Assert;
