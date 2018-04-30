@@ -65,7 +65,7 @@ class Login extends React.Component {
 
   render() {
     if (this.props.userLoggedIn) {
-      return <Redirect to="/addPlayers"/>;
+      return <Redirect to="/gametype"/>;
     }
 
     return (

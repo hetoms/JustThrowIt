@@ -4,11 +4,10 @@ import {Link, Redirect} from 'react-router-dom';
 import * as Actions from "../app/Actions";
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
-import '../../style/Homepage.css';
 
 const mapStateToProps = state => {
     return {
-        userLoggedIn: state.userLoggedIn,
+
     }
 };
 
@@ -18,7 +17,7 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-class HomePage extends React.Component {
+class GameTypeSelection extends React.Component {
 
     render() {
         if (this.props.userLoggedIn) {
@@ -30,36 +29,29 @@ class HomePage extends React.Component {
                 <div className='homepage-header'>
                     <Row>
                         <Col>
-                            <h1 className='homepage-title'>Disc Golf Score Tracking App</h1>
+                            <h1 className='homepage-title'>Game Type Selection</h1>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <small className='subheader'>Select a disc golf field where you want to play and start
-                                adding your throws
-                            </small>
+                            <small className='subheader'>Select multiplayer (lobby) or local game</small>
                         </Col>
                     </Row>
                 </div>
                 <Row>
                     <Col>
-                        <Link to='/gametype'>
+                        <Link to='/lobby'>
                             <Button className='homepage-button'>
-                                <h2>Play</h2>
-                                <small className='homepage-button-header'>(without logging in)</small>
+                                <h2>Play Online</h2>
+                                <small className='homepage-button-header'>(create or join a lobby)</small>
                             </Button>
                         </Link>
-                        <Link to='/login'>
+                        <Link to='/addplayers'>
                             <Button className='homepage-button'>
-                                <h2>Log In</h2>
-                                <small className='homepage-button-header'>(To save your game)</small>
+                                <h2>Play Locally</h2>
+                                <small className='homepage-button-header'>(on single device)</small>
                             </Button>
                         </Link>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col className='homepage-register'>
-                        No account yet? <Link to='/register'>Register a new account</Link>
                     </Col>
                 </Row>
             </Container>
@@ -67,4 +59,4 @@ class HomePage extends React.Component {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(GameTypeSelection);
