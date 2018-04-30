@@ -8,6 +8,9 @@ import Login from "../auth/Login";
 import Register from "../auth/Register";
 import AccountPage from "../home/AccountPage";
 import GameTypeSelection from "../home/GameTypeSelection";
+import LobbyActionView from "../gamelobby/LobbyActionView";
+import LobbyCreation from "../gamelobby/LobbyCreation";
+import LobbyJoin from "../gamelobby/LobbyJoin";
 
 const Router = () => (
   <main>
@@ -20,6 +23,9 @@ const Router = () => (
       <Route exact path='/fieldScoretable' component={FieldScoretable}/>
       <Route exact path='/user' component={AccountPage}/>
       <Route exact path='/gametype' component={GameTypeSelection}/>
+      <Route exact path='/lobby' component={LobbyActionView}/>
+      <Route exact path='/create-lobby' component={LobbyCreation}/>
+      <Route exact path='/join-lobby' component={LobbyJoin}/>
     </Switch>
   </main>
 );

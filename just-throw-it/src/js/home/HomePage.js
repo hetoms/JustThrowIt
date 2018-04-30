@@ -22,15 +22,15 @@ class HomePage extends React.Component {
 
     render() {
         if (this.props.userLoggedIn) {
-            return <Redirect to="/addPlayers"/>;
+            return <Redirect to="/gametype"/>;
         }
 
         return (
-            <Container className='homepage-container'>
-                <div className='homepage-header'>
+            <Container className='main-container'>
+                <div className='main-header'>
                     <Row>
                         <Col>
-                            <h1 className='homepage-title'>Disc Golf Score Tracking App</h1>
+                            <h1 className='main-title'>Disc Golf Score Tracking App</h1>
                         </Col>
                     </Row>
                     <Row>
@@ -44,15 +44,15 @@ class HomePage extends React.Component {
                 <Row>
                     <Col>
                         <Link to='/gametype'>
-                            <Button className='homepage-button'>
-                                <h2>Play</h2>
-                                <small className='homepage-button-header'>(without logging in)</small>
+                            <Button className='main-button'>
+                                <h2 className='main-button-header'>Play</h2>
+                                <small className='main-button-subheader'>(without logging in)</small>
                             </Button>
                         </Link>
                         <Link to='/login'>
-                            <Button className='homepage-button'>
-                                <h2>Log In</h2>
-                                <small className='homepage-button-header'>(To save your game)</small>
+                            <Button className='main-button'>
+                                <h2 className='main-button-header'>Log In</h2>
+                                <small className='main-button-subheader'>(To save your game)</small>
                             </Button>
                         </Link>
                     </Col>

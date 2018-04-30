@@ -1,14 +1,13 @@
-.homepage-container {
+.main-container {
   margin-top: 60px;
 }
 
-.homepage-header {
+.main-header {
   margin-bottom: 40px;
 }
 
-.homepage-title {
+.main-title {
   color: #292929;
-  font-weight: bold;
   font-size: 3.5em;
   margin-bottom: 0 !important;
 }
@@ -17,13 +16,13 @@
   color: #787878;
 }
 
-.homepage-button {
+.main-button {
   background-color: #537548 !important;
   border: 3px solid #537548 !important;
-  margin: 30px 30px 10px 30px;
+  margin: 30px 30px 30px 30px;
 }
 
-.homepage-button-header {
+.main-button-subheader {
   color: #BFCDAD;
 }
 
@@ -40,20 +39,20 @@
   color: #60A3C7;
 }
 
-.homepage-button:hover {
+.main-button:hover {
   background-color: white !important;
 }
 
-.homepage-button:hover h2 {
+.main-button:hover .main-button-header {
   color: #314418;
 }
 
-.homepage-button:hover .homepage-button-header {
+.main-button:hover .main-button-subheader {
   color: #577529;
 }
 
 @media screen and (max-width: 700px) {
-  .homepage-title {
+  .main-title {
     font-size: 2.3em;
   }
 }

@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-class GameTypeSelection extends React.Component {
+class LobbyCreation extends React.Component {
 
     render() {
         return (
@@ -25,27 +25,32 @@ class GameTypeSelection extends React.Component {
                 <div className='main-header'>
                     <Row>
                         <Col>
-                            <h1 className='main-title'>Game Type Selection</h1>
+                            <h1 className='main-title'>Your lobby key is <b>666</b> </h1>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <small className='subheader'>Select multiplayer (lobby) or local game</small>
+                            <small className='subheader'>Waiting for players to join...</small>
                         </Col>
                     </Row>
                 </div>
+                <h3>Joined players:</h3>
+                <ul>
+                    <li>Indrek</li>
+                    <li>Fred</li>
+                    <li>Henrik</li>
+                    <li>...</li>
+                </ul>
                 <Row>
                     <Col>
-                        <Link to='/lobby'>
+                        <Link to='/gametype'>
                             <Button className='main-button'>
-                                <h2 className='main-button-header'>Play Online</h2>
-                                <small className='main-button-subheader'>(create or join a lobby)</small>
+                                <h5 className='main-button-header'>Cancel</h5>
                             </Button>
                         </Link>
                         <Link to='/addplayers'>
                             <Button className='main-button'>
-                                <h2 className='main-button-header'>Play Locally</h2>
-                                <small className='main-button-subheader'>(on single device)</small>
+                                <h5 className='main-button-header'>Start</h5>
                             </Button>
                         </Link>
                     </Col>
@@ -55,4 +60,4 @@ class GameTypeSelection extends React.Component {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameTypeSelection);
+export default connect(mapStateToProps, mapDispatchToProps)(LobbyCreation);
