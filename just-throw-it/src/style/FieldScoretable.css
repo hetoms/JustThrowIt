@@ -14,6 +14,13 @@
     justify-content: space-between;
 }
 
+.header-box-mobile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .tracks-container {
     left: 0 !important;
     display: flex;
@@ -49,4 +56,34 @@
 .back-btn {
     margin-top:auto;
     margin-bottom: auto;
+}
+.small-button {
+    font-size: 12px !important;
+}
+
+.mobile-navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.mobile-navigation-back-to-track {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 699px) {
+    .throws-buttons-container {
+        display: flex;
+        padding-right: 0 !important;
+    }
+}
+
+.throws-buttons-container {
+
 }

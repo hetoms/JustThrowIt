@@ -47,7 +47,7 @@ class Track extends React.Component {
 
             </div>
           </CardHeader>
-          <CardBody>
+          <CardBody style={{ paddingLeft: 0, paddingRight: 0}}>
             <Table responsive>
               <thead>
               <tr>

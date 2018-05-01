@@ -60,18 +60,20 @@ class Track extends React.Component {
   renderPlayerPoints() {
     return (
       <Table responsive>
+        <tbody>
         {Object.keys(this.props.playerData).map(player => {
           return (
             <tr key={player}>
               <th> {this.state.playerData[player][0]}</th>
               <td> Throws: {this.state.playerData[player][1][this.state.trackNumber - 1]}</td>
-              <td>
+              <td className="throws-buttons-container">
                 <Button color="danger" className="decrease-btn" onClick={() => this.decreaseThrows(player)}>-</Button>
                 <Button color="success" className="increase-btn" onClick={() => this.increaseThrows(player)}>+</Button>
               </td>
             </tr>
           )
         })}
+        </tbody>
       </Table>
     );
   }
@@ -83,7 +85,7 @@ class Track extends React.Component {
           <CardHeader>
             Track {this.props.track.trackNumber} (par: {this.props.track.trackPar})
           </CardHeader>
-          <CardBody>
+          <CardBody style={{ paddingLeft: 0, paddingRight: 0}}>
             {this.renderPlayerPoints()}
           </CardBody>
         </Card>
