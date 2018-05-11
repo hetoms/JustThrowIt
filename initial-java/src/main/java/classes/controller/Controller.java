@@ -1,8 +1,7 @@
 package classes.controller;
 
-import classes.database.FieldRepository;
-import classes.database.PersonRepository;
 import classes.objects.*;
+import classes.response.LobbyResponse;
 import classes.response.LoginResponse;
 import classes.response.RequestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import java.util.List;
 
 @org.springframework.stereotype.Controller
 public class Controller {
+
     @Autowired
     private ControllerService controllerService;
 
@@ -53,5 +53,33 @@ public class Controller {
     // @RequestMapping(method = RequestMethod.POST)
     public List<SavedGame> getSaveHistory(@RequestParam("username") String username) {
         return controllerService.getSaveHistory(username);
+    }
+
+    @ResponseBody
+    @PostMapping("/createLobby")
+    // @RequestMapping(method = RequestMethod.POST)
+    public LobbyResponse createLobby(@RequestBody CreateLobbyPost lobbyPost) {
+        return controllerService.createLobby(lobbyPost);
+    }
+
+    @ResponseBody
+    @RequestMapping("/join")
+    // @RequestMapping(method = RequestMethod.POST)
+    public LobbyResponse getLobby(@RequestParam("lobbyKey") int lobbyKey, @RequestParam("username") String username) {
+        return controllerService.getLobby(lobbyKey, username);
+    }
+
+    @ResponseBody
+    @RequestMapping("/postScore")
+    // @RequestMapping(method = RequestMethod.POST)
+    public LobbyResponse postScore(@RequestBody(required = false) ScorePost scorePost) {
+        return controllerService.postScore(scorePost);
+    }
+
+    @ResponseBody
+    @RequestMapping("/forceFinish")
+    // @RequestMapping(method = RequestMethod.POST)
+    public RequestResponse forceFinish(@RequestBody ForceFinishPost forceFinishPost) {
+        return controllerService.forceFinish(forceFinishPost);
     }
 }
