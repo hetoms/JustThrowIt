@@ -12,10 +12,12 @@ import AppReducer from "./js/app/AppReducer";
 import {saveState} from "./js/sessionstorage/SaveToSessionStorage";
 import {loadState} from "./js/sessionstorage/LoadFromSessionStorage";
 import getFields from "./js/api/GetFields";
+import {setGameOnline} from "./js/app/Actions";
 // import {clearPlayerdata} from "./js/app/Actions";
 
 const preSavedState = loadState();
 const store = createStore(AppReducer, preSavedState, composeWithDevTools());
+store.dispatch(setGameOnline(false, false, [], 0));
 getFields(store.dispatch);
 // store.dispatch(clearPlayerData());
 

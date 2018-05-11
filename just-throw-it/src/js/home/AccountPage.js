@@ -7,6 +7,8 @@ import getUserdata from "../api/GetUserData";
 import '../../style/AccountPage.css';
 import getUserHistory from "../api/GetUserHistory";
 import {isEmpty} from "ramda";
+import Responsive from 'react-responsive';
+
 
 const mapStateToProps = state => {
   return {
@@ -31,7 +33,8 @@ class AccountPage extends React.Component {
       email: "",
       name: "",
       history: [],
-      gameInView: {}
+      gameInView: {},
+      gameIndex: 0
     };
     this.onReceiveUserData = this.onReceiveUserData.bind(this);
     this.onReceiveHistory = this.onReceiveHistory.bind(this);
@@ -39,6 +42,8 @@ class AccountPage extends React.Component {
     this.showGame = this.showGame.bind(this);
     getUserdata(this.props.user, this.onReceiveUserData);
     getUserHistory(this.props.user, this.onReceiveHistory);
+    this.showNextGame = this.showNextGame.bind(this);
+    this.showPrevGame = this.showPrevGame.bind(this);
   }
 
   onReceiveUserData(data) {
@@ -46,16 +51,16 @@ class AccountPage extends React.Component {
   }
 
   onReceiveHistory(data) {
-    console.log(data);
     this.setState({
       history: data,
       gameInView: data[0]
     })
   }
 
-  showGame(game) {
+  showGame(game, index) {
     this.setState({
-      gameInView: game
+      gameInView: game,
+      gameIndex: index
     })
   }
 
@@ -65,7 +70,7 @@ class AccountPage extends React.Component {
         const trackName = this.props.fields.find(field => field.fieldID.toString() === game.fieldId).fieldName;
         return (
           <NavItem className="track" key={game.fieldId.toString() + iterator.toString()}>
-            <NavLink href="#" onClick={() => this.showGame(game)}
+            <NavLink href="#" onClick={() => this.showGame(game, iterator)}
                      active={this.state.gameInView === game}>{game.date + " " + trackName}</NavLink>
           </NavItem>
         )
@@ -78,14 +83,19 @@ class AccountPage extends React.Component {
 
   renderGameOverview() {
     const trackName = !isEmpty(this.state.history) ?
-      this.props.fields.find(field => field.fieldID.toString() === this.state.gameInView.fieldId).fieldName : "No history to display";   
+      this.props.fields.find(field => field.fieldID.toString() === this.state.gameInView.fieldId).fieldName : "No history to display";
     return (
       <div className="track-box">
         <Card>
           <CardHeader>
-            {trackName}
+            <div>
+            <span>
+              {trackName}
+            </span>
+
+            </div>
           </CardHeader>
-          <CardBody>
+          <CardBody style={{ paddingLeft: 0, paddingRight: 0}}>
             <Table responsive>
               <thead>
               <tr>
@@ -101,12 +111,10 @@ class AccountPage extends React.Component {
           </CardBody>
         </Card>
       </div>
-    )
+    );
   }
 
   renderOverviewTableRows() {
-    console.log('field that I am looking for ', this.state.gameInView.fieldId);
-    console.log('all dem fields', this.props.fields);
     const par = this.props.fields.find(field => field.fieldID.toString() === this.state.gameInView.fieldId).pars;
     return JSON.parse(this.state.gameInView.data).map((player, iterator) => {
       return (
@@ -118,25 +126,77 @@ class AccountPage extends React.Component {
       )
     })
   }
+  showPrevGame() {
+    const {
+      gameIndex,
+      history
+    } = this.state;
+    if (gameIndex - 1 >= 0) {
+      this.setState({
+        gameIndex: gameIndex - 1,
+        gameInView: history[gameIndex - 1]
+      })
+    } else {
+      this.setState({
+        gameIndex: history.length - 1,
+        gameInView: history[history.length - 1]
+      })
+    }
+  }
+
+  showNextGame() {
+    const {
+      gameIndex,
+      history
+    } = this.state;
+    if (gameIndex < history.length - 1) {
+      this.setState({
+        gameIndex: gameIndex + 1,
+        gameInView: history[gameIndex + 1]
+      })
+    } else {
+      this.setState({
+        gameIndex: 0,
+        gameInView: history[0]
+      })
+    }
+  }
 
   renderPlayerHistory() {
     return (
-      <div className="container">
-        <div className="header-box">
-          <h2> History</h2>
-          <div/>
-        </div>
-        <hr/>
-        <div className="tracks-container">
-          <div className="tracks-nav">
-            <Nav pills vertical>
-              {this.renderHistoryOptions()}
-            </Nav>
+      <div>
+        <Responsive minWidth={700}>
+          <div className="container">
+            <div className="header-box">
+              <h3 style={{marginLeft: "50%"}}> History</h3>
+              <div/>
+            </div>
+            <hr/>
+            <div className="tracks-container">
+              <div className="tracks-nav">
+                <Nav pills vertical>
+                  {this.renderHistoryOptions()}
+                </Nav>
+              </div>
+              <div className="track-info">
+                {this.renderGameOverview()}
+              </div>
+            </div>
           </div>
-          <div className="track-info">
+        </Responsive>
+        <Responsive maxWidth={699}>
+          <div>
+            <div>
+              <h3>History</h3>
+              <hr/>
+            </div>
+            <div className="mobile-navigation">
+              <Button className="small-button" color="success" style={{ marginLeft: 10}} onClick={() => this.showPrevGame()}>Previous game</Button>
+              <Button className="small-button" color="success" onClick={() => this.showNextGame()}>Next game</Button>
+            </div>
             {this.renderGameOverview()}
           </div>
-        </div>
+        </Responsive>
       </div>
     )
   }

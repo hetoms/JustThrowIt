@@ -7,7 +7,7 @@ import {bindActionCreators} from "redux";
 
 const mapStateToProps = state => {
     return {
-
+        user: state.user
     }
 };
 
@@ -20,6 +20,10 @@ const mapDispatchToProps = dispatch => {
 class LobbyJoin extends React.Component {
 
     render() {
+      if (!this.props.user) {
+        alert("kindly fuck off cunt");
+        return <Redirect to="/"/>
+      }
         return (
             <Container className='main-container'>
                 <div className='main-header'>
