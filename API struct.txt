@@ -1,0 +1,73 @@
+
+// CREATE LOBBY
+
+url: createLobby
+method: post
+request: {
+	username: string,
+	fieldId: number
+}
+
+response {
+	success: bool,
+	lobbyKey: number
+}
+
+// JOIN LOBBY
+
+url: /join?lobbyKey=1234&&username=madis
+response: {
+	success: bool,
+	gameState: [
+		{
+			0: "player name",
+			1: [0, 0, 0, 0, 0, 0, 0, 0]
+		},
+				{
+			0: "player name",
+			1: [0, 0, 0, 0, 0, 0, 0, 0]
+		},
+				{
+			0: "player name",
+			1: [0, 0, 0, 0, 0, 0, 0, 0]
+		}
+	]
+}
+
+// POST SCORE
+
+url: /postScore
+request: {
+	username: string optional,
+	trackNr: number optional,
+	throws: number optional,
+	hasFinished: bool optional,
+	lobbyKey: number
+}
+
+response: {
+	success: bool,
+	gameState: [
+		{
+			0: "player name",
+			1: [0, 0, 0, 0, 0, 0, 0, 0]
+		},
+				{
+			0: "player name",
+			1: [0, 0, 0, 0, 0, 0, 0, 0]
+		},
+				{
+			0: "player name",
+			1: [0, 0, 0, 0, 0, 0, 0, 0]
+		}
+	]
+}
+
+
+// FORCE FINISH --- SET ALL PLAYERS hasFinished = TRUE
+
+url: /forceFinish
+body: {
+	username: string,
+	lobbyKey: number
+}
