@@ -17,7 +17,7 @@ import {setGameOnline} from "./js/app/Actions";
 
 const preSavedState = loadState();
 const store = createStore(AppReducer, preSavedState, composeWithDevTools());
-store.dispatch(setGameOnline(false, false, [], 0));
+store.dispatch(setGameOnline(false, false, [], 0, 1));
 getFields(store.dispatch);
 // store.dispatch(clearPlayerData());
 

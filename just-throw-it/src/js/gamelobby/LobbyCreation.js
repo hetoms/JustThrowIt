@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import {isEmpty} from "ramda";
 import getLobbyKey from "../api/GetLobbyKey";
+import {setGameOnline} from "../app/Actions";
 
 const mapStateToProps = state => {
     return {
@@ -34,6 +35,8 @@ class LobbyCreation extends React.Component {
         this.toggle = this.toggle.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleGetLobbyKey = this.handleGetLobbyKey.bind(this);
+        this.parseGameData = this.parseGameData.bind(this);
+        this.props.actions.setGameOnline(false, false, [], 0, 1)
     }
 
     handleChange(prop, value) {
@@ -50,11 +53,20 @@ class LobbyCreation extends React.Component {
         }
   }
 
+  parseGameData(resp) {
+      let gameState = {};
+      for (let i = 0; i < resp.gameState.length; i++) {
+        gameState["player" + i.toString()] = [resp.gameState[i].playername, JSON.parse(resp.gameState[i].score)]
+      }
+      console.log("new game state", gameState);
+      console.log("props", this.props);
+      this.props.actions.setGameOnline(true, true, gameState, resp.lobbyKey, this.state.selectedField.fieldID);
+  }
+
   handleGetLobbyKey() {
       if (!isEmpty(this.state.selectedField) && this.props.user) {
         console.log(this.props);
-        const resp = getLobbyKey(this.props.user, this.state.selectedField.fieldID);
-        console.log(resp);
+        getLobbyKey(this.props.user, this.state.selectedField.fieldID).then(resp => this.parseGameData(resp));
       }
   }
 
@@ -87,7 +99,7 @@ class LobbyCreation extends React.Component {
                   }}
                 >
                   {this.props.fields.map(field => (
-                    <DropdownItem onClick={() => this.handleChange("selectedField", field)}>{field.fieldName}</DropdownItem>
+                    <DropdownItem key={field.fieldID} onClick={() => this.handleChange("selectedField", field)}>{field.fieldName}</DropdownItem>
                   ))}
                 </DropdownMenu>
               </Dropdown>
@@ -99,9 +111,11 @@ class LobbyCreation extends React.Component {
                             </Button>
                         </Link>
                       {this.props.lobbyKey ? (
+                        <Link to='/fieldScoretable'>
                         <Button className='main-button'>
                           <h5 className='main-button-header'>Start</h5>
                         </Button>
+                        </Link>
                       ) : (
                         <Button className='main-button' onClick={this.handleGetLobbyKey}>
                           <h5 className='main-button-header'>Get lobby key</h5>
