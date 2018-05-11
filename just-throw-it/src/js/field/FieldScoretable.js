@@ -17,7 +17,10 @@ const mapStateToProps = state => {
   return {
     userLoggedIn: state.userLoggedIn,
     user: state.user,
-    selectedField: state.selectedField
+    selectedField: state.selectedField,
+    isOnlineGame: state.isOnlineGame,
+    lobbyKey: state.lobbyKey,
+    isOnlineGameOwner: state.isOnlineGameOwner
   }
 };
 
@@ -99,37 +102,42 @@ class FieldScoretable extends React.Component {
   }
 
   saveGame() {
-    const postdata = {};
-    postdata.username = this.props.user;
-    postdata.fieldId = this.props.selectedField;
-    const data = [];
-    const playerdata = this.props.playerData;
-    Object.keys(playerdata).forEach(key => (data.push({
-      playerName: playerdata[key][0],
-      throws: playerdata[key][1].reduce((a, b) => a + b, 0)
-    })));
-    postdata.data = JSON.stringify(data);
-    fetch(saveGameUrl, {
-      cache: 'no-store',
-      method: "POST",
-      body: JSON.stringify(postdata),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then((response) => {
-        return response.json();
-      }).then((data) => {
-      if (data.success) {
-        alert('Game saved')
-      } else {
-        console.error(data.message);
-      }
-    })
-      .catch((error) => {
-        console.error(error);
-      });
-    console.log('post data ', postdata)
+    if (!this.props.isOnlineGame) {
+      const postdata = {};
+      postdata.username = this.props.user;
+      postdata.fieldId = this.props.selectedField;
+      const data = [];
+      const playerdata = this.props.playerData;
+      Object.keys(playerdata).forEach(key => (data.push({
+        playerName: playerdata[key][0],
+        throws: playerdata[key][1].reduce((a, b) => a + b, 0)
+      })));
+      postdata.data = JSON.stringify(data);
+      fetch(saveGameUrl, {
+        cache: 'no-store',
+        method: "POST",
+        body: JSON.stringify(postdata),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then((response) => {
+          return response.json();
+        }).then((data) => {
+        if (data.success) {
+          alert('Game saved')
+        } else {
+          console.error(data.message);
+        }
+      })
+        .catch((error) => {
+          console.error(error);
+        });
+      console.log('post data ', postdata)
+    } else {
+      alert("ouyyy boyy, we gonna end a MP game");
+    }
+
   }
 
   render() {
@@ -147,15 +155,17 @@ class FieldScoretable extends React.Component {
       />;
     }
 
-    console.log(this.state);
-    console.log(this.props);
+    const {
+      isOnlineGame,
+      lobbyKey
+    } = this.props;
 
     return (
       <div>
         <Responsive minWidth={700}>
           <div className="container">
             <div className="header-box">
-              <Link className="back-btn" to='/pickField'><Button color="success">Back</Button></Link>
+              {isOnlineGame ? <h3>Your lobby key: {lobbyKey}</h3> : (<Link className="back-btn" to='/pickField'><Button color="success">Back</Button></Link>)}
               <h2>{this.props.field.fieldName} DiscGolf field</h2>
               {this.props.userLoggedIn ? (
                 <span className="back-btn">

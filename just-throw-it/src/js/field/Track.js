@@ -7,7 +7,11 @@ import {connect} from "react-redux";
 
 const mapStateToProps = state => {
   return {
-    playerData: state.playerData
+    playerData: state.playerData,
+    isOnlineGame: state.isOnlineGame,
+    onlineGameFinished: state.onlineGameFinished,
+    lobbyKey: state.lobbyKey,
+    user: state.user
   }
 };
 
@@ -58,6 +62,10 @@ class Track extends React.Component {
   }
 
   renderPlayerPoints() {
+    const {
+      isOnlineGame,
+      user
+    } = this.props;
     return (
       <Table responsive>
         <tbody>
