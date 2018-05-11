@@ -5,17 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Access(AccessType.FIELD)
 public class Fields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
+    @Column
     private long fieldID;
 
+    @Column
     private String county;
 
+    @Column
     private String fieldName;
 
+    @Column
     private int numberOfTracks ;
 
     @OneToMany(cascade = {CascadeType.ALL})
@@ -24,12 +29,16 @@ public class Fields {
 
     private List<Track> tracks = new ArrayList<>();
 
+    @Column
     private double latitude;
 
+    @Column
     private double longitude;
 
+    @Column
     private int pars;
 
+    @Column
     private String text = "";
 
     public Fields() {}
