@@ -7,6 +7,8 @@ export const SAVE_AREA_FILTERS = 'SAVE_AREA_FILTERS';
 export const DELETE_PLAYER = 'DELETE_PLAYER';
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
+export const SET_GAME_ONLINE = 'SET_GAME_ONLINE';
+export const SET_LOBBY_KEY = 'SET_LOBBY_KEY';
 
 export const setName = (id, name) => ({
   type: SET_NAME,
@@ -53,3 +55,12 @@ export const login = (payload) => ({
 export const logout = () => ({
   type: LOG_OUT
 });
+
+export const setGameOnline = (gameOnline, isOnlineGameOwner, gameData, lobbyKey) => ({
+  type: SET_GAME_ONLINE,
+  gameOnline,
+  isOnlineGameOwner,
+  gameData,
+  lobbyKey
+});
+
