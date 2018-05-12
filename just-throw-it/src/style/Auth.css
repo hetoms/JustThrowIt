@@ -3,27 +3,27 @@
   margin-left: auto;
   margin-right: auto;
   padding: 40px;
-  color: white;
+  color: #1F1F1F;
   border-radius: 10px;
   box-shadow: 5px 10px 8px #888888;
-  border: 0.5px solid #517D2C;
-  background-color: #8AAD52;
+  background-color: #D1E8BA;
 }
 
 .cancel-btn, .login-btn, .register-btn {
   margin: 25px 15px 0 15px;
-  background-color: #314418 !important;
+  border: none !important;
+  background-color: #67AD67 !important;
 }
 
 .cancel-btn:hover, .login-btn:hover, .register-btn:hover {
-  background-color: #3D531D !important;
+  border: none !important;
+  background-color: #7AB677 !important;
 }
 
 .register-form {
   box-shadow: 5px 10px 8px #888888;
-  border: 0.5px solid #517D2C;
-  background-color: #8AAD52;
-  color: white;
+  background-color: #D1E8BA;
+  color: #1F1F1F;
   border-radius: 10px;
   max-width: 800px;
   margin: auto;
