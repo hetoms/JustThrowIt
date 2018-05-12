@@ -1,6 +1,5 @@
 
 .navigation-bar {
-    /*background: url(../resources/images/header.jpg) center;*/
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), url(../resources/images/header.jpg) center;
     background-size: cover;
     border-bottom: 2px solid #BDD6E0;
@@ -32,7 +31,7 @@
 .navigation-bar-link {
     color: #636363 !important;
     font-weight: bold;
-    margin: 20px;
+    margin: 20px 5px 20px 5px;
     padding: 8px 8px 3px 8px !important;
 }
 
