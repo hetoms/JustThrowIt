@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Nav, NavLink, NavItem} from 'reactstrap';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import Track from "./Track";
 import Overview from "./Overview";
 import "../../style/FieldScoretable.css";
@@ -11,6 +11,7 @@ import {connect} from "react-redux";
 import Responsive from 'react-responsive';
 import {find, propEq} from "ramda";
 import postNewScore from "../api/PostScore";
+import forceFinishGame from "../api/ForceFinishGame";
 
 const saveGameUrl = 'http://justthrowit-env.eu-central-1.elasticbeanstalk.com/userHistory';
 
@@ -41,12 +42,14 @@ class FieldScoretable extends React.Component {
     this.reloadScores = this.reloadScores.bind(this);
     this.parseGameData = this.parseGameData.bind(this);
     this.handleEndGame = this.handleEndGame.bind(this);
+    this.forceFinish = this.forceFinish.bind(this);
 
     this.state = {
       displayedTrack: this.props.field.tracks[0],
       showOverview: false,
       timer: null,
-      hasAlerted: false
+      hasAlerted: false,
+      redirectToHistory: false
     }
   }
 
@@ -71,27 +74,38 @@ class FieldScoretable extends React.Component {
 
   handleEndGame() {
     postNewScore(this.props.user, null, null, true, this.props.lobbyKey).then(resp => this.parseGameData(resp));
+  }
 
+  forceFinish() {
+    forceFinishGame(this.props.user, this.props.lobbyKey).then(resp => console.log(resp));
   }
 
   parseGameData(resp) {
-    let gameState = {};
-    let hasFinished = false;
-    console.log("resp", resp);
-    for (let i = 0; i < resp.gameState.length; i++) {
-      gameState["player" + i.toString()] = [resp.gameState[i].playername, JSON.parse(resp.gameState[i].score)];
-      if(resp.gameState[i].playername === this.props.user) {
-        hasFinished = resp.gameState[i].hasFinished
+    if (resp.success) {
+      let gameState = {};
+      let hasFinished = false;
+      console.log("resp", resp);
+      for (let i = 0; i < resp.gameState.length; i++) {
+        gameState["player" + i.toString()] = [resp.gameState[i].playername, JSON.parse(resp.gameState[i].score)];
+        if(resp.gameState[i].playername === this.props.user) {
+          hasFinished = resp.gameState[i].hasFinished
+        }
       }
+      console.log("new game state", gameState, " finished", hasFinished);
+      this.props.actions.updateOnlinegame(gameState, hasFinished);
+      if (hasFinished && !this.state.hasAlerted) {
+        alert("Game has ended, when all players have ended it will appear under your history aswell");
+        this.setState({
+          hasAlerted: true
+        });
+      }
+    } else {
+      alert("all players have ended their games, redirecting to history");
+        this.setState({
+          redirectToHistory: true
+        });
     }
-    console.log("new game state", gameState, " finished", hasFinished);
-    this.props.actions.updateOnlinegame(gameState, hasFinished);
-    if (hasFinished && !this.state.hasAlerted) {
-      alert("Game has ended, when all players have ended it will appear under your history aswell");
-      this.setState({
-        hasAlerted: true
-      });
-    }
+
   }
 
   showTrack(track) {
@@ -210,6 +224,9 @@ class FieldScoretable extends React.Component {
       isOnlineGame,
       lobbyKey
     } = this.props;
+    if (this.state.redirectToHistory) {
+      return <Redirect to="/user"/>
+    }
 
     return (
       <div>
@@ -222,6 +239,9 @@ class FieldScoretable extends React.Component {
                 <span className="back-btn">
 								<Button onClick={this.saveGame} color="success">Finish game</Button>
 							</span>
+              ) : null}
+              {this.props.userLoggedIn && this.props.isOnlineGameOwner ? (
+                <Button onClick={this.forceFinish} color="success" className="small-button">Force finish all players</Button>
               ) : null}
               <div/>
             </div>
