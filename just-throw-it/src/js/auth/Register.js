@@ -136,10 +136,10 @@ class Register extends React.Component {
 					<FormGroup>
 						<Row>
 							<Col>
+                                <Button type="submit" className="register-btn">Register</Button>
 								<Link to='/'>
 									<Button className="cancel-btn">Cancel</Button>
 								</Link>
-								<Button className="register-btn">Register</Button>
 							</Col>
 						</Row>
 					</FormGroup>

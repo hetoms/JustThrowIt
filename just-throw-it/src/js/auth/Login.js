@@ -96,10 +96,10 @@ class Login extends React.Component {
           {' '}
           <Row>
             <Col>
-              <Link to='/'>
-                <Button className="cancel-btn">Cancel</Button>
-              </Link>
               <Button className="login-btn">Log in</Button>
+              <Link to='/'>
+                <Button type="submit" className="cancel-btn">Cancel</Button>
+              </Link>
             </Col>
           </Row>
         </Form>
