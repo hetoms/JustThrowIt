@@ -13,11 +13,17 @@ public class LobbyResponse {
 
     private int lobbyKey;
 
+    private long fieldId;
+
+    private String owner;
+
     @OneToMany(cascade = {CascadeType.ALL})
     @ElementCollection(targetClass= GameState.class)
     private List<GameState> gameState = new ArrayList<>();
 
-    public LobbyResponse(Boolean success, int lobbyKey, List<GameState> gameState) {
+    public LobbyResponse(String owner, Boolean success, int lobbyKey, List<GameState> gameState, long fieldId) {
+        this.owner = owner;
+        this.fieldId = fieldId;
         this.lobbyKey = lobbyKey;
         this.success = success;
         this.gameState = gameState;
@@ -45,5 +51,21 @@ public class LobbyResponse {
 
     public void setGameState(List<GameState> gameState) {
         this.gameState = gameState;
+    }
+
+    public long getFieldId() {
+        return fieldId;
+    }
+
+    public void setFieldId(long fieldId) {
+        this.fieldId = fieldId;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

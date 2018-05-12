@@ -8,7 +8,7 @@ public class GameState {
 
     public GameState() {}
 
-    public GameState(String playername, String score, boolean hasFinished){
+    public GameState(String playername, List<Integer> score, boolean hasFinished){
         this.playername = playername;
         this.score = score;
         this.hasFinished = hasFinished;
@@ -23,7 +23,8 @@ public class GameState {
     @Column
     private String playername;
 
-    private String score;
+    @ElementCollection(targetClass= Integer.class)
+    private List<Integer> score;
 
     public String getPlayername() {
         return playername;
@@ -33,11 +34,11 @@ public class GameState {
         this.playername = playername;
     }
 
-    public String getScore() {
+    public List<Integer> getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(List<Integer> score) {
         this.score = score;
     }
 

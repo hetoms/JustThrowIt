@@ -19,7 +19,7 @@ public class Lobby {
 
     private String creator;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.DETACH})
     private Fields fields;
 
     @Column

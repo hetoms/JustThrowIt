@@ -14,7 +14,7 @@ public class SavedGame {
     private long iD;
 
     @NotNull
-    private String fieldId;
+    private long fieldId;
 
     @NotNull
     private String date;
@@ -27,18 +27,18 @@ public class SavedGame {
 
     public SavedGame() {}
 
-    public SavedGame(String fieldId, String data, String date, String username) {
+    public SavedGame(long fieldId, String data, String date, String username) {
         this.fieldId = fieldId;
         this.data = data;
         this.username = username;
         this.date = date;
     }
 
-    public String getFieldId() {
+    public long getFieldId() {
         return fieldId;
     }
 
-    public void setFieldId(String fieldId) {
+    public void setFieldId(long fieldId) {
         this.fieldId = fieldId;
     }
 

@@ -2,17 +2,17 @@ package classes.objects;
 
 public class SavedGameGet {
 
-    private String fieldId;
+    private long fieldId;
 
     private String data;
 
     private String username;
 
-    public String getFieldId() {
+    public long getFieldId() {
         return fieldId;
     }
 
-    public void setFieldId(String fieldId) {
+    public void setFieldId(long fieldId) {
         this.fieldId = fieldId;
     }
 

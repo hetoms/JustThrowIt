@@ -48,7 +48,7 @@ public class UnitTests {
 
 	@Before
 	public void setup() {
-		this.savedGame = new SavedGame("id", "data", "date", "username");
+		this.savedGame = new SavedGame(1, "data", "date", "username");
 		this.track = new Track(2, 3);
 		this.mary = new Person("mary", "asda", "asd@awd.ee", "sdasd");
 		this.fields = new Fields("tallinn", 4, 3, 2, 1);
@@ -195,7 +195,7 @@ public class UnitTests {
 
 	@Test
 	public void testSavedGameInitialisationId() {
-		assertTrue(savedGame.getFieldId().equals("id"));
+		assertTrue(savedGame.getFieldId() == 1);
 	}
 
 	@Test
