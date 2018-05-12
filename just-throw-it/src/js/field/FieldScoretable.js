@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Nav, NavLink, NavItem} from 'reactstrap';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import Track from "./Track";
 import Overview from "./Overview";
 import "../../style/FieldScoretable.css";
@@ -10,6 +10,8 @@ import * as Actions from "../app/Actions";
 import {connect} from "react-redux";
 import Responsive from 'react-responsive';
 import {find, propEq} from "ramda";
+import postNewScore from "../api/PostScore";
+import forceFinishGame from "../api/ForceFinishGame";
 
 const saveGameUrl = 'http://justthrowit-env.eu-central-1.elasticbeanstalk.com/userHistory';
 
@@ -17,7 +19,11 @@ const mapStateToProps = state => {
   return {
     userLoggedIn: state.userLoggedIn,
     user: state.user,
-    selectedField: state.selectedField
+    selectedField: state.selectedField,
+    isOnlineGame: state.isOnlineGame,
+    lobbyKey: state.lobbyKey,
+    isOnlineGameOwner: state.isOnlineGameOwner,
+    onlineGameFinished: state.onlineGameFinished
   }
 };
 
@@ -33,11 +39,73 @@ class FieldScoretable extends React.Component {
     this.setTracks = this.setTracks.bind(this);
     this.showTrack = this.showTrack.bind(this);
     this.saveGame = this.saveGame.bind(this);
+    this.reloadScores = this.reloadScores.bind(this);
+    this.parseGameData = this.parseGameData.bind(this);
+    this.handleEndGame = this.handleEndGame.bind(this);
+    this.forceFinish = this.forceFinish.bind(this);
 
     this.state = {
       displayedTrack: this.props.field.tracks[0],
-      showOverview: false
+      showOverview: false,
+      timer: null,
+      hasAlerted: false,
+      redirectToHistory: false
     }
+  }
+
+  componentDidMount() {
+    console.log("game online", this.props.isOnlineGame);
+
+    if (this.props.isOnlineGame) {
+      let timer = setInterval(this.reloadScores, 3000);
+      this.setState({timer});
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.timer);
+  }
+
+  reloadScores() {
+    console.log("game reloaded");
+
+    postNewScore(null, null, null, this.props.onlineGameFinished, this.props.lobbyKey).then(resp => this.parseGameData(resp));
+  }
+
+  handleEndGame() {
+    postNewScore(this.props.user, null, null, true, this.props.lobbyKey).then(resp => this.parseGameData(resp));
+  }
+
+  forceFinish() {
+    forceFinishGame(this.props.user, this.props.lobbyKey).then(resp => console.log(resp));
+  }
+
+  parseGameData(resp) {
+    if (resp.success) {
+      let gameState = {};
+      let hasFinished = false;
+      console.log("resp", resp);
+      for (let i = 0; i < resp.gameState.length; i++) {
+        gameState["player" + i.toString()] = [resp.gameState[i].playername, resp.gameState[i].score];
+        if(resp.gameState[i].playername === this.props.user) {
+          hasFinished = resp.gameState[i].hasFinished
+        }
+      }
+      console.log("new game state", gameState, " finished", hasFinished);
+      this.props.actions.updateOnlinegame(gameState, hasFinished);
+      if (hasFinished && !this.state.hasAlerted) {
+        alert("Game has ended, when all players have ended it will appear under your history aswell");
+        this.setState({
+          hasAlerted: true
+        });
+      }
+    } else {
+      alert("all players have ended their games, redirecting to history");
+        this.setState({
+          redirectToHistory: true
+        });
+    }
+
   }
 
   showTrack(track) {
@@ -99,37 +167,44 @@ class FieldScoretable extends React.Component {
   }
 
   saveGame() {
-    const postdata = {};
-    postdata.username = this.props.user;
-    postdata.fieldId = this.props.selectedField;
-    const data = [];
-    const playerdata = this.props.playerData;
-    Object.keys(playerdata).forEach(key => (data.push({
-      playerName: playerdata[key][0],
-      throws: playerdata[key][1].reduce((a, b) => a + b, 0)
-    })));
-    postdata.data = JSON.stringify(data);
-    fetch(saveGameUrl, {
-      cache: 'no-store',
-      method: "POST",
-      body: JSON.stringify(postdata),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then((response) => {
-        return response.json();
-      }).then((data) => {
-      if (data.success) {
-        alert('Game saved')
-      } else {
-        console.error(data.message);
-      }
-    })
-      .catch((error) => {
-        console.error(error);
-      });
-    console.log('post data ', postdata)
+    if (!this.props.isOnlineGame) {
+      const postdata = {};
+      postdata.username = this.props.user;
+      postdata.fieldId = this.props.selectedField;
+      const data = [];
+      const playerdata = this.props.playerData;
+      Object.keys(playerdata).forEach(key => (data.push({
+        playerName: playerdata[key][0],
+        throws: playerdata[key][1].reduce((a, b) => a + b, 0)
+      })));
+      postdata.data = JSON.stringify(data);
+      fetch(saveGameUrl, {
+        cache: 'no-store',
+        method: "POST",
+        body: JSON.stringify(postdata),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then((response) => {
+          return response.json();
+        }).then((data) => {
+        if (data.success) {
+          alert('Game saved')
+        } else {
+          console.error(data.message);
+        }
+      })
+        .catch((error) => {
+          console.error(error);
+        });
+      console.log('post data ', postdata)
+    } else {
+
+      console.log("tRAIINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
+      this.handleEndGame();
+    }
+
   }
 
   render() {
@@ -147,20 +222,28 @@ class FieldScoretable extends React.Component {
       />;
     }
 
-    console.log(this.state);
-    console.log(this.props);
+    const {
+      isOnlineGame,
+      lobbyKey
+    } = this.props;
+    if (this.state.redirectToHistory) {
+      return <Redirect to="/user"/>
+    }
 
     return (
       <div>
         <Responsive minWidth={700}>
           <div className="container">
             <div className="header-box">
-              <Link className="back-btn" to='/pickField'><Button color="success">Back</Button></Link>
+              {isOnlineGame ? <h3>Your lobby key: {lobbyKey}</h3> : (<Link className="back-btn" to='/pickField'><Button color="success">Back</Button></Link>)}
               <h2>{this.props.field.fieldName} DiscGolf field</h2>
               {this.props.userLoggedIn ? (
                 <span className="back-btn">
 								<Button onClick={this.saveGame} color="success">Finish game</Button>
 							</span>
+              ) : null}
+              {this.props.userLoggedIn && this.props.isOnlineGameOwner ? (
+                <Button onClick={this.forceFinish} color="success" className="small-button">Force finish all players</Button>
               ) : null}
               <div/>
             </div>

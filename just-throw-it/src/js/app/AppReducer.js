@@ -6,7 +6,7 @@ import {
   SET_FIELDS,
   CLEAR_PLAYER_DATA,
   SAVE_THROW, SAVE_AREA_FILTERS, DELETE_PLAYER,
-  LOG_IN, LOG_OUT, SET_GAME_ONLINE
+  LOG_IN, LOG_OUT, SET_GAME_ONLINE, SET_GAME_OFFLINE, UPDATE_ONLINE_GAME
 } from "./Actions";
 import clone from "ramda/es/clone";
 
@@ -19,7 +19,8 @@ const initialState = {
   user: "",
   isOnlineGame: false,
   isOnlineGameOwner: false,
-  lobbyKey: 0
+  lobbyKey: 0,
+  onlineGameFinished: false
 };
 
 const AppReducer = (state = initialState, action) => {
@@ -96,8 +97,23 @@ const AppReducer = (state = initialState, action) => {
         isOnlineGame: action.gameOnline,
         isOnlineGameOwner: action.isOnlineGameOwner,
         playerData: action.gameData,
-        lobbyKey: action.lobbyKey
-
+        lobbyKey: action.lobbyKey,
+        selectedField: action.selectedField,
+        onlineGameFinished: false
+      };
+    case SET_GAME_OFFLINE:
+      return {
+        ...state,
+        isOnlineGame: false,
+        isOnlineGameOwner: false,
+        lobbyKey: initialState.lobbyKey,
+        onlineGameFinished: false
+      };
+    case UPDATE_ONLINE_GAME:
+      return {
+        ...state,
+        onlineGameFinished: action.onlineGameFinished,
+        playerData: action.gameData
       };
     default:
       return state;

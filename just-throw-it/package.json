@@ -3,20 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bootstrap": "^4.1.1",
+    "bootstrap": "^4.0.0",
     "jquery": "^3.3.1",
     "password-hash": "^1.2.2",
     "prop-types": "latest",
     "ramda": "^0.25.0",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "react-google-maps": "^9.4.5",
     "react-icons": "^2.2.7",
-    "react-redux": "^5.0.7",
+    "react-redux": "^5.0.6",
     "react-responsive": "^4.1.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
-    "reactstrap": "^5.0.0",
+    "reactstrap": "^5.0.0-beta",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "src": "^1.1.2"
@@ -28,6 +28,6 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "recompose": "^0.27.0"
+    "recompose": "latest"
   }
 }

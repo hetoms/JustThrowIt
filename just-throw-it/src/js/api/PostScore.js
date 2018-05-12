@@ -1,11 +1,14 @@
-const apiURL = 'http://justthrowit-env.eu-central-1.elasticbeanstalk.com/createLobby';
+const apiURL = 'http://justthrowit-env.eu-central-1.elasticbeanstalk.com/postScore';
 
-const getLobbyKey = async (username, fieldId) => {
+const postNewScore = async (username, trackNr, throws, hasFinished, lobbyKey) => {
   return await fetch(apiURL,
     {cache: 'no-store',
       body: JSON.stringify({
         username,
-        fieldId
+        trackNr,
+        score: throws,
+        hasFinished,
+        lobbyKey
       }),
       method: "post",
       headers: {
@@ -17,4 +20,4 @@ const getLobbyKey = async (username, fieldId) => {
       console.error(error);
     });
 };
-export default getLobbyKey;
+export default postNewScore;

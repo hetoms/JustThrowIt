@@ -4,10 +4,16 @@ import "../../style/Track.css";
 import {bindActionCreators} from "redux";
 import * as Actions from "../app/Actions";
 import {connect} from "react-redux";
+import {equals} from "ramda";
+import postNewScore from "../api/PostScore";
 
 const mapStateToProps = state => {
   return {
-    playerData: state.playerData
+    playerData: state.playerData,
+    isOnlineGame: state.isOnlineGame,
+    onlineGameFinished: state.onlineGameFinished,
+    lobbyKey: state.lobbyKey,
+    user: state.user
   }
 };
 
@@ -28,19 +34,48 @@ class Track extends React.Component {
     this.decreaseThrows = this.decreaseThrows.bind(this);
     this.increaseThrows = this.increaseThrows.bind(this);
     this.renderPlayerPoints = this.renderPlayerPoints.bind(this);
-
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.track !== this.props.track) {
+  parseGameData(resp) {
+    let gameState = {};
+    let hasFinished = false;
+    for (let i = 0; i < resp.gameState.length; i++) {
+      gameState["player" + i.toString()] = [resp.gameState[i].playername, resp.gameState[i].score]
+      if(resp.gameState[i].playername === this.props.user) {
+        hasFinished = resp.gameState[i].hasFinished
+      }
+    }
+    console.log("new game state", gameState, " finished", hasFinished);
+    this.props.actions.updateOnlinegame(gameState, hasFinished);
+  }
+
+  postScore(throws, track, hasFinished) {
+    const {
+      lobbyKey,
+      user
+  } = this.props;
+    console.log("eem what");
+    postNewScore(user, track, throws, hasFinished, lobbyKey).then(resp => this.parseGameData(resp));
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    console.log("oh god");
+    console.log("what the fuck", this.props);
+    if (!equals(this.props, nextProps)) {
+      console.log("oh god send help wtf");
+
       this.setState({
-        trackNumber: nextProps.track.trackNumber
+        trackNumber: nextProps.track.trackNumber,
+        playerData: nextProps.playerData
       });
     }
   }
 
   increaseThrows(player) {
-    let throws = this.props.playerData[player][1][this.state.trackNumber - 1] + 1;
+    let throws = this.state.playerData[player][1][this.state.trackNumber - 1] + 1;
+    if (this.props.isOnlineGame) {
+      this.postScore(throws, this.state.trackNumber, false)
+    }
     this.props.actions.saveThrow(player, this.state.trackNumber, throws);
     this.setState({
       playerData: this.props.playerData
@@ -48,8 +83,11 @@ class Track extends React.Component {
   }
 
   decreaseThrows(player) {
-    if (this.props.playerData[player][1][this.state.trackNumber - 1] > 0) {
-      let throws = this.props.playerData[player][1][this.state.trackNumber - 1] - 1;
+    if (this.state.playerData[player][1][this.state.trackNumber - 1] > 0) {
+      let throws = this.state.playerData[player][1][this.state.trackNumber - 1] - 1;
+      if (this.props.isOnlineGame) {
+        this.postScore(throws, this.state.trackNumber, false)
+      }
       this.props.actions.saveThrow(player, this.state.trackNumber, throws);
       this.setState({
         playerData: this.props.playerData
@@ -58,6 +96,11 @@ class Track extends React.Component {
   }
 
   renderPlayerPoints() {
+    const {
+      isOnlineGame,
+      user,
+      onlineGameFinished
+    } = this.props;
     return (
       <Table responsive>
         <tbody>
@@ -66,10 +109,13 @@ class Track extends React.Component {
             <tr key={player}>
               <th> {this.state.playerData[player][0]}</th>
               <td> Throws: {this.state.playerData[player][1][this.state.trackNumber - 1]}</td>
-              <td className="throws-buttons-container">
-                <Button color="danger" className="decrease-btn" onClick={() => this.decreaseThrows(player)}>-</Button>
-                <Button color="success" className="increase-btn" onClick={() => this.increaseThrows(player)}>+</Button>
-              </td>
+              {console.log(!isOnlineGame || (user === this.state.playerData[player][0]), this.state.playerData[player][0] )}
+              {!isOnlineGame || (user === this.state.playerData[player][0] && !onlineGameFinished) ? (
+                <td className="throws-buttons-container">
+                  <Button color="danger" className="decrease-btn" onClick={() => this.decreaseThrows(player)}>-</Button>
+                  <Button color="success" className="increase-btn" onClick={() => this.increaseThrows(player)}>+</Button>
+                </td>
+              ) : <td/> }
             </tr>
           )
         })}
