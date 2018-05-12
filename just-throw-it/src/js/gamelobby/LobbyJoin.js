@@ -40,7 +40,8 @@ class LobbyJoin extends React.Component {
       }
       console.log("new game state", gameState);
       console.log("props", this.props);
-      this.props.actions.setGameOnline(true, false, gameState, resp.lobbyKey, resp.fieldId);
+      const isOwner = resp.owner === this.props.user;
+      this.props.actions.setGameOnline(true, isOwner, gameState, resp.lobbyKey, resp.fieldId);
       this.setState({
         redirect: true
       })
