@@ -4,6 +4,7 @@ import {Link, Redirect} from 'react-router-dom';
 import * as Actions from "../app/Actions";
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
+import joinLobby from "../api/JoinLobby";
 
 const mapStateToProps = state => {
     return {
@@ -18,6 +19,36 @@ const mapDispatchToProps = dispatch => {
 };
 
 class LobbyJoin extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      lobbyKey: "",
+      redirect: false
+    };
+    this.onLobbyJoin = this.onLobbyJoin.bind(this);
+    this.parseGameData = this.parseGameData.bind(this);
+  }
+  onLobbyJoin() {
+    joinLobby(this.props.user, this.state.lobbyKey).then(resp => this.parseGameData(resp));
+  }
+
+  parseGameData(resp) {
+    if (resp && resp.success) {
+      let gameState = {};
+      for (let i = 0; i < resp.gameState.length; i++) {
+        gameState["player" + i.toString()] = [resp.gameState[i].playername, JSON.parse(resp.gameState[i].score)]
+      }
+      console.log("new game state", gameState);
+      console.log("props", this.props);
+      this.props.actions.setGameOnline(true, false, gameState, resp.lobbyKey, resp.fieldId);
+      this.setState({
+        redirect: true
+      })
+    } else {
+      alert("There is no such game")
+    }
+
+  }
 
     render() {
       if (!this.props.user) {
@@ -43,7 +74,8 @@ class LobbyJoin extends React.Component {
                         <Label>Lobby key:</Label>
                         <Input
                             style={{'width': 250 + 'px', 'margin': '0 auto 40px auto'}}
-                            onChange={e => console.log(e.target.value)}
+                            onChange={e => this.setState({ lobbyKey: e.target.value})}
+                            value={this.state.lobbyKey}
                             type="text"
                             name="lobbykey"
                             id="key"
@@ -57,13 +89,12 @@ class LobbyJoin extends React.Component {
                                 <h5 className='main-button-header'>Cancel</h5>
                             </Button>
                         </Link>
-                        <Link to='/addplayers'>
-                            <Button className='main-button'>
+                            <Button className='main-button' onClick={this.onLobbyJoin}>
                                 <h5 className='main-button-header'>Join</h5>
                             </Button>
-                        </Link>
                     </Col>
                 </Row>
+              {this.state.redirect ? (<Redirect to="/fieldScoretable"/>) : null}
             </Container>
         )
     };
