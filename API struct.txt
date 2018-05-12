@@ -18,6 +18,7 @@ response {
 url: /join?lobbyKey=1234&&username=madis
 response: {
 	success: bool,
+	trackNr: number optional,
 	gameState: [
 		{
 			0: "player name",

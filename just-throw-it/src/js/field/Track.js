@@ -98,7 +98,8 @@ class Track extends React.Component {
   renderPlayerPoints() {
     const {
       isOnlineGame,
-      user
+      user,
+      onlineGameFinished
     } = this.props;
     return (
       <Table responsive>
@@ -109,7 +110,7 @@ class Track extends React.Component {
               <th> {this.state.playerData[player][0]}</th>
               <td> Throws: {this.state.playerData[player][1][this.state.trackNumber - 1]}</td>
               {console.log(!isOnlineGame || (user === this.state.playerData[player][0]), this.state.playerData[player][0] )}
-              {!isOnlineGame || (user === this.state.playerData[player][0]) ? (
+              {!isOnlineGame || (user === this.state.playerData[player][0] && !onlineGameFinished) ? (
                 <td className="throws-buttons-container">
                   <Button color="danger" className="decrease-btn" onClick={() => this.decreaseThrows(player)}>-</Button>
                   <Button color="success" className="increase-btn" onClick={() => this.increaseThrows(player)}>+</Button>

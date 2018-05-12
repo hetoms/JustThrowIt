@@ -110,15 +110,6 @@ const AppReducer = (state = initialState, action) => {
         onlineGameFinished: false
       };
     case UPDATE_ONLINE_GAME:
-      if (action.onlineGameFinished) {
-        return {
-          ...state,
-          isOnlineGame: false,
-          isOnlineGameOwner: false,
-          lobbyKey: initialState.lobbyKey,
-          onlineGameFinished: false
-        }
-      }
       return {
         ...state,
         onlineGameFinished: action.onlineGameFinished,

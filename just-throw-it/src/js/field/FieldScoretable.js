@@ -21,7 +21,8 @@ const mapStateToProps = state => {
     selectedField: state.selectedField,
     isOnlineGame: state.isOnlineGame,
     lobbyKey: state.lobbyKey,
-    isOnlineGameOwner: state.isOnlineGameOwner
+    isOnlineGameOwner: state.isOnlineGameOwner,
+    onlineGameFinished: state.onlineGameFinished
   }
 };
 
@@ -39,11 +40,13 @@ class FieldScoretable extends React.Component {
     this.saveGame = this.saveGame.bind(this);
     this.reloadScores = this.reloadScores.bind(this);
     this.parseGameData = this.parseGameData.bind(this);
+    this.handleEndGame = this.handleEndGame.bind(this);
 
     this.state = {
       displayedTrack: this.props.field.tracks[0],
       showOverview: false,
-      timer: null
+      timer: null,
+      hasAlerted: false
     }
   }
 
@@ -66,9 +69,15 @@ class FieldScoretable extends React.Component {
     postNewScore(null, null, null, null, this.props.lobbyKey).then(resp => this.parseGameData(resp));
   }
 
+  handleEndGame() {
+    postNewScore(this.props.user, null, null, true, this.props.lobbyKey).then(resp => this.parseGameData(resp));
+
+  }
+
   parseGameData(resp) {
     let gameState = {};
     let hasFinished = false;
+    console.log("resp", resp);
     for (let i = 0; i < resp.gameState.length; i++) {
       gameState["player" + i.toString()] = [resp.gameState[i].playername, JSON.parse(resp.gameState[i].score)];
       if(resp.gameState[i].playername === this.props.user) {
@@ -77,6 +86,12 @@ class FieldScoretable extends React.Component {
     }
     console.log("new game state", gameState, " finished", hasFinished);
     this.props.actions.updateOnlinegame(gameState, hasFinished);
+    if (hasFinished && !this.state.hasAlerted) {
+      alert("Game has ended, when all players have ended it will appear under your history aswell");
+      this.setState({
+        hasAlerted: true
+      });
+    }
   }
 
   showTrack(track) {
@@ -171,7 +186,7 @@ class FieldScoretable extends React.Component {
         });
       console.log('post data ', postdata)
     } else {
-      alert("ouyyy boyy, we gonna end a MP game");
+      this.handleEndGame();
     }
 
   }
