@@ -9,6 +9,7 @@ export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
 export const SET_GAME_ONLINE = 'SET_GAME_ONLINE';
 export const SET_GAME_OFFLINE = 'SET_GAME_OFFLINE';
+export const UPDATE_ONLINE_GAME = "UPDATE_ONLINE_GAME";
 
 export const setName = (id, name) => ({
   type: SET_NAME,
@@ -67,5 +68,11 @@ export const setGameOnline = (gameOnline, isOnlineGameOwner, gameData, lobbyKey,
 
 export const setGameOffline = () => ({
   type: SET_GAME_OFFLINE
+});
+
+export const updateOnlinegame = (gameData, onlineGameFinished) => ({
+  type: UPDATE_ONLINE_GAME,
+  gameData,
+  onlineGameFinished
 });
 
