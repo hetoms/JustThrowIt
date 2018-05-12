@@ -40,7 +40,8 @@ class FieldPicker extends React.Component {
     }
 
     pickField(id) {
-        this.props.actions.pickField(id)
+        this.props.actions.pickField(id);
+        this.props.actions.setGameOffline();
     }
 
     renderAllFields() {

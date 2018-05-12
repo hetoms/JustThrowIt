@@ -10,6 +10,7 @@ import * as Actions from "../app/Actions";
 import {connect} from "react-redux";
 import Responsive from 'react-responsive';
 import {find, propEq} from "ramda";
+import postNewScore from "../api/PostScore";
 
 const saveGameUrl = 'http://justthrowit-env.eu-central-1.elasticbeanstalk.com/userHistory';
 
@@ -36,11 +37,46 @@ class FieldScoretable extends React.Component {
     this.setTracks = this.setTracks.bind(this);
     this.showTrack = this.showTrack.bind(this);
     this.saveGame = this.saveGame.bind(this);
+    this.reloadScores = this.reloadScores.bind(this);
+    this.parseGameData = this.parseGameData.bind(this);
 
     this.state = {
       displayedTrack: this.props.field.tracks[0],
-      showOverview: false
+      showOverview: false,
+      timer: null
     }
+  }
+
+  componentDidMount() {
+    console.log("game online", this.props.isOnlineGame);
+
+    if (this.props.isOnlineGame) {
+      let timer = setInterval(this.reloadScores, 3000);
+      this.setState({timer});
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.timer);
+  }
+
+  reloadScores() {
+    console.log("game reloaded");
+
+    postNewScore(null, null, null, null, this.props.lobbyKey).then(resp => this.parseGameData(resp));
+  }
+
+  parseGameData(resp) {
+    let gameState = {};
+    let hasFinished = false;
+    for (let i = 0; i < resp.gameState.length; i++) {
+      gameState["player" + i.toString()] = [resp.gameState[i].playername, JSON.parse(resp.gameState[i].score)];
+      if(resp.gameState[i].playername === this.props.user) {
+        hasFinished = resp.gameState[i].hasFinished
+      }
+    }
+    console.log("new game state", gameState, " finished", hasFinished);
+    this.props.actions.updateOnlinegame(gameState, hasFinished);
   }
 
   showTrack(track) {

@@ -108,10 +108,13 @@ class Track extends React.Component {
             <tr key={player}>
               <th> {this.state.playerData[player][0]}</th>
               <td> Throws: {this.state.playerData[player][1][this.state.trackNumber - 1]}</td>
-              <td className="throws-buttons-container">
-                <Button color="danger" className="decrease-btn" onClick={() => this.decreaseThrows(player)}>-</Button>
-                <Button color="success" className="increase-btn" onClick={() => this.increaseThrows(player)}>+</Button>
-              </td>
+              {console.log(!isOnlineGame || (user === this.state.playerData[player][0]), this.state.playerData[player][0] )}
+              {!isOnlineGame || (user === this.state.playerData[player][0]) ? (
+                <td className="throws-buttons-container">
+                  <Button color="danger" className="decrease-btn" onClick={() => this.decreaseThrows(player)}>-</Button>
+                  <Button color="success" className="increase-btn" onClick={() => this.increaseThrows(player)}>+</Button>
+                </td>
+              ) : <td/> }
             </tr>
           )
         })}
