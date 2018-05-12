@@ -36,7 +36,7 @@ class LobbyJoin extends React.Component {
     if (resp && resp.success) {
       let gameState = {};
       for (let i = 0; i < resp.gameState.length; i++) {
-        gameState["player" + i.toString()] = [resp.gameState[i].playername, JSON.parse(resp.gameState[i].score)]
+        gameState["player" + i.toString()] = [resp.gameState[i].playername, resp.gameState[i].score]
       }
       console.log("new game state", gameState);
       console.log("props", this.props);

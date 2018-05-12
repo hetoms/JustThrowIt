@@ -69,7 +69,7 @@ class FieldScoretable extends React.Component {
   reloadScores() {
     console.log("game reloaded");
 
-    postNewScore(null, null, null, null, this.props.lobbyKey).then(resp => this.parseGameData(resp));
+    postNewScore(null, null, null, this.props.onlineGameFinished, this.props.lobbyKey).then(resp => this.parseGameData(resp));
   }
 
   handleEndGame() {
@@ -86,7 +86,7 @@ class FieldScoretable extends React.Component {
       let hasFinished = false;
       console.log("resp", resp);
       for (let i = 0; i < resp.gameState.length; i++) {
-        gameState["player" + i.toString()] = [resp.gameState[i].playername, JSON.parse(resp.gameState[i].score)];
+        gameState["player" + i.toString()] = [resp.gameState[i].playername, resp.gameState[i].score];
         if(resp.gameState[i].playername === this.props.user) {
           hasFinished = resp.gameState[i].hasFinished
         }
@@ -200,6 +200,8 @@ class FieldScoretable extends React.Component {
         });
       console.log('post data ', postdata)
     } else {
+
+      console.log("tRAIINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
       this.handleEndGame();
     }
 

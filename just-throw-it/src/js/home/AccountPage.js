@@ -67,7 +67,8 @@ class AccountPage extends React.Component {
   renderHistoryOptions() {
     if (!isEmpty(this.state.history)) {
       return this.state.history.map((game, iterator) => {
-        const trackName = this.props.fields.find(field => field.fieldID.toString() === game.fieldId).fieldName;
+        console.log("VAATA SIIA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", game, this.props.fields);
+        const trackName = this.props.fields.find(field => field.fieldID.toString() === game.fieldId.toString()).fieldName || "MIDA VITTU";
         return (
           <NavItem className="track" key={game.fieldId.toString() + iterator.toString()}>
             <NavLink href="#" onClick={() => this.showGame(game, iterator)}
@@ -83,7 +84,7 @@ class AccountPage extends React.Component {
 
   renderGameOverview() {
     const trackName = !isEmpty(this.state.history) ?
-      this.props.fields.find(field => field.fieldID.toString() === this.state.gameInView.fieldId).fieldName : "No history to display";
+      this.props.fields.find(field => field.fieldID === this.state.gameInView.fieldId).fieldName : "No history to display";
     return (
       <div className="track-box">
         <Card>
@@ -115,7 +116,7 @@ class AccountPage extends React.Component {
   }
 
   renderOverviewTableRows() {
-    const par = this.props.fields.find(field => field.fieldID.toString() === this.state.gameInView.fieldId).pars;
+    const par = this.props.fields.find(field => field.fieldID === this.state.gameInView.fieldId).pars;
     return JSON.parse(this.state.gameInView.data).map((player, iterator) => {
       return (
         <tr key={player + iterator.toString()}>

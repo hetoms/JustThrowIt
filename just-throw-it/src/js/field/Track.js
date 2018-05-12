@@ -40,7 +40,7 @@ class Track extends React.Component {
     let gameState = {};
     let hasFinished = false;
     for (let i = 0; i < resp.gameState.length; i++) {
-      gameState["player" + i.toString()] = [resp.gameState[i].playername, JSON.parse(resp.gameState[i].score)]
+      gameState["player" + i.toString()] = [resp.gameState[i].playername, resp.gameState[i].score]
       if(resp.gameState[i].playername === this.props.user) {
         hasFinished = resp.gameState[i].hasFinished
       }
