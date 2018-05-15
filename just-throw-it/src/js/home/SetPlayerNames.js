@@ -84,14 +84,14 @@ class SetName extends React.Component {
         <Form className='set-name' onSubmit={this.setNameAndRedirect}>
           <Label for="playerName" className="mr-sm-2 player-name-label">Add players: </Label>
           {this.getPlayerNameInputs()}
-          <Button color="success" onClick={event => this.addPlayer(event)}>+</Button>
+          <Button color="info" onClick={event => this.addPlayer(event)}>+</Button>
         </Form>
         <div className="buttons">
           <div className="confirm-btn">
-            <Button onClick={event => this.resetFields()}>Reset</Button>
+            <Button color="success" onClick={event => this.resetFields()}>Reset</Button>
           </div>
           <div className="confirm-btn">
-            <Link to='/pickField'><Button>Continue</Button></Link>
+            <Link to='/pickField'><Button color="success">Continue</Button></Link>
           </div>
         </div>
       </div>

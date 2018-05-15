@@ -56,3 +56,9 @@
     font-size: 3em;
   }
 }
+
+@media screen and (max-width: 750px) {
+  .main-button {
+    margin: 30px auto 30px auto;
+  }
+}
