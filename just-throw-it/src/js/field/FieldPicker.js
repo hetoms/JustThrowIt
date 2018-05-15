@@ -28,7 +28,6 @@ class FieldPicker extends React.Component {
     }
 
     componentWillMount() {
-        console.log(this.props);
         loadFilters(this.props.actions.saveAreaFilters);
     }
 
@@ -46,7 +45,6 @@ class FieldPicker extends React.Component {
 
     renderAllFields() {
         let fields = this.props.fields;
-        console.log(this.state.appliedFilters, 'wat');
         if (this.state.appliedFilters[0] !== "all") {
             const countyFilter = field => contains(field.county, this.state.appliedFilters);
             fields = filter(countyFilter, fields);
@@ -55,7 +53,6 @@ class FieldPicker extends React.Component {
 
         if (this.state.textFilter !== "") {
             let searchKey = clone(this.state.textFilter).toLowerCase();
-            console.log('yellow ', searchKey, ' aaaa ', fields);
             fields = fields.filter(field => field.fieldName.toLowerCase().includes(searchKey));
         }
 

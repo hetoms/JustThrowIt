@@ -54,7 +54,6 @@ class FieldScoretable extends React.Component {
     }
 
     componentDidMount() {
-        console.log("game online", this.props.isOnlineGame);
 
         if (this.props.isOnlineGame) {
             let timer = setInterval(this.reloadScores, 3000);
@@ -67,7 +66,6 @@ class FieldScoretable extends React.Component {
     }
 
     reloadScores() {
-        console.log("game reloaded");
 
         postNewScore(null, null, null, this.props.onlineGameFinished, this.props.lobbyKey).then(resp => this.parseGameData(resp));
     }
@@ -84,14 +82,12 @@ class FieldScoretable extends React.Component {
         if (resp.success) {
             let gameState = {};
             let hasFinished = false;
-            console.log("resp", resp);
             for (let i = 0; i < resp.gameState.length; i++) {
                 gameState["player" + i.toString()] = [resp.gameState[i].playername, resp.gameState[i].score];
                 if (resp.gameState[i].playername === this.props.user) {
                     hasFinished = resp.gameState[i].hasFinished
                 }
             }
-            console.log("new game state", gameState, " finished", hasFinished);
             this.props.actions.updateOnlinegame(gameState, hasFinished);
             if (hasFinished && !this.state.hasAlerted) {
                 alert("Game has ended, when all players have ended it will appear under your history aswell");
@@ -198,10 +194,8 @@ class FieldScoretable extends React.Component {
                 .catch((error) => {
                     console.error(error);
                 });
-            console.log('post data ', postdata)
         } else {
 
-            console.log("tRAIINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
             this.handleEndGame();
         }
 

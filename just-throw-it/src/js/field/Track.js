@@ -45,7 +45,6 @@ class Track extends React.Component {
         hasFinished = resp.gameState[i].hasFinished
       }
     }
-    console.log("new game state", gameState, " finished", hasFinished);
     this.props.actions.updateOnlinegame(gameState, hasFinished);
   }
 
@@ -54,15 +53,11 @@ class Track extends React.Component {
       lobbyKey,
       user
   } = this.props;
-    console.log("eem what");
     postNewScore(user, track, throws, hasFinished, lobbyKey).then(resp => this.parseGameData(resp));
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    console.log("oh god");
-    console.log("what the fuck", this.props);
     if (!equals(this.props, nextProps)) {
-      console.log("oh god send help wtf");
 
       this.setState({
         trackNumber: nextProps.track.trackNumber,
