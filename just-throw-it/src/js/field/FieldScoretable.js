@@ -270,29 +270,30 @@ class FieldScoretable extends React.Component {
                 <Responsive maxWidth={767}>
                     <div>
                         <div className="header-box-mobile">
-                            {this.props.userLoggedIn && this.props.isOnlineGameOwner ? (
-                                <span className="back-btn">
-                                    <Button onClick={this.forceFinish} color="success"
-                                            className="small-button">
-                                        Force finish <br/> all players
-                                    </Button>
-                                </span>
-                            ) : null}
-                            {isOnlineGame ? null : (
-                                <Link className="back-btn" to='/pickField'><Button
-                                    color="success">Back</Button></Link>)}
                             <div className="field-header">
                                 <h2>{this.props.field.fieldName} DiscGolf field</h2>
                                 {isOnlineGame ? <h5>Your lobby key: {lobbyKey}</h5> : null}
                             </div>
-
-
-                            {this.props.userLoggedIn ? (
-                                <span className="back-btn">
+                            <div className="header-buttons-mobile">
+                                {this.props.userLoggedIn && this.props.isOnlineGameOwner ? (
+                                    <span className="back-btn">
+                                    <Button onClick={this.forceFinish} color="success"
+                                            className="small-button">
+                                        Force finish all players
+                                    </Button>
+                                </span>
+                                ) : null}
+                                {isOnlineGame ? null : (
+                                    <Link className="back-btn" to='/pickField'><Button
+                                        color="success">Back</Button></Link>)}
+                                {this.props.userLoggedIn ? (
+                                    <span className="back-btn">
 								<Button onClick={this.saveGame} color="success"
                                         className="small-button">Finish game</Button>
 							</span>
-                            ) : null}
+                                ) : null}
+                            </div>
+
                             <div/>
                         </div>
                         <hr/>

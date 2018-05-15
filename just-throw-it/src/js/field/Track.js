@@ -104,7 +104,7 @@ class Track extends React.Component {
             <tr key={player}>
               <th> {this.state.playerData[player][0]}</th>
               <td> Throws: {this.state.playerData[player][1][this.state.trackNumber - 1]}</td>
-              {console.log(!isOnlineGame || (user === this.state.playerData[player][0]), this.state.playerData[player][0] )}
+              {/*{console.log(!isOnlineGame || (user === this.state.playerData[player][0]), this.state.playerData[player][0] )}*/}
               {!isOnlineGame || (user === this.state.playerData[player][0] && !onlineGameFinished) ? (
                 <td className="throws-buttons-container">
                   <Button color="danger" className="decrease-btn" onClick={() => this.decreaseThrows(player)}>-</Button>
