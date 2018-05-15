@@ -11,11 +11,10 @@ import MapModal from "../map/MapModal";
 import loadFilters from "../api/LoadFilters";
 import {clone, contains, filter, isEmpty, remove} from "ramda";
 
-console.log(getFields());
-
 class FieldPicker extends React.Component {
     constructor(props) {
         super(props);
+        getFields();
         this.state = {
             modalOpen: false,
             fieldInModal: {fieldName: 'Something went wrong'},

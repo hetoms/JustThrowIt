@@ -72,7 +72,7 @@ class LobbyCreation extends React.Component {
 
     render() {
       if (!this.props.user) {
-        alert("kindly fuck off cunt");
+        alert("You need to be logged in for playing in multiplayer (join/create a lobby)");
         return <Redirect to="/"/>        
       }
         return (
