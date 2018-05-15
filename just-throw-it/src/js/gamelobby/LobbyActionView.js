@@ -40,7 +40,7 @@ class LobbyActionView extends React.Component {
                         <Link to='/join-lobby'>
                             <Button className='main-button'>
                                 <h2 className='main-button-header'>Join Lobby</h2>
-                                <small className='main-button-subheader'>(join friend's game by entering the key)</small>
+                                <small className='main-button-subheader'>(join your friend's game)</small>
                             </Button>
                         </Link>
                     </Col>
