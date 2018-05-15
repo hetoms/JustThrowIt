@@ -232,7 +232,7 @@ class FieldScoretable extends React.Component {
 
         return (
             <div>
-                <Responsive minWidth={700}>
+                <Responsive minWidth={768}>
                     <div className="container">
                         <div className="header-box">
                             {this.props.userLoggedIn && this.props.isOnlineGameOwner ? (
@@ -273,7 +273,7 @@ class FieldScoretable extends React.Component {
                         </div>
                     </div>
                 </Responsive>
-                <Responsive maxWidth={699}>
+                <Responsive maxWidth={767}>
                     <div>
                         <div className="header-box-mobile">
                             {this.props.userLoggedIn && this.props.isOnlineGameOwner ? (
