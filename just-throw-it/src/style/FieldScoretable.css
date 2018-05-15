@@ -17,7 +17,7 @@
 .header-box-mobile {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -84,6 +84,6 @@
     }
 }
 
-.throws-buttons-container {
-
+.back-btn {
+    margin: auto 10px auto 10px;
 }
